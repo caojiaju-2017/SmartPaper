@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"  name="viewport" />
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/Pad/dev_info.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+    <script src='/static/ThreeParty/Graphy/ichart.latest.min.js'></script>
+</head>
+<body style="background: #1D2228">
+<form class="layui-form" action="">
+    <div style="width: 100%;float: left" id="right_div">
+        <div style="width: 100%;" id="right_top">
+            <div style="width: 50%;float: left">
+                <img src="/static/Service/948d598f744f11e882ae989096c1d848.png" style="width: 100%;height: 100%" alt="" id="org_map">
+            </div>
+
+            <div style="float:left ;overflow-y:auto; overflow-x:auto;margin-top: 10px;margin-right: 10px" id="power_info_div">
+
+                <div style="overflow-y:auto; overflow-x:auto;position: relative" id="power_info">
+
+                </div>
+
+            </div>
+        </div>
+        <div style="width: 100%;background: #cf3a02;height: 2px" id="r_seprate"></div>
+        <div style="width: 100%" id="right_bottom">
+            <div style="float: left;width: 15px;height: 100%;margin-left: 20px;font-size: 18px;color: whitesmoke;padding-top: 10px">设备状况</div>
+            <div id='ichart-render1' style="width: 80% ;margin-top:10px;float: right;background: white"></div>
+        </div>
+    </div>
+</form>
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+    });
+</script>
+</body>
+</html>

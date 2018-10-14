@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/Media_js/config_setting.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body style="text-align: center">
+
+<form class="layui-form" action="">
+    <div class="layui-form-item" style="margin-top: 10px;">
+        <label class="layui-form-label" style="width: 130px">参数别名</label>
+        <div class="layui-input-block">
+            <input type="text" name="channelname" id="paramalias" lay-verify="title" autocomplete="off"
+                   class="layui-input" style="width: 160px" readonly>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;">
+        <label class="layui-form-label" style="width: 130px">参数键值</label>
+        <div class="layui-input-block">
+            <input type="text" name="channelname" id="paramkey" lay-verify="title" autocomplete="off"
+                   class="layui-input" style="width: 160px" readonly>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;">
+        <label class="layui-form-label" style="width: 130px">参数值</label>
+        <div class="layui-input-block">
+            <input type="text" name="channelname" id="paramvalue" lay-verify="title" autocomplete="off" placeholder="请输入参数名"
+                   class="layui-input" style="width: 160px">
+        </div>
+    </div>
+    <div class="layui-form-item" style="margin-top: 10px">
+        <div class="layui-input-block">
+            <div style="width: 120px;margin-top: 30px;cursor: pointer;background-color: #d58512;font-size: 18px;
+        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px" id="test9" onclick="$.commitSave()">保存
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+
+    });
+
+    function setCurrentDatas(datas) {
+        orgsign = datas.orgsign;
+        configCode = datas.code;
+
+        $("#paramalias").val(datas.name);
+        $("#paramkey").val(datas.keyname);
+        $("#paramvalue").val(datas.keyvalue);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>智慧管控终端</title>
+	<link rel="stylesheet" type="text/css" href="/static/Pad/pad_home.css">
+	<script type="text/javascript" src="/static/Public/jquery.js"></script>
+	<script type="text/javascript" src="/static/Public/md5.js"></script>
+	<script type="text/javascript" src="/static/Public/cookie.js"></script>
+	<script type="text/javascript" src="/static/Public/public.js"></script>
+	<script type="text/javascript" src="/static/Pad/pad_home.js"></script>
+</head>
+<body>
+
+<!-- 中部 -->
+<div class="center">
+		<div class="news_content" id="content">
+			<div class="news_detail" id="imge"></div>
+			<div class="News_List"  id="detailed">
+
+				<!-- <ul>
+						<div class="zone" style="background: #e84a4a;text-align:center;overflow:hidden;" >					
+							<a href="#" class="zone_btn"  style="margin-left:15px;float:left;margin-top: 15px">测试</a>
+							<img src="images/checkbox_off.png" style="margin-top: 1px">
+
+						</div>
+
+					</ul>   -->
+
+				</div>
+			</div>
+</div>
+
+
+<!-- 底部 -->
+	<div class="container">
+<!-- <iframe name="myiframe" id="myrame" src="https://blog.csdn.net/u013803262/article/details/74170904/" style="position: absolute;left:50px;top:50px;width: 500px;height: 500px" frameborder="0" scrolling="no"></iframe> -->
+<!-- <iframe src="http://www.baidu.com" name="test" width="1000" height="500"  align="left" scrolling="no"></iframe> -->
+<div class="memu">
+			<!-- 公司名称 -->
+			<div class="cam_name " >
+
+				<p>
+					<a href="javascript:void(0)">首页</a>
+					<samp>|</samp>
+					<a href="javascript:void(0)">智慧管控终端</a>					
+				</p>
+			</div>
+
+
+			<!-- 导航Tab -->
+			<ul>
+<!-- 分区 -->
+				<div class="zone">					
+					<a href="javascript:void(0)" class="zone_btn" onclick="zone()">分区</a>
+					<div class="zone_content" id="zone_content"></div>
+				</div> 
+
+<!-- 电源 -->
+				<div class="power">					
+					<a href="javascript:void(0)" class="power_btn" onclick="power()">电源</a>
+					<div class="power_content" id="power_content"></div>
+				</div> 
+
+
+				<div class="contendw">					
+					<a href="javascript:void(0)" class="btn" onclick="count()">统计</a>
+					<!-- <div class="content">
+						<a href="#">子菜单1</a>
+						<a href="#">子菜单2</a>
+						<a href="#">子菜单3</a>
+					</div> -->
+				</div>
+			</ul>
+		</div>
+	</div>
+</body>
+
+<!-- <script type="text/javascript">
+   
+    //获取电源数据
+    $.loadPowerList();
+    //设置最外层div高度
+    //var h =  parseInt(window.screen.width);
+    //$("body").height(h);
+    //body.height(h+"px");//直接设置元素的高
+   //alert("提示信息:"+h);  
+
+</script> -->
+
+</html>

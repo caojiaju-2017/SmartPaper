@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/role_add.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body style="text-align: center">
+
+{#<div class="layui-upload">#}
+{#  <button type="button" class="layui-btn" id="test1" style="width: 40px;height: 30px;padding: 0px;line-height: 30px">传</button>#}
+{#  <div class="layui-upload-list">#}
+{#    <img class="layui-upload-img" id="demo1" src="/static/VipHome/default.jpg" style="width: 60px;height:60px;">#}
+{#    <p id="demoText"></p>#}
+{#  </div>#}
+{#</div>#}
+<form class="layui-form layui-form-pane" action="">
+<div class="layui-form-item" style="margin-top: 10px">
+{#    <label class="layui-form-label" style="">角色名字</label>#}
+    <div class="layui-input-block">
+        <input type="text" name="city" id="rolename" lay-verify="title" autocomplete="off" placeholder="请输入角色名字"
+               class="layui-input" style="width: 200px">
+    </div>
+</div>
+
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">角色描述</label>
+        <div class="layui-input-block" style="margin-left: 60px;margin-right: 30px;margin-top: 10px">
+            <textarea placeholder="请输入描述内容" class="layui-textarea" id="role_info"></textarea>
+        </div>
+    </div>
+</form>
+
+<div class="layui-form-item" style="margin-top: 10px">
+    {#    <label class="layui-form-label" style="width: 130px">联系电话</label>#}
+    <div class="layui-input-block">
+        <div style="width: 80%;margin-left:10%;margin-top: 30px;cursor: pointer;background-color: #d58512;font-size: 18px;
+        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px" onclick="$.saveInfo()">保存
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    layui.use('layer', function () {
+        layui.use('form', function () {
+            var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+            form.render();
+        });
+
+    });
+</script>
+</body>
+</html>

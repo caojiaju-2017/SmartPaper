@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/org_list.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+{#    <link rel="stylesheet" href="/static/OrgHome/org_list.css"/>#}
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body>
+
+<div style="height: 600px;width: 13%;background-color: #f2f2f2;float: left;border-radius: 10px;white-space: nowrap;" id="left_org_tree">
+    <div id="orgTree" style="width: 96%;margin-top: 20px;margin-left: 2px;overflow-x: auto"></div>
+</div>
+<div style="background: #fff;height: 600px;width: 84%;margin-left:16px;float: right" id="vip_div">
+    <div class="demoTable">
+        搜索：
+        <div class="layui-inline">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="输入单位名">
+        </div>
+        <button class="layui-btn" data-type="reload" onclick="searchOrg()">搜索</button>
+{#        <button class="layui-btn" data-type="reload" onclick="showAll()">所有单位</button>#}
+        <button class="layui-btn" data-type="reload" onclick="$.createOrg(null)">添加单位</button>
+    </div>
+
+    <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="mapimage">场景图</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="addsub">添加子单位</a>
+{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="mangeacnt">账户管理</a>#}
+</script>
+
+
+<script>
+    var orgTab;
+    layui.use('table', function () {
+        var table = layui.table;
+
+        var listParams = new Array();
+        listParams[0] = "command=LIST_ORGS";
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "logincode=" + $.cookie("OrgUserCode");
+        listParams[3] = "parentcode=";
+        listParams[4] = "type=3";
+        listParams[5] = "state=1";
+        listParams[6] = "fliter=" + $("#demoReload").val();
+        listParams[7] = "orgsign=" + orgsign;
+
+        listParams = listParams.sort();
+        var urlCmd = $.buildGetParam("/api/org/?", listParams);
+        urlCmd = urlCmd + "&sign=" + $.signString(listParams);
+
+        //第一个实例
+        orgTab = table.render({
+            elem: '#demo'
+            , height: 600
+            ,cellMinWidth:80
+            , url: urlCmd //数据接口
+            , page: true //开启分页
+            , id: 'testReload'
+            , cols: [[ //表头
+                {field: 'name', title: '客户单位', sort: true}
+                , {field: 'contactname', title: '联系人',}
+                , {field: 'contactphone', title: '联系电话',}
+                , {field: 'regdate', title: '登记日期', sort: true}
+                {#, {field: 'state', title: '状态', sort: true}#}
+                , {fixed: 'right', title: '操作', align: 'left',width:440, toolbar: '#barDemo'}
+            ]]
+            , done: function (res, page, count) {
+                $("[data-field='type']").children().each(function () {
+                    if ($(this).text() == "1") {
+                        $(this).text("客户机构");
+                    }
+                    else if ($(this).text() == "2") {
+                        $(this).text("广告厂商");
+                    }
+                    else if ($(this).text() == "3") {
+                        $(this).text("平台机构");
+                    }
+                })
+                $("[data-field='state']").children().each(function () {
+                    if ($(this).text() == "0") {
+                        $(this).text("无效");
+                    }
+                    else if ($(this).text() == "1") {
+                        $(this).text("激活");
+                    }
+                    else if ($(this).text() == "2") {
+                        $(this).text("删除");
+                    }
+                })
+            },
+        });
+
+        //监听工具条
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'detail') {
+                var newTmpLay = layer.open({
+                    title: ['网点设备分布', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+                    type: 2,
+                    maxmin: true,
+                    scrollbar: false,
+                    area: ['800px', '600px'],
+                    content: 'org_sceen.html?code=' + data.code + "&type=0"
+                });
+            } else if (layEvent === 'del') {
+                layer.confirm('删除后，该单位下所有数据将不可使用', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.removeOrgCustom(data);
+                });
+            } else if (layEvent === 'edit') {
+                //layer.msg('编辑操作');
+                $.modiCustom(data);
+            }
+            else if (layEvent === 'addsub') {
+                //layer.msg('编辑操作');
+                $.createOrg(data.code);
+            }
+            else if (layEvent === 'mangeacnt') {
+                //layer.msg('编辑操作');
+                $.configCustom(data);
+            }
+            else if (layEvent == "mapimage")
+            {
+                layer.open({
+                    title: ['设置场景图', 'font-size:13px;margin-top:10px;'],
+                    type: 2,
+                    area: ['800px', '600px'],
+                    content: 'set_sceen.html?code=' + data.code
+                });
+            }
+        });
+    });
+
+
+    {#加载树形模块#}
+    {#    var menuList = $.getTestOrg();#}
+
+
+    $('.demoTable .layui-btn').on('click', function () {
+
+    });
+
+/*刷新数据*/
+function  loadOrgTree(datas) {
+    currentSign = datas[0].id;
+    layui.use('tree', function () {
+
+        $('ul li').remove();
+
+        layui.tree({
+            elem: '#orgTree' //传入元素选择器
+            , nodes: datas
+            , click: function (node) {
+                var pcode = node.id;
+                var pfliter = $("#demoReload").val();
+                orgTab.reload({
+                    where: { //设定异步数据接口的额外参数，任意设
+                        pcode:pcode
+                        ,fliterstring:pfliter
+                    }
+                    , page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            }
+        });
+    });
+}
+
+
+    function showAll() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+    function searchOrg() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                fliterstring:pfliter
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+    
+
+</script>
+</body>
+</html>

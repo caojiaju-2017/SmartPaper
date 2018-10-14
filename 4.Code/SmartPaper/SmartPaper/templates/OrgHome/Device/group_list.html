@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/group_list.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+
+    <style>
+        .layui-table-cell{
+    height:30px;
+    line-height:30px;
+}
+    </style>
+</head>
+<body>
+
+<div style="background: #fff;height: 600px;width: 90%;margin-left:5%;" id="vip_div">
+    <div class="demoTable">
+        <div class="layui-inline">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="分区名称">
+        </div>
+        <button class="layui-btn" data-type="reload" onclick="searchFliter()">搜索</button>
+
+        <button class="layui-btn layui-btn-danger layui-btn-radius" style="float: right"onclick="addGroup()">添加分区</button>
+    </div>
+    <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="view" id="view">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" id="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" id="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="binddev" id="binddev">设备绑定</a>
+</script>
+
+<script type="text/html" id="barControl">
+    <a class="layui-btn layui-btn-xs" lay-event="closeLight" id="closeLight">关灯</a>
+    <a class="layui-btn layui-btn-xs" lay-event="openLight" id="openLight">开灯</a>
+</script>
+
+<script>
+    var orgTab;
+    layui.use('table', function () {
+        var table = layui.table;
+
+        var listParams = new Array();
+        listParams[0] = "command=GROUPS_LIST";
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "logincode=" + $.cookie("OrgUserCode");
+        listParams[3] = "orgsign=" + orgsign;
+
+        listParams = listParams.sort();
+        var urlCmd = $.buildGetParam("/api/group/?", listParams);
+        urlCmd = urlCmd + "&sign=" + $.signString(listParams);
+
+        //第一个实例
+        orgTab = table.render({
+            elem: '#demo'
+            , height: 600
+            ,cellMinWidth:80
+            , url: urlCmd //数据接口
+            , page: true //开启分页
+            , id: 'testReload'
+            , cols: [[ //表头
+                {type:'checkbox'}
+                ,{field: 'id', title: 'ID',sort: true,style:'hidden!important;' ,width:60}
+                , {field: 'name', title: '分区名称'}
+                , {field: 'orgname', title: '归属单位'}
+                , {field: 'devcount', title: '设备数量'}
+                , {fixed: 'right', title: '操作', align: 'center',toolbar: '#barDemo',width:300}
+                , {fixed: 'right', title: '控制', align: 'center',toolbar: '#barControl',width:160}
+            ]]
+            , done: function (res, page, count) {
+
+            },
+        });
+
+        //监听工具条
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent == "view")
+            {
+                var newTmpLay = layer.open({
+                    title: ['分区与设备分布', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+                    type: 2,
+                    maxmin: true,
+                    scrollbar: false,
+                    area: ['800px', '600px'],
+                    content: 'org_sceen.html?code=' + data.code + "&type=1"
+                });
+            }
+            else if (layEvent === 'edit') {
+                $.editGroup(data);
+            } else if (layEvent === 'del') {
+                layer.confirm('你确定删除该分区？', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.deleGroup(data);
+                });
+            }
+            //else if (layEvent === 'location') {
+            //    $.mangeLocation(data);
+            //}
+            //else if (layEvent === 'bindlight') {
+            //    $.bindLight(data);
+            //}
+            else if (layEvent === 'binddev') {
+                layer.open({
+                    title: ['设置分区设备', 'font-size:13px;margin-top:10px;'],
+                    type: 2,
+                    area: ['800px', '640px'],
+                    content: 'group_bind.html?orgcode=' + data.orgcode + "&grpcode=" + data.code
+                });
+            }
+            else if (layEvent === 'closeLight')
+            {
+                layer.confirm('你确定关闭该分区所有灯光？', function (index) {
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.closeLight(data);
+                });
+            }
+            else if (layEvent === 'openLight')
+            {
+                layer.confirm('你确定开启该分区所有灯光？', function (index) {
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.openLight(data);
+                });
+
+            }
+
+        });
+    });
+    function showAll() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+    function searchFliter() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                fliterstring:pfliter
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+    function addGroup()
+    {
+        var newTmpLay = layer.open({
+            title: ['添加分区', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+            type: 2,
+            maxmin:true,
+            scrollbar: false,
+            area:['500px', '260px'],
+            content: 'group_add.html'
+        });
+    }
+
+</script>
+</body>
+</html>

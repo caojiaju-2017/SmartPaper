@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>image</title>
+    <style type="text/css">
+        .modal-body {
+            position: absolute;
+        }
+
+        .img {
+            position: absolute;
+        }
+
+        .move {
+            left: 500px;
+            top: 500px;
+        }
+    </style>
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Pad/set_position.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body>
+<!-- 	 javascript:alert('你点我了')", -->
+<img id="img" width="100%"
+     onclick="getClickPos(event);"/>
+<img class="modal-body" id="tu2" src="/static/Pad/location.png" width="30" height="30" style="display:none;">
+<script type="text/javascript">
+    layui.use('layer', function () {
+        var $ = layui.jquery, layer = layui.layer;
+    });
+    var img1 = document.getElementById('img');
+    var img2 = document.getElementById('tu2');
+    var box = document.querySelector('.modal-body');
+
+    function getClickPos(e) {
+        img2.style.display = '';
+        box.setAttribute('class', 'modal-body move');
+        var xPage = (navigator.appName == 'Netscape') ? e.pageX : event.x + document.body.scrollLeft;
+        var yPage = (navigator.appName == 'Netscape') ? e.pageY : event.y + document.body.scrollTop;
+        identifyImage = document.getElementById("img");
+        img_x = locationLeft(identifyImage);
+        img_y = locationTop(identifyImage);
+        var xPos = xPage - img_x - 4;
+        var yPos = yPage - img_y - 4;
+        setPosition(xPos, yPos);
+    }
+
+    function locationLeft(element) {
+        offsetTotal = element.offsetLeft;
+        scrollTotal = 0; //element.scrollLeft but we dont want to deal with scrolling - already in page coords
+        if (element.tagName != "BODY") {
+            if (element.offsetParent != null)
+                return offsetTotal + scrollTotal + locationLeft(element.offsetParent);
+        }
+        return offsetTotal + scrollTotal;
+    }
+
+    function locationTop(element) {
+        offsetTotal = element.offsetTop;
+        scrollTotal = 0; //element.scrollTop but we dont want to deal with scrolling - already in page coords
+        if (element.tagName != "BODY") {
+            if (element.offsetParent != null)
+                return offsetTotal + scrollTotal + locationTop(element.offsetParent);
+        }
+        return offsetTotal + scrollTotal;
+    }
+
+    function setPosition(xPos, yPos) {
+        if (allowOperator == 0) {
+            alert("未设置网点背景图，不支持设置设备位置");
+            return;
+        }
+        img2.style.display = '';
+        box.style.left = xPos + "px";
+        box.style.top = yPos + "px";
+
+        var width = $("#img").width();
+        var height = $("#img").height();
+        //
+        layer.confirm('你确定将该位置设置为设备的位置？', function (index) {
+            layer.close(index);
+            //向服务端发送删除指令
+
+            openConfirm(devcode, xPos,yPos,width,height);
+        });
+
+    }
+
+    function setNewPosition(xPos, yPos) {
+        if (allowOperator == 0) {
+            alert("未设置网点背景图，不支持设置设备位置");
+            return;
+        }
+        img2.style.display = '';
+        box.style.left = xPos + "px";
+        box.style.top = yPos + "px";
+
+        var width = $("#img").width();
+        var height = $("#img").height();
+        //
+        layer.confirm('你确定将该位置设置为设备的位置？', function (index) {
+            layer.close(index);
+            //向服务端发送删除指令
+
+            openConfirm(devcode, xPos,yPos,width,height);
+        });
+
+    }
+    function openConfirm(devcode,leftx,lefty,width,height) {
+        var listParams = new Array();
+        listParams[0] = "command=SET_DEV_POSITION";
+
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "logincode=" + $.cookie("OrgUserCode");
+        listParams[3] = "orgsign=" + orgsign;
+
+        var postParm = new Array();
+        postParm[0] = "devcode=" + devcode;
+        postParm[1] = "leftx=" + leftx;
+        postParm[2] = "lefty=" + lefty;
+        postParm[3] = "width=" + width;
+        postParm[4] = "height=" + height;
+
+        var allParams = listParams.concat(postParm);
+        allParams = allParams.sort();
+        var urlCmd = $.buildGetParam("/api/device/?", listParams);
+        urlCmd = urlCmd + "&sign=" + $.signString(allParams);
+
+        var params = null;
+        params = $.buildPostParam(postParm);
+
+        $.post(urlCmd, params,
+            function (data) {
+
+                var ErrorId = data.ErrorId;
+                var Result = data.Result;
+
+                if (ErrorId == 200) {
+                    parent.location.reload();
+                }
+                else {
+                    alert(data.ErrorInfo);
+                }
+
+            },
+            "json");
+    }
+</script>
+</body>
+</html>
+
+
+
+
+

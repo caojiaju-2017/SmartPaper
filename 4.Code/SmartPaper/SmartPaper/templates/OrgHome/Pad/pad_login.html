@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <!-- 样式 -->
+    <style type="text/css">
+    @charset "utf-8";
+    body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+    form,fieldset,input,textarea,p,blockquote,th,td {
+        padding: 0;
+        margin: 0;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    fieldset,img {
+        border: 0;
+    }
+    address,caption,cite,code,dfn,em,strong,th,var {
+        font-weight: normal;
+        font-style: normal;
+    }
+    ol,ul {
+        list-style: none;
+    }
+    caption,th {
+        text-align: left;
+        text-indent:10px;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-weight: normal;
+        font-size: 100%;
+    }
+    q:before,q:after {
+        content:'';
+    }
+    abbr,acronym { border: 0;
+    }
+
+    .clear{
+        clear:both;
+    }
+
+    body{
+        background:url(/static/Pad/images/linen-lt.png);
+        font:12px "microsoft yahei";
+        color: #565656;
+    }
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+       background-color: transparent;
+       padding: 0;
+       border: 0;
+   }
+
+   h1.title {
+    font: 32px "microsoft yahei";
+    margin:10px 20px;
+    color:#666;
+}
+/* Forms */
+input[type=text],
+input[type=password],
+textarea {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    color: #888;
+    outline:none;
+}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-button:vertical{display:none}
+::-webkit-scrollbar-track:vertical{background-color:black}
+::-webkit-scrollbar-track-piece{background: #FDFDFD;}
+::-webkit-scrollbar-thumb:vertical{background-color:#8E8E8E;border-radius:5px}
+::-webkit-scrollbar-thumb:vertical:hover{background-color:#3B3B3B}
+::-webkit-scrollbar-corner:vertical{background-color:#535353}
+::-webkit-scrollbar-resizer:vertical{background-color:#FF6E00}
+
+@-webkit-keyframes animate-cloud {
+  from {
+    background-position: 600px 100%;
+}
+to {
+    background-position: 0 100%;
+}
+}
+@-moz-keyframes animate-cloud {
+  from {
+    background-position: 600px 100%;
+}
+to {
+    background-position: 0 100%;
+}
+}
+@-ms-keyframes animate-cloud {
+  from {
+    background-position: 600px 100%;
+}
+to {
+    background-position: 0 100%;
+}
+}
+@-o-keyframes animate-cloud {
+  from {
+    background-position: 600px 100%;
+}
+to {
+    background-position: 0 100%;
+}
+}
+
+html{
+    height: 100%;
+}
+
+body{
+ background:url(/static/Pad/images/cloud.png) 0 bottom repeat-x  #049ec4;
+ -webkit-animation: animate-cloud 20s linear infinite;
+ -moz-animation: animate-cloud 20s linear infinite;
+ -ms-animation: animate-cloud 20s linear infinite;
+ -o-animation: animate-cloud 20s linear infinite;
+ animation: animate-cloud 20s linear infinite;
+ width: 100%;
+ height: auto;
+}
+
+.signup_container{
+    width:340px;
+    height: auto;
+    margin-top: 10%;
+    margin-right: 10%;
+    padding-bottom: 20px;
+    background: #EDEDED;
+    float: right;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.6);
+    -webkit-user-select:none;
+    -ms-user-select:none;
+}
+
+h1.signup_title{
+    background:#19B4EA;
+    width: 100%;
+    height:70px;
+    font: 26px/1.4 "microsoft yahei";
+    text-align: left;
+    text-indent:20px;
+    letter-spacing:3px;
+    color:#FDFDFD;
+    line-height: 70px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.signup_container img{
+    margin:20px 0 0;
+}
+
+.signup_container .copyright{
+    margin:20px 0;
+    color: #ABABAB;
+}
+
+.signup_forms{
+    width:260px;
+    margin:30px auto 20px auto;
+    padding: 0;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.36),0 1px 0 rgba(255,255,255,0.15);
+}
+
+.signup_forms .form_row {
+    position:relative;
+    border-top:1px solid #CCC;
+    border-top:1px solid rgba(0,0,0,0.12);
+}
+
+.signup_forms label {
+    display:none
+}
+
+.signup_forms input{
+    width:100%;
+    padding: 10px 0;
+    text-indent: 40px;
+    display:block;
+    margin:0;
+    border:0;
+    outline: none;
+    font:bold 14px/1.4 "microsoft yahei";
+    line-height:25px;
+    color: #888;
+}
+
+#signup_name{
+    background: url('/static/Pad/images/i1.png') no-repeat 9px 15px;
+}
+#signup_password{
+    background: url('/static/Pad/images/i2.png') no-repeat 9px 15px;
+}
+#signup_select{
+ background: url('/static/Pad/images/i3.png') no-repeat 9px 12px;
+}
+
+#admin{
+    background: #FFF;
+    padding: 5px;
+}
+
+.login-btn-set{
+    width:160px;
+    height: auto;
+    overflow: hidden;
+    margin:10px auto;
+}
+.login-btn{
+    display: block;
+    float: right;
+    background: url(/static/Pad/images/login_btn.png) no-repeat;
+    width: 157px;
+    height:41px;
+}
+
+.login-btn:hover{
+    background-position: 0 -48px;
+}
+
+.login-btn:active{
+    background-position: 0 -96px;
+}
+
+
+.login-btn-set .rem.selected{
+    background-position: 0 0;
+}
+
+.tip{
+    background: url(/static/Pad/images/tip.png) no-repeat;
+    width:32px;
+    height:32px;
+    position: absolute;
+    right: -36px;
+    top:5px;
+}
+
+.tip.ok{
+    background-position: 0 0;
+}
+
+.tip.error{
+    background-position: 0 -34px;
+}
+</style>
+</head>
+<body>
+
+    <div class='signup_container'>
+        <h1 class='signup_title'>用户登录</h1>
+        <div id="signup_forms" class="signup_forms clearfix">
+            <form class="signup_form_form" id="signup_form" method="post" action="" data-secure-action="#" data-secure-ajax-action="">
+
+                <div class="form_row first_row">
+                    <label for="signup_email">请输入用户名</label><div class='tip ok'></div>
+                    <input type="text" name="user[email]" placeholder="请输入用户名" id="signup_name" data-required="required" value="w9527">
+                </div>
+
+                <div class="form_row">
+                    <label for="signup_password">请输入密码</label><div class='tip error'></div>
+                    <input type="password" name="user[password]" placeholder="请输入密码" id="signup_password" data-required="required" value="123456">
+                </div>
+
+            </form>
+        </div>
+        <div class="login-btn-set">
+
+            <a href='javascript:normalLogin()' class='login-btn'></a>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    var orgsign= "1e2c68303ebd11e880d3989096c1d848";
+    $(function() {
+
+        $('.rem').click(function() {
+            $(this).toggleClass('selected');
+        })
+
+    })
+
+    var heightScreen =  parseInt(window.screen.height);
+
+    $("body").height(heightScreen);
+
+    function  normalLogin() {
+
+        // 获取账户信息
+        var username = $("#signup_name").val();
+        var passwordInput = $("#signup_password").val();
+
+        var listParams = new Array();
+        listParams[0] = "command=NORMAL_LOGIN";
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "account=" + username;
+        var password = $.md5(passwordInput);
+        listParams[3] = "password=" + password;
+        listParams[4] = "orgsign=" + orgsign;
+        listParams = listParams.sort();
+
+
+
+        var rtnCmd = "/api/login/?command=NORMAL_LOGIN&timestamp=" + timestamp;
+
+        rtnCmd = rtnCmd + "&sign=" + $.signString(listParams);
+
+        var params = {account: username, password: password, orgsign: orgsign};
+        $.post(rtnCmd, params,
+            function (data) {
+                var ErrorId = data.ErrorId;
+                var Result = data.Result;
+
+                if (ErrorId == 200) {
+                    // 记录当前登录COOKIE
+                    $.cookie("OrgUserCode", username);
+                    $.cookie("OrgUserAlias", Result);
+
+                    location.href = "./pad_home.html?logincode=" + username + "&orgsign=" + orgsign;
+
+                }
+                else {
+                    alert(data.ErrorInfo);
+                }
+            },
+            "json");
+    }
+</script>
+
+</html>

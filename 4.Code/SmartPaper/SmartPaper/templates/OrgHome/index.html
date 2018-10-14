@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>设备管理中心</title>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/index.js"></script>
+
+    <link rel="shortcut icon" href="/static/logo.png">
+</head>
+<body class="layui-layout-body" onload="openHome({{ privs }})">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" style="height:60px;border-bottom: 1px solid #fff;background-color: #2f4056">
+        <div class="layui-logo" style=";color: #93ff93;font-size: 18px;text-align: center">
+            后台管理中心
+        </div>
+
+        <ul class="layui-nav layui-layout-right" id="right-layout" >
+            <li class="layui-nav-item">
+                <a href="javascript:;" id="useralias" style=";color: white">
+                    <img src="/static/AdminHome/default.png" class="layui-nav-img">
+                    {{ useralias }}
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a onclick="goChangePassword()" style="cursor: pointer">修改密码</a></dd>
+                    <dd><a onclick="$.goBackPage()" style="cursor: pointer">退出</a></dd>
+                    {#          <dd><a href="">安全设置</a></dd>#}
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+        <div class="layui-side layui-bg-cyan">
+            <div class="layui-side-scroll">
+
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
+                    <li class="layui-nav-item"><a href="javascript:openHome();"
+                                                  style="font-family: 'Microsoft YaHei UI';font-size: 14px">首页</a></li>
+
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;" style="font-family: 'Microsoft YaHei UI';font-size: 14px"
+                           id="priv">权限管理</a>
+                        <dl class="layui-nav-child" style="padding-left: 14px">
+                            <dd><a class="menuitem" href="javascript:"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10001">单位管理</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10002">角色管理</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10003">账户管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;" style="font-family: 'Microsoft YaHei UI';font-size: 14px"
+                           id="dev">设备管理</a>
+                        <dl class="layui-nav-child" style="padding-left: 14px">
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10004">运行统计</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10005">设备管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;" style="font-family: 'Microsoft YaHei UI';font-size: 14px"
+                           id="zonep">商品与订单</a>
+                        <dl class="layui-nav-child" style="padding-left: 14px">
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10007">商品管理</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10008">订单管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;" style="font-family: 'Microsoft YaHei UI';font-size: 14px"
+                           id="sys">系统管理</a>
+                        <dl class="layui-nav-child" style="padding-left: 14px">
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10009">短信配置</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10010">商户配置</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10011">日志查询</a>
+                            </dd>
+                            <dd><a class="menuitem" href="javascript:;"
+                                   style="font-family: 'Microsoft YaHei UI';font-size: 14px" id="menu_10012">版本管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body" id="showbody">
+            <div class="layui-tab" lay-filter="showbody" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                </ul>
+                <div class="layui-tab-content">
+                </div>
+            </div>
+        </div>
+
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        {{ lisence }}
+    </div>
+</div>
+<script src="/static/ThreeParty/LayUi/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+        //触发事件
+        var active = {};
+    });
+
+    function openHome(privs) {
+        var element = layui.element;
+        var $ = jQuery = layui.jquery;
+
+        try {
+            $.showElement(privs);
+        } catch (e) {
+        }
+
+
+        {#获取当前tables#}
+        {#判断当前table是否被打开#}
+        var isOpen = false;
+        $.each($(".layui-tab-title li[lay-id]"), function () {
+            if ($(this).attr("lay-id") == "00") {
+                isOpen = true;
+            }
+        });
+        {#如果已打开，则进行切换#}
+        if (!isOpen) {
+            {#如果未打开，则打开#}
+            element.tabAdd('showbody', {
+                title: '主页' //用于演示
+                , content: '<iframe src="./home.html" style="overflow: hidden;border:0px solid #ccc;"></iframe>'
+                , id: "00" //实际使用一般是规定好的id，这里以时间戳模拟下
+            });
+
+        }
+
+        FrameWH();
+        element.tabChange('showbody', '00');
+    }
+
+    function FrameWH() {
+            var h = $(window).height() -41- 10 - 60 -10-44 -30;
+            var rightWd = $("#right-layout").width();
+            var w = $(window).width() - rightWd - 65;
+            {#alert(rightWd);#}
+            $("iframe").css("height",h+"px");
+            $("iframe").css("width",w+"px");
+        }
+    $(window).resize(function () {
+            FrameWH();
+        })
+
+    function deleteTable(layid){
+        layui.use('element', function () {
+            var element = layui.element;
+            element.tabDelete('showbody', layid); //删除：“商品管理”
+        });
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/org_add.js"></script>
+
+{#    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>#}
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body style="text-align: center">
+
+{#<div class="layui-upload">#}
+{#  <button type="button" class="layui-btn" id="test1" style="width: 40px;height: 30px;padding: 0px;line-height: 30px">传</button>#}
+{#  <div class="layui-upload-list">#}
+{#    <img class="layui-upload-img" id="demo1" src="/static/VipHome/default.jpg" style="width: 60px;height:60px;">#}
+{#    <p id="demoText"></p>#}
+{#  </div>#}
+{#</div>#}
+
+<div class="layui-form-item" style="margin-top: 10px">
+    <label class="layui-form-label" style="width: 130px">单位名字</label>
+    <div class="layui-input-block">
+      <input type="text" name="city" id="orgname" lay-verify="required" lay-verify="title" autocomplete="off" placeholder="请输入单位名字" class="layui-input" style="width: 200px">
+    </div>
+  </div>
+
+
+<div class="layui-form-item" style="margin-top: 10px">
+    <label class="layui-form-label" style="width: 130px">联系人</label>
+    <div class="layui-input-block">
+      <input type="text" name="profession" id="conname" lay-verify="title" autocomplete="off" placeholder="请输入联系人" class="layui-input" style="width: 200px">
+    </div>
+  </div>
+
+<div class="layui-form-item" style="margin-top: 10px">
+    <label class="layui-form-label" style="width: 130px">联系电话</label>
+    <div class="layui-input-block">
+      <input type="text" name="depsity" id="conphone" lay-verify="title" autocomplete="off" placeholder="请输入联系电话" class="layui-input" style="width: 200px">
+    </div>
+  </div>
+
+<form class="layui-form" action="" hidden>
+    <div class="layui-form-item" style="width: 80%;margin-left: 10%">
+        <label class="layui-form-label">单行选择框</label>
+        <div class="layui-input-block">0
+            <select name="interest" lay-filter="aihao">
+                <option value=""></option>
+                <option value="0">写作</option>
+                <option value="1" selected="">阅读</option>
+                <option value="2">游戏</option>
+                <option value="3">音乐</option>
+                <option value="4">旅行</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="layui-form-item" style="margin-top: 10px">
+{#    <label class="layui-form-label" style="width: 130px">联系电话</label>#}
+    <div class="layui-input-block">
+      <div style="width: 120px;margin-top: 20px;cursor: pointer;background-color: #d58512;font-size: 18px;
+        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px" onclick="$.saveInfo()">保存</div>
+
+    </div>
+  </div>
+
+
+
+<script>
+    layui.use('form', function(){
+      var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      form.render();
+    });
+  </script>
+</body>
+</html>

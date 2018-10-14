@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/account_list.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+{#    <link rel="stylesheet" href="/static/OrgHome/org_list.css"/>#}
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body onload="$.setPriv({{ adminflag }})">
+
+<div style="height: 600px;width: 13%;background-color: #f2f2f2;float: left;border-radius: 10px" id="left_org_tree">
+    <ul id="orgTree" style="width: 100%;margin-top: 20px;margin-left: 10px"></ul>
+</div>
+<div style="background: #fff;height: 600px;width: 84%;margin-left:16px;float: right" id="vip_div">
+    <div class="demoTable">
+        搜索：
+        <div class="layui-inline">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off"  placeholder="输入账户名">
+        </div>
+        <button class="layui-btn" data-type="reload" onclick="searchOrg()">搜索</button>
+        <button class="layui-btn" data-type="reload" onclick="showAll()">所有账户</button>
+        <button class="layui-btn" data-type="reload" onclick="$.createUser(null)">添加账户</button>
+    </div>
+
+    <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
+</div>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="confrole">角色</a>
+    <a id="resetpassword" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="resetpassword">重置密码</a>
+</script>
+
+
+<script>
+    var orgTab;
+    layui.use('table', function () {
+        var table = layui.table;
+
+        var listParams = new Array();
+        listParams[0] = "command=ACCOUNT_LIST";
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "logincode=" + $.cookie("OrgUserCode");
+        listParams[3] = "orgsign=" + orgsign;
+
+        listParams = listParams.sort();
+        var urlCmd = $.buildGetParam("/api/org/?", listParams);
+        urlCmd = urlCmd + "&sign=" + $.signString(listParams);
+
+        //第一个实例
+        orgTab = table.render({
+            elem: '#demo'
+            , height: 600
+            ,cellMinWidth:80
+            , url: urlCmd //数据接口
+            , page: true //开启分页
+            , id: 'testReload'
+            , cols: [[ //表头
+                {field: 'account', title: '账号', sort: true}
+                , {field: 'typename', title: '类别', sort: true}
+                , {field: 'name', title: '姓名',}
+                , {field: 'phone', title: '联系电话',}
+                , {field: 'regdate', title: '登记日期', sort: true}
+                {#, {field: 'state', title: '状态', sort: true}#}
+                , {fixed: 'right', title: '操作', align: 'left',width:360, toolbar: '#barDemo'}
+            ]]
+            , done: function (res, page, count) {
+            },
+        });
+
+        //监听工具条
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'detail') {
+                layer.msg('查看操作');
+            } else if (layEvent === 'del') {
+                layer.confirm('删除后，该账户下所有数据将不可使用', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.removeOrgCustom(data);
+                });
+            } else if (layEvent === 'edit') {
+                //layer.msg('编辑操作');
+                $.modiCustom(data);
+            }
+            else if(layEvent == "confrole")
+            {
+                $.configUserRole(data);
+            }
+            else if (layEvent == "resetpassword")
+            {
+                $.resetAccountPassword(data);
+            }
+
+        });
+    });
+
+
+    {#加载树形模块#}
+    {#    var menuList = $.getTestOrg();#}
+
+
+    $('.demoTable .layui-btn').on('click', function () {
+
+    });
+
+/*刷新数据*/
+function  loadOrgTree(datas) {
+    layui.use('tree', function () {
+        layui.tree({
+            elem: '#orgTree' //传入元素选择器
+            , nodes: datas
+            , click: function (node) {
+                var pcode = node.id;
+                var pfliter = $("#demoReload").val();
+                orgTab.reload({
+                    where: { //设定异步数据接口的额外参数，任意设
+                        orgcode:pcode
+                        ,fliterstring:pfliter
+                    }
+                    , page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            }
+        });
+    });
+}
+
+
+    function showAll() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+    function searchOrg() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                fliterstring:pfliter
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

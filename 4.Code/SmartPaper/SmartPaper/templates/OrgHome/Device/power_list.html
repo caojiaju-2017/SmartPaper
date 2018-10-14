@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/power_list.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+
+    <style>
+        .layui-table-cell{
+    height:30px;
+    line-height:30px;
+}
+    </style>
+</head>
+<body>
+
+<div style="background: #fff;height: 600px;width: 90%;margin-left:5%;" id="vip_div">
+    <div class="demoTable">
+        <div class="layui-inline">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="电源名称">
+        </div>
+
+        <button class="layui-btn" data-type="reload" onclick="searchFliter()">搜索</button>
+        {#        <button class="layui-btn" data-type="reload" onclick="showAll()">所有终端</button>#}
+        <button class="layui-btn layui-btn-danger layui-btn-radius" style="float: right"onclick="addPower()">添加电源</button>
+    </div>
+    <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="view" id="view">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" id="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" id="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="close" id="close">关闭</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="open" id="open">开启</a>
+</script>
+
+
+<script>
+    var orgTab;
+    layui.use('table', function () {
+        var table = layui.table;
+
+        var listParams = new Array();
+        listParams[0] = "command=POWERS_LIST";
+        var timestamp = (new Date()).valueOf();
+        listParams[1] = "timestamp=" + timestamp;
+        listParams[2] = "logincode=" + $.cookie("OrgUserCode");
+        listParams[3] = "orgsign=" + orgsign  ;
+
+        listParams = listParams.sort();
+        var urlCmd = $.buildGetParam("/api/device/?", listParams);
+        urlCmd = urlCmd + "&sign=" + $.signString(listParams);
+
+        //第一个实例
+        orgTab = table.render({
+            elem: '#demo'
+            , height: 600
+            ,cellMinWidth:80
+            , url: urlCmd //数据接口
+            , page: true //开启分页
+            , id: 'testReload'
+            , cols: [[ //表头
+                {type:'checkbox'}
+                , {field: 'name', title: '名称',}
+                , {field: 'orgname', title: '归属网点', sort: true,}
+                , {field: 'type', title: '电源厂家', }
+                , {field: 'ctrlportnumber', title: '端子数量', sort: true,}
+                , {field: 'binddevs', title: '设备数量', sort: true,}
+                , {fixed: 'right', title: '操作', align: 'center',toolbar: '#barDemo',width:300}
+            ]]
+            , done: function (res, page, count) {
+            },
+        });
+
+        //监听工具条
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent == "view")
+            {
+                var newTmpLay = layer.open({
+                    title: ['电源与设备分布', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+                    type: 2,
+                    maxmin: true,
+                    scrollbar: false,
+                    area: ['800px', '600px'],
+                    content: 'org_sceen.html?code=' + data.code + "&type=2"
+                });
+            }
+            else if (layEvent === 'edit') {
+                $.editPower(data);
+            }
+            else if (layEvent === 'del') {
+                layer.confirm('你确定删除该电源，删除后绑定到电源的设备将会被解绑，是否继续？', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.delePower(data);
+                });
+            } else if (layEvent === 'close') {
+                layer.confirm('你确定要切断该电源所有端子？', function (index) {
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.closePower(data);
+                });
+            }
+            else if (layEvent === 'open') {
+                layer.confirm('你确定要接通所有端子？', function (index) {
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.openPower(data);
+                });
+            }
+        });
+    });
+    function showAll() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+    function searchFliter() {
+        var pfliter = $("#demoReload").val();
+        orgTab.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                fliterstring:pfliter
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+    function openTerminal() {
+        layui.use('table', function () {
+            var table = layui.table;
+            var oldData = table.cache["testReload"];
+
+            for (var index = 0 ; index < oldData.length;index ++)
+            {
+                var oneRecore = oldData[index];
+
+                if (oneRecore.LAY_CHECKED)
+                {
+                    console.log(oneRecore.name);
+                }
+
+            }
+        });
+    }
+
+    function shutdownTerminal() {
+
+    }
+
+    function restartTermianl() {
+
+    }
+
+    function addPower()
+    {
+        var newTmpLay = layer.open({
+            title: ['添加电源', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+            type: 2,
+            maxmin:true,
+            scrollbar: false,
+            area:['500px', '460px'],
+            content: 'power_add.html'
+        });
+    }
+</script>
+</body>
+</html>

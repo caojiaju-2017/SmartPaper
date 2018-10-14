@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/device_view.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+    <script src='/static/ThreeParty/Graphy/ichart.latest.min.js'></script>
+</head>
+<body style="text-align: center">
+
+<div style="width: 100%">
+    <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">设备名称</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="name"></label>
+    </div>
+
+    <div style="margin-top: 10px;float: left;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">Mac地址</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="macaddress"></label>
+    </div>
+</div>
+<div style="width: 100%">
+    <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">管理地址</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="ipaddress"></label>
+    </div>
+
+    <div style="margin-top: 10px;float: left;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">管理端口</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="port"></label>
+    </div>
+</div>
+
+<div style="width: 100%">
+    <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">设备类型</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="dev_type"></label>
+    </div>
+
+    <div style="margin-top: 10px;float: left;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">设备状态</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="state_list"></label>
+    </div>
+</div>
+
+<div style="width: 100%">
+    <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">归属单位</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="org_list"></label>
+    </div>
+
+    <div style="margin-top: 10px;float: left;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">绑定电源</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="bind_power"></label>
+    </div>
+</div>
+<div style="width: 100%">
+    <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">归属分区</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="bind_group"></label>
+    </div>
+
+        <div style="margin-top: 10px;float: left;margin-left: 20px;width: 300px;line-height: 30px;height: 30px;text-align: left">
+        <label style="width: 130px;font-weight: bold">绑定端子</label>
+        <label style="width: 130px;margin-left: 20px;font-weight: normal" id="pportname"></label>
+    </div>
+</div>
+
+<div style="width: 100%;margin-left: 5%" id="right_bottom">
+    <div id='ichart-render1' style="width: 90% ;margin-top:10px;float: left;background: white"></div>
+</div>
+<script>
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+    });
+</script>
+</body>
+</html>

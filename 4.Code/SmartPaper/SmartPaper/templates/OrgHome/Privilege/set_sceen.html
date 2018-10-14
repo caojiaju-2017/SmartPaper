@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/ThreeParty/Boost/bootstrap.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/set_sceen.js"></script>
+
+    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body style="text-align: center">
+
+
+<div class="layui-upload">
+
+  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+  <button type="button" class="layui-btn" id="test9">开始上传</button>
+
+    <div class="layui-upload-list">
+        <img class="layui-upload-img" id="demo1"   style="width: 640px;height:500px;">
+    </div>
+</div>
+
+
+<script>
+    code = $.GetQueryString("code");
+    $('#demo1').attr('src', "/static/Service/" + code + ".png");
+    layui.use('upload', function () {
+        var $ = layui.jquery, upload = layui.upload;
+        $.timeout = 1024000;
+        upload.render({
+            elem: '#test8'
+            ,url: '/upload/?code=' + code
+            ,auto: false
+            ,size:0
+            ,accept:'file'
+            ,bindAction: '#test9'
+            , data: {
+                name: function () {
+                    //return $("#title").val();
+                    return "";
+                }
+            }
+            ,choose:function (obj) {
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+                parent.$(".layui-layer-title")[0].innerText = '上传资源(已选中)';
+                layer.tips('文件已选中', this.item, {tips: 2});
+            }
+            , before: function (obj) {
+                layer.load(); //上传loading
+
+            }
+            ,done: function(res)
+            {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    parent.location.reload();
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+            }
+          });
+
+    });
+</script>
+</body>
+</html>
