@@ -6,7 +6,7 @@
  * geometries UV mapping
  *
  * Sample usage:
- *	document.body.appendChild( THREE.UVsDebug( new THREE.SphereGeometry( 10, 10, 10, 10 ) );
+ *	document.body.appendChild( THREE.UVsDebug( V2.4.3 THREE.SphereGeometry( 10, 10, 10, 10 ) );
  *
  */
  

@@ -92,7 +92,7 @@ THREE.TimelinerController.prototype = {
 
 		if ( index < 0 ) {
 
-			// insert new keyframe
+			// insert V2.4.3 keyframe
 
 			index = ~ index;
 			offset = index * stride;

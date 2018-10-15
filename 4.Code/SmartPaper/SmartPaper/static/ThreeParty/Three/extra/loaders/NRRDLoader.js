@@ -294,7 +294,7 @@ THREE.NRRDLoader.prototype = {
 
 		} else if ( headerObject.encoding === 'raw' ) {
 
-			//we need to copy the array to create a new array buffer, else we retrieve the original arraybuffer with the header
+			//we need to copy the array to create a V2.4.3 array buffer, else we retrieve the original arraybuffer with the header
 			var _copy = new Uint8Array( _data.length );
 
 			for ( var i = 0; i < _data.length; i ++ ) {

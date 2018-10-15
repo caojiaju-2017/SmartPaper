@@ -37,8 +37,8 @@
 </div>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="mapimage">场景图</a>
+{#    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>#}
+{#    <a class="layui-btn layui-btn-xs" lay-event="mapimage">场景图</a>#}
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="addsub">添加子单位</a>
@@ -80,7 +80,8 @@
                 , {field: 'contactphone', title: '联系电话',}
                 , {field: 'regdate', title: '登记日期', sort: true}
                 {#, {field: 'state', title: '状态', sort: true}#}
-                , {fixed: 'right', title: '操作', align: 'left',width:440, toolbar: '#barDemo'}
+                , {fixed: 'right', title: '操作', align: 'left',width:200, toolbar: '#barDemo'}
+
             ]]
             , done: function (res, page, count) {
                 $("[data-field='type']").children().each(function () {
@@ -112,16 +113,7 @@
         table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
                 , layEvent = obj.event; //获得 lay-event 对应的值
-            if (layEvent === 'detail') {
-                var newTmpLay = layer.open({
-                    title: ['网点设备分布', 'font-size:13px;margin-top:10px;font-weight:bold;'],
-                    type: 2,
-                    maxmin: true,
-                    scrollbar: false,
-                    area: ['800px', '600px'],
-                    content: 'org_sceen.html?code=' + data.code + "&type=0"
-                });
-            } else if (layEvent === 'del') {
+            if (layEvent === 'del') {
                 layer.confirm('删除后，该单位下所有数据将不可使用', function (index) {
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
@@ -139,15 +131,6 @@
             else if (layEvent === 'mangeacnt') {
                 //layer.msg('编辑操作');
                 $.configCustom(data);
-            }
-            else if (layEvent == "mapimage")
-            {
-                layer.open({
-                    title: ['设置场景图', 'font-size:13px;margin-top:10px;'],
-                    type: 2,
-                    area: ['800px', '600px'],
-                    content: 'set_sceen.html?code=' + data.code
-                });
             }
         });
     });

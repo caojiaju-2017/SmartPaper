@@ -83,21 +83,22 @@ class LoggerHelper(object):
 
         logDb.logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         logDb.operttype = UtilHelper.getCommand(request)  # 此处在SAAS模式下会有问题， 暂时这样
+
         try:
-            logDb.orgcode = PaperOrgs.objects.filter(code = UtilHelper.getOrgCode(request)).first()
+            logDb.orgcode = (PaperAccount.objects.filter(account = UtilHelper.getUserCode(request)).first()).orgcode
         except:
             logDb.orgcode = None
             pass
 
         try:
-            logDb.ucode = PaperAccount.objects.filter(workno = request.COOKIES["OrgUserCode"]).first()
-
-            if not logDb.ucode:
-                logDb.uaccount = "Unknown"
-                logDb.uname = "Unknown"
-            else:
-                logDb.uname = logDb.ucode.alias
-                logDb.uaccount = logDb.ucode.workno
+            logDb.ucode = UtilHelper.getUserCode(request)
+            logDb.terminalcode = PaperAccount.objects.filter(account=logDb.ucode).first().alias
+            # if not logDb.ucode:
+            #     logDb.uaccount = "Unknown"
+            #     logDb.uname = "Unknown"
+            # else:
+            #     logDb.uname = logDb.ucode.alias
+            #     logDb.uaccount = logDb.ucode.workno
         except:
             pass
 

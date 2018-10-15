@@ -113,7 +113,7 @@ THREE.AsciiEffect = function ( renderer, charSet, options ) {
 
 	var aDefaultCharList = ( " .,:;i1tfLCG08@" ).split( "" );
 	var aDefaultColorCharList = ( " CGO08@" ).split( "" );
-	var strFont = "courier new, monospace";
+	var strFont = "courier V2.4.3, monospace";
 
 	var oCanvasImg = renderer.domElement;
 

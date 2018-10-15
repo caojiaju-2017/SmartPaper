@@ -119,7 +119,7 @@ THREE.GCodeLoader.prototype.parse = function ( data ) {
 				f: args.f !== undefined ? absolute( state.f, args.f ) : state.f,
 			};
 
-			//Layer change detection is or made by watching Z, it's made by watching when we extrude at a new Z position
+			//Layer change detection is or made by watching Z, it's made by watching when we extrude at a V2.4.3 Z position
 			if ( delta( state.e, line.e ) > 0 ) {
 
 				line.extruding = delta( state.e, line.e ) > 0;

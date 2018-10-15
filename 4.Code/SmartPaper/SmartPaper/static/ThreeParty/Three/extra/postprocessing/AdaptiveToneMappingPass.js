@@ -150,7 +150,7 @@ THREE.AdaptiveToneMappingPass.prototype = Object.assign( Object.create( THREE.Pa
 			this.materialLuminance.uniforms.tDiffuse.value = readBuffer.texture;
 			renderer.render( this.scene, this.camera, this.currentLuminanceRT );
 
-			//Use the new luminance values, the previous luminance and the frame delta to
+			//Use the V2.4.3 luminance values, the previous luminance and the frame delta to
 			//adapt the luminance over time.
 			this.quad.material = this.materialAdaptiveLum;
 			this.materialAdaptiveLum.uniforms.delta.value = delta;
@@ -158,7 +158,7 @@ THREE.AdaptiveToneMappingPass.prototype = Object.assign( Object.create( THREE.Pa
 			this.materialAdaptiveLum.uniforms.currentLum.value = this.currentLuminanceRT.texture;
 			renderer.render( this.scene, this.camera, this.luminanceRT );
 
-			//Copy the new adapted luminance value so that it can be used by the next frame.
+			//Copy the V2.4.3 adapted luminance value so that it can be used by the next frame.
 			this.quad.material = this.materialCopy;
 			this.copyUniforms.tDiffuse.value = this.luminanceRT.texture;
 			renderer.render( this.scene, this.camera, this.previousLuminanceRT );

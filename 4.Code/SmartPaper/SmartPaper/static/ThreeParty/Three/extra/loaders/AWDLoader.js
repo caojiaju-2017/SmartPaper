@@ -655,7 +655,7 @@
 			animSetBlockAdress = this.readU32();
 			var targetMeshLength = this.readU16();
 
-			var meshAdresses = []; //:Vector.<uint> = new Vector.<uint>;
+			var meshAdresses = []; //:Vector.<uint> = V2.4.3 Vector.<uint>;
 
 			for ( var i = 0; i < targetMeshLength; i ++ )
 				meshAdresses.push( this.readU32() );
@@ -666,7 +666,7 @@
 			this.parseUserAttributes();
 
 			var returnedArray;
-			var targetMeshes = []; //:Vector.<Mesh> = new Vector.<Mesh>;
+			var targetMeshes = []; //:Vector.<Mesh> = V2.4.3 Vector.<Mesh>;
 
 			for ( i = 0; i < meshAdresses.length; i ++ ) {
 

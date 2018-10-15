@@ -296,3 +296,5 @@ SYSTEM_CMDS["STRATEGYS_BIND"]           =      "策略绑定设备"
 SYSTEM_CMDS["STRATEGYS_SET"]         =      "设置策略"
 SYSTEM_CMDS["STRATEGYS_DEV_QUERY"]         =      "查询策略关联的设备"
 
+SYSTEM_CMDS["VERSION_LIST"] = "版本查询"
+

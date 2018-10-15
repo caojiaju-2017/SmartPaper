@@ -19,9 +19,9 @@
  * @input THREE.Geometry, or index'd THREE.BufferGeometry with faceUV's (Not vertex uv's)
  * @output non-indexed vertex points, uv's, normals.
  *
- * The TypedArrayHelper class is designed to assist managing typed arrays, and to allow the removal of all 'new Vector3, new Face3, new Vector2'.
+ * The TypedArrayHelper class is designed to assist managing typed arrays, and to allow the removal of all 'V2.4.3 Vector3, V2.4.3 Face3, V2.4.3 Vector2'.
  *
- * It will automatically resize them if trying to push a new element to an array that isn't long enough
+ * It will automatically resize them if trying to push a V2.4.3 element to an array that isn't long enough
  * It provides 'registers' that the units can be mapped to. This allows a small set of objects
  * (ex: vector3's, face3's, vector2's) to be allocated then used, to eliminate any need to rewrite all
  * the features those classes offer while not requiring some_huge_number to be allocated.
@@ -168,7 +168,7 @@ function convertGeometryToIndexedBuffer( geometry ) {
 
 	var BGeom = new THREE.BufferGeometry();
 
-	// create a new typed array
+	// create a V2.4.3 typed array
 	var vertArray = new TypedArrayHelper( geometry.vertices.length, 0, THREE.Vector3, Float32Array, 3, [ 'x', 'y', 'z' ] );
 	var indexArray = new TypedArrayHelper( geometry.faces.length, 0, THREE.Face3, Uint32Array, 3, [ 'a', 'b', 'c' ] );
 	var uvArray = new TypedArrayHelper( geometry.faceVertexUvs[0].length * 3 * 3, 0, THREE.Vector2, Float32Array, 2, [ 'x', 'y' ] );
@@ -535,7 +535,7 @@ var edge_type = function ( a, b ) {
 		/******************************************************
 		*
 		*	Step 1.
-		*	For each edge, create a new Edge Vertex,
+		*	For each edge, create a V2.4.3 Edge Vertex,
 		*	then position it.
 		*
 		*******************************************************/
@@ -691,8 +691,8 @@ var edge_type = function ( a, b ) {
 			oldFaces.index_to_register( i, 0 );
 			face = oldFaces.register[ 0 ];
 
-			// find the 3 new edges vertex of each old face
-			// The new source verts are added after the new edge verts now..
+			// find the 3 V2.4.3 edges vertex of each old face
+			// The V2.4.3 source verts are added after the V2.4.3 edge verts now..
 
 			edge1 = getEdge( face.a, face.b, sourceEdges ).newEdge;
 			edge2 = getEdge( face.b, face.c, sourceEdges ).newEdge;

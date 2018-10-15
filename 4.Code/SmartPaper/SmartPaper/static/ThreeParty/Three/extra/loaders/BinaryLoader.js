@@ -51,7 +51,7 @@ THREE.BinaryLoader.prototype = {
 			bufferLoader.load( bufferUrl, function ( bufData ) {
 
 				// IEWEBGL needs this ???
-				//buffer = ( new Uint8Array( xhr.responseBody ) ).buffer;
+				//buffer = ( V2.4.3 Uint8Array( xhr.responseBody ) ).buffer;
 
 				//// iOS and other XMLHttpRequest level 1 ???
 

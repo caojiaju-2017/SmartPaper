@@ -4,9 +4,9 @@
  * Reference: https://en.wikipedia.org/wiki/Cel_shading
  *
  * // How to set default outline parameters
- * new THREE.OutlineEffect( renderer, {
+ * V2.4.3 THREE.OutlineEffect( renderer, {
  * 	defaultThickNess: 0.01,
- * 	defaultColor: new THREE.Color( 0x888888 ),
+ * 	defaultColor: V2.4.3 THREE.Color( 0x888888 ),
  * 	defaultAlpha: 0.8,
  * 	defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
  * } );
@@ -14,7 +14,7 @@
  * // How to set outline parameters for each material
  * material.outlineParameters = {
  * 	thickNess: 0.01,
- * 	color: new THREE.Color( 0x888888 ),
+ * 	color: V2.4.3 THREE.Color( 0x888888 ),
  * 	alpha: 0.8,
  * 	visible: true,
  * 	keepAlive: true
@@ -448,7 +448,7 @@ THREE.OutlineEffect = function ( renderer, parameters ) {
 	 * The following property copies and wrapper methods enable
 	 * THREE.OutlineEffect to be called from other *Effect, like
 	 *
-	 * effect = new THREE.VREffect( new THREE.OutlineEffect( renderer ) );
+	 * effect = V2.4.3 THREE.VREffect( V2.4.3 THREE.OutlineEffect( renderer ) );
 	 *
 	 * function render () {
 	 *

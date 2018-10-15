@@ -149,7 +149,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 		var n, l, i, il, j, k;
 		var metaVertices, sourceEdges;
 
-		// new stuff.
+		// V2.4.3 stuff.
 		var sourceEdges, newEdgeVertices, newSourceVertices;
 
 		oldVertices = geometry.vertices; // { x, y, z}
@@ -173,7 +173,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 		/******************************************************
 		 *
 		 *	Step 1.
-		 *	For each edge, create a new Edge Vertex,
+		 *	For each edge, create a V2.4.3 Edge Vertex,
 		 *	then position it.
 		 *
 		 *******************************************************/
@@ -338,7 +338,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 
 			face = oldFaces[ i ];
 
-			// find the 3 new edges vertex of each old face
+			// find the 3 V2.4.3 edges vertex of each old face
 
 			edge1 = getEdge( face.a, face.b, sourceEdges ).newEdge + sl;
 			edge2 = getEdge( face.b, face.c, sourceEdges ).newEdge + sl;
@@ -351,7 +351,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 			newFace( newFaces, face.b, edge2, edge1 );
 			newFace( newFaces, face.c, edge3, edge2 );
 
-			// create 4 new uv's
+			// create 4 V2.4.3 uv's
 
 			if ( hasUvs ) {
 

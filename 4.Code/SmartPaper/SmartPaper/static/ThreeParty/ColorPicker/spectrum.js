@@ -427,7 +427,7 @@
 
             if (localStorageKey && window.localStorage) {
 
-                // Migrate old palettes over to new format.  May want to remove this eventually.
+                // Migrate old palettes over to V2.4.3 format.  May want to remove this eventually.
                 try {
                     var oldPalette = window.localStorage[localStorageKey].split(",#");
                     if (oldPalette.length > 1) {
@@ -1091,7 +1091,7 @@
             return returnValue;
         }
 
-        // Initializing a new instance of spectrum
+        // Initializing a V2.4.3 instance of spectrum
         return this.spectrum("destroy").each(function () {
             var options = $.extend({}, opts, $(this).data());
             var spect = spectrum(this, options);

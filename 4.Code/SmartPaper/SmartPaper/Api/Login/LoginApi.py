@@ -8,7 +8,7 @@ from SmartPaper.BaseMoudle.Privilege import *
 from SmartPaper.Api.Privilege.OrgTree import *
 from SmartPaper.BaseMoudle.DBModule.DBHelper import *
 from SmartPaper.BaseMoudle.DBModule.CommitData import *
-
+from SmartPaper.BaseMoudle.Privilege.PrivilegeHelper import PrivilegeHelper
 
 
 class LoginApi(object):
@@ -55,31 +55,31 @@ class LoginApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查logioncode是否为权力机构
-        # acntHandle = SmartAccount.objects.filter(account=allParams["logincode"]).first()
-
-        # 检查当前账号是否具有当前权限
-        # if not acntHandle:
-        #     LoggerHandle.writeLogDevelope("当前账号数据异常", request)
-        #     loginResut = json.dumps({"ErrorInfo": "当前账号数据异常", "ErrorId": 20001, "Result": {}})
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
         #     return HttpResponse(loginResut)
 
-        orgHandel = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
-        if not orgHandel:
-            LoggerHandle.writeLogDevelope("客户单位数据异常", request)
-            loginResut = json.dumps({"ErrorInfo": "客户单位数据异常", "ErrorId": 20008, "Result": {}})
+        # 检查logioncode是否为权力机构
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+
+        # 检查当前账号是否具有当前权限
+        if not acntHandle:
+            LoggerHandle.writeLogDevelope("当前账号数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "当前账号数据异常", "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        userOrg, userHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
+        # orgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
+        # if not orgHandel:
+        #     LoggerHandle.writeLogDevelope("客户单位数据异常", request)
+        #     loginResut = json.dumps({"ErrorInfo": "客户单位数据异常", "ErrorId": 20008, "Result": {}})
+        #     return HttpResponse(loginResut)
+
+        userOrg, userHandle = OrgTree.getUserOrg(allParams["logincode"])
         if not userOrg:
             LoggerHandle.writeLogDevelope("用户单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
@@ -91,14 +91,14 @@ class LoginApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, userHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, userHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 查询账号信息
-        accountModi = SmartAccount.objects.filter(code = allParams["acode"]).first()
+        accountModi = PaperAccount.objects.filter(code = allParams["acode"]).first()
         if not accountModi:
             LoggerHandle.writeLogDevelope("待修改的账号不存在", request)
             loginResut = json.dumps({"ErrorInfo": "待修改的账号不存在", "ErrorId": 20007, "Result": {}})
@@ -527,10 +527,6 @@ class LoginApi(object):
         dict = {}
         try:
             logincode = request.GET.get('logincode').lower()
-            # orgsign = request.GET.get('orgsign').lower()
-
-            # havePrivOrgs,userHandle = OrgTree.getUserOrg(logincode,orgsign)
-
             dict["logincode"] = logincode
 
             acntHandle = PaperAccount.objects.filter(account=logincode, state=1).first()
@@ -546,7 +542,7 @@ class LoginApi(object):
 
         dict["lisence"] = "© 博源科技-版权所有"
 
-        dict["privs"] = PrivilegeHelper.PrivilegeHelper.getUserPriv(acntHandle)
+        dict["privs"] = PrivilegeHelper.getUserPriv(acntHandle)
         # dict["privs"] = []
         LoggerHandle.writeLogDevelope("打开管理员主页", request)
         return render(request, os.path.join(STATIC_TMP,'OrgHome/index.html'), dict)

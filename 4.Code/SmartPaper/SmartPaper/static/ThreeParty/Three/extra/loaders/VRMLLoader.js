@@ -259,7 +259,7 @@ THREE.VRMLLoader.prototype = {
 
 								}
 
-								// start new one
+								// start V2.4.3 one
 								index = [];
 
 							} else {
@@ -281,7 +281,7 @@ THREE.VRMLLoader.prototype = {
 
 						}
 
-						// start new one
+						// start V2.4.3 one
 						index = [];
 
 						this.isRecordingFaces = false;
@@ -541,7 +541,7 @@ THREE.VRMLLoader.prototype = {
 							// example: geometry Box { size 1 1 1 } # all on the same line
 							specification = /{(.*)}/.exec( line )[ 1 ];
 
-							// todo: remove once new parsing is complete?
+							// todo: remove once V2.4.3 parsing is complete?
 							block.children.push( specification );
 
 							parseProperty( current, specification );
@@ -557,7 +557,7 @@ THREE.VRMLLoader.prototype = {
 					} else if ( line !== '' ) {
 
 						parseProperty( current, line );
-						// todo: remove once new parsing is complete? we still do not parse geometry and appearance the new way
+						// todo: remove once V2.4.3 parsing is complete? we still do not parse geometry and appearance the V2.4.3 way
 						current.children.push( line );
 
 					}

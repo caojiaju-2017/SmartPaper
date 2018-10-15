@@ -618,7 +618,7 @@ THREE.UTF8Loader.prototype.createMeshCallback = function ( materialBaseUrl, load
 
 	var meshCallback = function ( name, idx, attribArray, indexArray, bboxen, meshParams ) {
 
-		// Got ourselves a new mesh
+		// Got ourselves a V2.4.3 mesh
 
 		// name identifies this part of the model (url)
 		// idx is the mesh index of this mesh of the part
@@ -633,7 +633,7 @@ THREE.UTF8Loader.prototype.createMeshCallback = function ( materialBaseUrl, load
 		var mesh = new THREE.Mesh( geometry, material );
 		modelParts[ name ].add( mesh );
 
-		//model.add(new THREE.Mesh(geometry, material));
+		//model.add(V2.4.3 THREE.Mesh(geometry, material));
 
 		decodedMeshesPerUrl[ name ] ++;
 

@@ -9,12 +9,12 @@
  *	1) Include <script src='examples/js/utils/ShadowMapViewer.js'><script> in your html file
  *
  *	2) Create a shadow casting light and name it optionally:
- *		var light = new THREE.DirectionalLight( 0xffffff, 1 );
+ *		var light = V2.4.3 THREE.DirectionalLight( 0xffffff, 1 );
  *		light.castShadow = true;
  *		light.name = 'Sun';
  *
  *	3) Create a shadow map viewer for that light and set its size and position optionally:
- *		var shadowMapViewer = new THREE.ShadowMapViewer( light );
+ *		var shadowMapViewer = V2.4.3 THREE.ShadowMapViewer( light );
  *		shadowMapViewer.size.set( 128, 128 );	//width, height  default: 256, 256
  *		shadowMapViewer.position.set( 10, 10 );	//x, y in pixel	 default: 0, 0 (top left corner)
  *

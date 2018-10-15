@@ -117,9 +117,11 @@ $.extend({
                 // 该参数在后台不予处理，密码修改为专用通道
                 $("#password").val("123456");
 
+                $("#conphone").attr("disabled","disabled");
                 $("#account").attr("disabled","disabled");
                 $("#password").attr("disabled","disabled");
 
+                $("#account_type_list").find("option[value = '"+datas.type +"']").attr("selected","selected");
                 $.loadBoxData(datas.orgcode);
             },
             "json");//这里返回的类型有：json,html,xml,text
@@ -151,10 +153,16 @@ $.extend({
             alert("请指定账户使用者真实名称");
             return;
         }
+        if (conphone == "" || conphone.length <= 0)
+        {
+            alert("未输入账户");
+            return;
+        }
+
 
         if (account == "" || account.length <= 0)
         {
-            alert("请设置账户登陆账号");
+            alert("请设置员工工号");
             return;
         }
 

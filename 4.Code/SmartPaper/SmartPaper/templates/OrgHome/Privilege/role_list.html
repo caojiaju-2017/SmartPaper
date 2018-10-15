@@ -26,16 +26,16 @@
     <ul id="RoleTree" style="width: 100%;margin-top: 20px;margin-left: 10px"></ul>
 </div>
 <div style="background: #fff;height: 600px;width: 84%;margin-left:16px;float: right" id="vip_div">
-    <div class="demoTable">
-        <button class="layui-btn" data-type="reload" onclick="$.saveRole()">保存配置</button>
-{#        <button class="layui-btn" data-type="reload" onclick="$.configUser()">配置用户</button>#}
-        <button class="layui-btn" data-type="reload" onclick="$.removeRole()">删除当前角色</button>
-    </div>
+
 
     <form class="layui-form" action="" id="priv_detail" style="margin-top: 20px">
         <div id="role_name" style="margin-top: 30px;font-size: 28px;margin-bottom: 20px;color: #761c19"></div>
     </form>
-
+    <div class="demoTable"  style="display: none;margin-left: 90px" id="manage_ctrl">
+        <button class="layui-btn" data-type="reload" onclick="$.saveRole()">保存角色</button>
+{#        <button class="layui-btn" data-type="reload" onclick="$.configUser()">配置用户</button>#}
+        <button class="layui-btn" data-type="reload" onclick="$.removeRole()">删除角色</button>
+    </div>
 </div>
 
 <script>
@@ -47,7 +47,7 @@
         layer.open({
             title: ['添加角色', 'font-size:13px;margin-top:10px;'],
             type: 2,
-            area: ['400px', '350px'],
+            area: ['320px', '200px'],
             content: 'role_add.html?orgsign=' + orgsign
         });
     }
@@ -56,12 +56,12 @@
     function loadRoleTree(datas) {
         layui.use('tree', function () {
 
-
             $('ul li').remove();
             layui.tree({
                 elem: '#RoleTree' //传入元素选择器
                 , nodes: datas
                 , click: function (node) {
+                    $("#manage_ctrl").show();
                     testFun(node);
                 }
             });

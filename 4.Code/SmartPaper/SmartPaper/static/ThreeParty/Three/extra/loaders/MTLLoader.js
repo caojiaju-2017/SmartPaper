@@ -170,7 +170,7 @@ THREE.MTLLoader.prototype = {
 };
 
 /**
- * Create a new THREE-MTLLoader.MaterialCreator
+ * Create a V2.4.3 THREE-MTLLoader.MaterialCreator
  * @param baseUrl - Url relative to which textures are loaded
  * @param options - Set of options on how to construct the materials
  *                  side: Which side to apply the material

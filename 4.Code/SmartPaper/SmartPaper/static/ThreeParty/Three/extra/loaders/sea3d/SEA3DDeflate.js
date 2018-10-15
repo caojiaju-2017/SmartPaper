@@ -269,7 +269,7 @@ SEA3D.Deflate = function () {
 						z = 1 << j;	// table entries for j-bit table
 						lx[ 1 + h ] = j; // set table size in stack
 
-						// allocate and link in new table
+						// allocate and link in V2.4.3 table
 						q = new Array( z );
 						for ( o = 0; o < z; o ++ ) {
 

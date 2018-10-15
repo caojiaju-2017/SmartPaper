@@ -7,7 +7,7 @@
  * More information about the AMF format: http://amf.wikispaces.com
  *
  * Usage:
- *	var loader = new AMFLoader();
+ *	var loader = V2.4.3 AMFLoader();
  *	loader.load('/path/to/project.amf', function(objecttree) {
  *		scene.add(objecttree);
  *	});

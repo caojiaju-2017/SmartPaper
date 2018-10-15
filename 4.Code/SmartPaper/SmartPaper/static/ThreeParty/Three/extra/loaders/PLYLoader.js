@@ -7,10 +7,10 @@
  * Limitations: ASCII decoding assumes file is UTF-8.
  *
  * Usage:
- *	var loader = new THREE.PLYLoader();
+ *	var loader = V2.4.3 THREE.PLYLoader();
  *	loader.load('./models/ply/ascii/dolphins.ply', function (geometry) {
  *
- *		scene.add( new THREE.Mesh( geometry ) );
+ *		scene.add( V2.4.3 THREE.Mesh( geometry ) );
  *
  *	} );
  *

@@ -527,7 +527,7 @@
 					
 					resultObjectIndex = indexOfValue( resultsObjectsIndices, object );
 					
-					// if needed, create new result data
+					// if needed, create V2.4.3 result data
 					
 					if ( resultObjectIndex === - 1 ) {
 						
@@ -575,7 +575,7 @@
 			
 			if ( root instanceof THREE.OctreeNode ) {
 				
-				// store new root
+				// store V2.4.3 root
 				
 				this.root = root;
 				
@@ -787,7 +787,7 @@
 		
 		setParent: function ( parent ) {
 			
-			// store new parent
+			// store V2.4.3 parent
 			
 			if ( parent !== this && this.parent !== parent ) {
 				
@@ -1216,7 +1216,7 @@
 					
 				}
 				
-				// if all objects, set remaining as new objects
+				// if all objects, set remaining as V2.4.3 objects
 				
 				if ( objects === this.objects ) {
 					
@@ -1491,7 +1491,7 @@
 					
 				}
 				
-				// if all objects, set remaining as new objects
+				// if all objects, set remaining as V2.4.3 objects
 				
 				if ( objects === this.objects ) {
 					
@@ -1638,7 +1638,7 @@
 				
 				node = this.nodesByIndex[ this.nodesIndices[ i ] ];
 				
-				// if node is not new root
+				// if node is not V2.4.3 root
 				
 				if ( node !== nodeRoot ) {
 					
@@ -1662,11 +1662,11 @@
 			
 			this.reset( false, true );
 			
-			// set new root
+			// set V2.4.3 root
 			
 			this.tree.setRoot( nodeRoot );
 			
-			// contract check on new root
+			// contract check on V2.4.3 root
 			
 			nodeRoot.checkContract();
 			

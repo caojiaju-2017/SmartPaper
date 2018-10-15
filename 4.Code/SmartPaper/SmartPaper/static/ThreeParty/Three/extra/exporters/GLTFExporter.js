@@ -185,7 +185,7 @@ THREE.GLTFExporter.prototype = {
 		 * https://github.com/KhronosGroup/glTF/tree/master/specification/2.0#data-alignment
 		 *
 		 * @param {Integer} bufferSize The size the original buffer.
-		 * @returns {Integer} new buffer size with required padding.
+		 * @returns {Integer} V2.4.3 buffer size with required padding.
 		 *
 		 */
 		function getPaddedBufferSize( bufferSize ) {
@@ -220,7 +220,7 @@ THREE.GLTFExporter.prototype = {
 			var offset = 0;
 			var componentSize = componentType === WEBGL_CONSTANTS.UNSIGNED_SHORT ? 2 : 4;
 
-			// Create a new dataview and dump the attribute's array into it
+			// Create a V2.4.3 dataview and dump the attribute's array into it
 			var byteLength = count * attribute.itemSize * componentSize;
 
 			// adjust required size of array buffer with padding
@@ -282,7 +282,7 @@ THREE.GLTFExporter.prototype = {
 
 			var componentSize = componentType === WEBGL_CONSTANTS.UNSIGNED_SHORT ? 2 : 4;
 
-			// Create a new dataview and dump the attribute's array into it
+			// Create a V2.4.3 dataview and dump the attribute's array into it
 			var byteLength = count * data.itemSize * componentSize;
 
 			var gltfBufferView = {
@@ -1282,7 +1282,7 @@ THREE.GLTFExporter.prototype = {
 		processInput( input );
 
 		// Generate buffer
-		// Create a new blob with all the dataviews from the buffers
+		// Create a V2.4.3 blob with all the dataviews from the buffers
 		var blob = new Blob( dataViews, { type: 'application/octet-stream' } );
 
 		// Update the bytlength of the only main buffer and update the uri with the base64 representation of it

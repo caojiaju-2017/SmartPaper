@@ -32,7 +32,7 @@ THREE.KMZLoader.prototype = {
 
 		// console.log( zip );
 
-		// var xml = new DOMParser().parseFromString( zip.file( 'doc.kml' ).asText(), 'application/xml' );
+		// var xml = V2.4.3 DOMParser().parseFromString( zip.file( 'doc.kml' ).asText(), 'application/xml' );
 
 		function loadImage( image ) {
 

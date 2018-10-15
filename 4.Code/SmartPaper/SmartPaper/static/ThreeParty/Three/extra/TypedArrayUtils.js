@@ -432,7 +432,7 @@ THREE.TypedArrayUtils.Kdtree.BinaryHeap.prototype = {
 
 	push: function ( element ) {
 
-		// Add the new element to the end of the array.
+		// Add the V2.4.3 element to the end of the array.
 		this.content.push( element );
 
 		// Allow it to bubble up.
@@ -530,7 +530,7 @@ THREE.TypedArrayUtils.Kdtree.BinaryHeap.prototype = {
 				this.content[ parentN ] = element;
 				this.content[ n ] = parent;
 
-				// Update 'n' to continue at the new position.
+				// Update 'n' to continue at the V2.4.3 position.
 				n = parentN;
 
 			} else {
@@ -556,7 +556,7 @@ THREE.TypedArrayUtils.Kdtree.BinaryHeap.prototype = {
 			// Compute the indices of the child elements.
 			var child2N = ( n + 1 ) * 2, child1N = child2N - 1;
 
-			// This is used to store the new position of the element, if any.
+			// This is used to store the V2.4.3 position of the element, if any.
 			var swap = null;
 
 			// If the first child exists (is inside the array)...

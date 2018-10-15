@@ -77,9 +77,7 @@ class PrivilegeApi(object):
 
         try:
             logincode = request.GET.get('logincode').lower()
-            orgsign = request.GET.get('orgsign').lower()
-
-            userOrg, userHandle = OrgTree.getUserOrg(logincode, orgsign)
+            userOrg, userHandle = OrgTree.getUserOrg(logincode)
             dict['adminflag'] = userHandle.type
         except:
             LoggerHandle.writeLogDevelope("打开登录页面", request)

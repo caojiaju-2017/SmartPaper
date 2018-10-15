@@ -22,7 +22,7 @@ class DjangoMigrations(models.Model):
 
 class PaperAccount(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
-    code = models.CharField(db_column='Code', max_length=32)  # Field name made lowercase.
+    code = models.CharField(db_column='Code', max_length=32,unique=True)  # Field name made lowercase.
     account = models.CharField(db_column='Account', max_length=18, blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(db_column='Password', max_length=32, blank=True, null=True)  # Field name made lowercase.
     workno = models.CharField(db_column='WorkNo', max_length=20, blank=True, null=True)  # Field name made lowercase.
@@ -136,8 +136,9 @@ class PaperOrgs(models.Model):
     regdate = models.CharField(db_column='RegDate', max_length=10, blank=True, null=True)  # Field name made lowercase.
     logo = models.CharField(db_column='Logo', max_length=64, blank=True, null=True)  # Field name made lowercase.
     state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
-    parentcode = models.ForeignKey('self', models.DO_NOTHING, db_column='ParentCode', blank=True, null=True)  # Field name made lowercase.
-
+    # parentcode = models.ForeignKey('self', models.DO_NOTHING, db_column='ParentCode', blank=True, null=True)  # Field name made lowercase.
+    parentcode = models.ForeignKey('self', models.DO_NOTHING, db_column='ParentCode', blank=True, null=True,
+                                   to_field="code", related_name="children")  # Field name made lowercase.
     class Meta:
         managed = False
         db_table = 'paper_orgs'
@@ -158,7 +159,10 @@ class PaperRoleFunc(models.Model):
 class PaperRoles(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', unique=True, max_length=32)  # Field name made lowercase.
-    orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
+    # orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
+    orgcode = models.ForeignKey('PaperOrgs', models.DO_NOTHING, db_column='OrgCode', blank=True, null=True,
+                                to_field="code")  # Field name made lowercase.
+
     name = models.CharField(db_column='Name', max_length=64, blank=True, null=True)  # Field name made lowercase.
     content = models.CharField(db_column='Content', max_length=2000, blank=True, null=True)  # Field name made lowercase.
     state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
@@ -171,8 +175,9 @@ class PaperRoles(models.Model):
 class PaperRunlog(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', unique=True, max_length=32)  # Field name made lowercase.
-    orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
-    operttype = models.IntegerField(db_column='OpertType', blank=True, null=True)  # Field name made lowercase.
+    orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
+    # operttype = models.IntegerField(db_column='OpertType', blank=True, null=True)  # Field name made lowercase.
+    operttype = models.CharField(db_column='OpertType', max_length=32, blank=True, null=True)  # Field name made lowercase.
     content = models.CharField(db_column='Content', max_length=200, blank=True, null=True)  # Field name made lowercase.
     ip = models.CharField(db_column='IP', max_length=15, blank=True, null=True)  # Field name made lowercase.
     ucode = models.CharField(db_column='UCode', max_length=32, blank=True, null=True)  # Field name made lowercase.
@@ -187,8 +192,8 @@ class PaperRunlog(models.Model):
 class PaperUserRole(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', unique=True, max_length=32)  # Field name made lowercase.
-    acode = models.ForeignKey(PaperAccount, models.DO_NOTHING, db_column='ACode', blank=True, null=True)  # Field name made lowercase.
-    rcode = models.ForeignKey(PaperRoles, models.DO_NOTHING, db_column='RCode', blank=True, null=True)  # Field name made lowercase.
+    acode = models.ForeignKey(PaperAccount, models.DO_NOTHING, db_column='ACode', blank=True, null=True,to_field="code")  # Field name made lowercase.
+    rcode = models.ForeignKey(PaperRoles, models.DO_NOTHING, db_column='RCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -198,7 +203,7 @@ class PaperUserRole(models.Model):
 class PaperVersion(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', unique=True, max_length=32)  # Field name made lowercase.
-    orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
+    orgcode = models.ForeignKey(PaperOrgs, models.DO_NOTHING, db_column='OrgCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
     type = models.IntegerField(db_column='Type', blank=True, null=True)  # Field name made lowercase.
     version = models.CharField(db_column='Version', max_length=20, blank=True, null=True)  # Field name made lowercase.
     regtime = models.CharField(db_column='RegTime', max_length=20, blank=True, null=True)  # Field name made lowercase.

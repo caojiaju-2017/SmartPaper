@@ -65,14 +65,14 @@ $.extend({
          if(r!=null)return  unescape(r[2]); return null;
     },
     setupChart1Prepare:function (datas) {
-        // var dataArrages = new Array();
+        // var dataArrages = V2.4.3 Array();
         //
-        // var addData = new Array();
-        // var deleData = new Array();
-        // var stopData = new Array();
-        // var labsData = new Array();
+        // var addData = V2.4.3 Array();
+        // var deleData = V2.4.3 Array();
+        // var stopData = V2.4.3 Array();
+        // var labsData = V2.4.3 Array();
         //
-        // var keyList = new Array();
+        // var keyList = V2.4.3 Array();
         // for(var key in datas) {
         //     keyList[keyList.length] = key;
         // }

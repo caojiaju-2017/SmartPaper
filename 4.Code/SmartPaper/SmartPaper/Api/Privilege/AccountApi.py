@@ -6,7 +6,8 @@ from include import *
 from SmartPaper.BaseMoudle.Util import *
 from SmartPaper.BaseMoudle.Privilege import *
 from SmartPaper.BaseMoudle.DBModule.DBHelper import *
-
+from SmartPaper.BaseMoudle.Privilege.PrivilegeHelper import PrivilegeHelper
+from SmartPaper.BaseMoudle.DBModule.CommitData import *
 from SmartPaper.Api.Privilege.OrgTree import *
 
 class AccountApi(object):
@@ -57,17 +58,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno = allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account = allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -76,21 +77,21 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查单位是否存在
-        orgHandle = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
-        if not orgHandle:
-            LoggerHandle.writeLogDevelope("单位不存在", request)
-            loginResut = json.dumps({"ErrorInfo": "单位不存在", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 检查单位是否存在
+        # orgHandle = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        # if not orgHandle:
+        #     LoggerHandle.writeLogDevelope("单位不存在", request)
+        #     loginResut = json.dumps({"ErrorInfo": "单位不存在", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查账户是否存在
-        accountHandle = SmartAccount.objects.filter(code = allParams["usercode"],state=1).first()
+        accountHandle = PaperAccount.objects.filter(code = allParams["usercode"],state=1).first()
         if not accountHandle:
             LoggerHandle.writeLogDevelope("账户数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "账户数据异常", "ErrorId": 20006, "Result": {}})
@@ -101,12 +102,12 @@ class AccountApi(object):
         # 提交变更
         commitDataList = []
 
-        commitDataList.append(CommitData(SmartUserRole.objects.filter(acode=accountHandle), 1))
+        commitDataList.append(CommitData(PaperUserRole.objects.filter(acode=accountHandle), 1))
         for oneRoleCode in roles:
             if not oneRoleCode or oneRoleCode == "" or oneRoleCode == "null":
                 continue
-            newMap = SmartUserRole()
-            newMap.rcode = SmartRoles.objects.filter(code = oneRoleCode).first()
+            newMap = PaperUserRole()
+            newMap.rcode = PaperRoles.objects.filter(code = oneRoleCode).first()
             newMap.code = uuid.uuid1().__str__().replace("-", "")
             newMap.acode = accountHandle
             commitDataList.append(CommitData(newMap, 0))
@@ -148,17 +149,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno=allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -166,22 +167,22 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "当前账号数据异常", "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 检查当前账户是否具有权限
+        # resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        # if not resultPrivilegeSign:
+        #     LoggerHandle.writeLogDevelope("权限受限", request)
+        #     loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        # 查询单位数据
-        orgHandle = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
-        if not orgHandle:
-            LoggerHandle.writeLogDevelope("单位数据不存在", request)
-            loginResut = json.dumps({"ErrorInfo": "单位数据不存在", "ErrorId": 20007, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 查询单位数据
+        # orgHandle = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
+        # if not orgHandle:
+        #     LoggerHandle.writeLogDevelope("单位数据不存在", request)
+        #     loginResut = json.dumps({"ErrorInfo": "单位数据不存在", "ErrorId": 20007, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        acntHandle = SmartAccount.objects.filter(code=allParams["code"]).first()
-        roleUserMaps = SmartUserRole.objects.filter(acode = acntHandle )
+        acntHandle = PaperAccount.objects.filter(code=allParams["code"]).first()
+        roleUserMaps = PaperUserRole.objects.filter(acode = acntHandle )
 
         rtnList = []
         for oneMap in roleUserMaps:
@@ -221,17 +222,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno = allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account = allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -240,21 +241,21 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查单位是否存在
-        orgHandle = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        orgHandle = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         if not orgHandle:
             LoggerHandle.writeLogDevelope("单位不存在", request)
             loginResut = json.dumps({"ErrorInfo": "单位不存在", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查账户是否存在
-        accountHandle = SmartAccount.objects.filter(code = allParams["code"], workno=allParams["account"],state=1).first()
+        accountHandle = PaperAccount.objects.filter(code = allParams["code"], state=1).first()
         if not accountHandle:
             LoggerHandle.writeLogDevelope("账户不存在", request)
             loginResut = json.dumps({"ErrorInfo": "账户不存在", "ErrorId": 20006, "Result": {}})
@@ -263,6 +264,7 @@ class AccountApi(object):
 
         accountHandle.alias = allParams["name"]
         accountHandle.phone = allParams["phone"]
+        accountHandle.account = allParams["phone"]
         accountHandle.type = int(allParams["accounttype"])
         accountHandle.orgcode = orgHandle
 
@@ -307,17 +309,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno=allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -326,20 +328,20 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 查询单位数据
-        orgHandle = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
-        if not orgHandle:
-            LoggerHandle.writeLogDevelope("单位数据不存在", request)
-            loginResut = json.dumps({"ErrorInfo": "单位数据不存在", "ErrorId": 20007, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 查询单位数据
+        # orgHandle = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
+        # if not orgHandle:
+        #     LoggerHandle.writeLogDevelope("单位数据不存在", request)
+        #     loginResut = json.dumps({"ErrorInfo": "单位数据不存在", "ErrorId": 20007, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        oneAccount = SmartAccount.objects.filter(code = allParams["code"],workno=allParams["account"]).first()
+        oneAccount = PaperAccount.objects.filter(code = allParams["code"],workno=allParams["account"]).first()
 
         if not oneAccount:
             LoggerHandle.writeLogDevelope("账户数据不存在", request)
@@ -351,7 +353,8 @@ class AccountApi(object):
         oneOrgDict['code'] = oneAccount.code
         oneOrgDict['account'] = oneAccount.workno
         oneOrgDict['name'] = oneAccount.alias
-        oneOrgDict['phone'] = oneAccount.phone
+        oneOrgDict['phone'] = oneAccount.account
+        oneOrgDict['type'] = oneAccount.type
         oneOrgDict['regdate'] = oneAccount.regdate
         oneOrgDict['orgcode'] = oneAccount.orgcode_id
 
@@ -381,17 +384,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno=allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -400,20 +403,19 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 查询单位数据
-        orgHandle = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
-        if not orgHandle:
+        if not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("单位数据不存在", request)
             loginResut = json.dumps({"ErrorInfo": "单位数据不存在", "ErrorId": 20007, "Result": {}})
             return HttpResponse(loginResut)
 
-        accountHandle = SmartAccount.objects.filter(code = allParams["code"],workno=allParams["account"]).first()
+        accountHandle = PaperAccount.objects.filter(code = allParams["code"],workno=allParams["account"]).first()
 
         accountHandle.state = 2
         # 提交变更
@@ -463,17 +465,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno = allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account = allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -482,7 +484,7 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
@@ -490,13 +492,14 @@ class AccountApi(object):
 
         orgS = None
         orgList=[]
-        orgsign = allParams["orgsign"]
-        orgList = OrgTree.getOrgTreeObjects(SmartOrganization.objects.filter(code = orgsign).first())
-        orgList.append(SmartOrganization.objects.filter(code=orgsign).first())
+        orgsign = acntHandle.orgcode.code
+        # orgsign = allParams["orgsign"]
+        orgList = OrgTree.getOrgTreeObjects(PaperOrgs.objects.filter(code = orgsign).first())
+        orgList.append(PaperOrgs.objects.filter(code=orgsign).first())
 
         accountList = []
         for oneOrg in orgList:
-            acns = SmartAccount.objects.filter(orgcode = oneOrg,state = 1)
+            acns = PaperAccount.objects.filter(orgcode = oneOrg,state = 1)
             for oneAcnt in acns:
                 accountList.append(oneAcnt)
 
@@ -511,22 +514,25 @@ class AccountApi(object):
 
         orgsign = allParams["orgsign"]
         Name = allParams["name"]
-        Account = allParams["account"]
+        Account = allParams["account"] #工号
         Password = allParams["password"]
-        Phone = allParams["phone"]
+        Phone = allParams["phone"] # 手机号码
         OrgCode = allParams["orgcode"]
         accounttype = int(allParams["accounttype"])
         LoginCode = allParams["logincode"]
 
-        orgHandle = SmartOrganization.objects.filter(code = OrgCode).first()
+        orgHandle = PaperOrgs.objects.filter(code = OrgCode).first()
 
-        newAccount = SmartAccount()
+        newAccount = PaperAccount()
         newAccount.alias = Name
         newAccount.orgcode = orgHandle
         newAccount.code = uuid.uuid1().__str__().replace("-", "")
         newAccount.type = accounttype
         newAccount.state = 1
-        newAccount.phone = Phone
+
+        # 登陆账号
+        newAccount.account = Phone
+        newAccount.mobile = Phone
         newAccount.workno = Account
         newAccount.password = Password
         newAccount.regdate = time.strftime("%Y-%m-%d", time.localtime())
@@ -576,17 +582,17 @@ class AccountApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        acntHandle = SmartAccount.objects.filter(workno = allParams["logincode"]).first()
+        acntHandle = PaperAccount.objects.filter(account = allParams["logincode"]).first()
 
         # 检查当前账号是否具有当前权限
         if not acntHandle:
@@ -595,7 +601,7 @@ class AccountApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
@@ -604,7 +610,8 @@ class AccountApi(object):
 
         orgS = None
 
-        orgsign = allParams["orgsign"]
+        # orgsign = allParams["orgsign"]
+        orgsign = acntHandle.orgcode.code
         orgcode = None
 
         try:
@@ -614,15 +621,15 @@ class AccountApi(object):
 
         orgList = []
         if orgcode:
-            orgList.append(SmartOrganization.objects.filter(code = orgcode).first())
+            orgList.append(PaperOrgs.objects.filter(code = orgcode).first())
         else:
-            orgList = OrgTree.getOrgTreeObjects(SmartOrganization.objects.filter(code = orgsign).first())
-            orgList.append(SmartOrganization.objects.filter(code=orgsign).first())
+            orgList = OrgTree.getOrgTreeObjects(PaperOrgs.objects.filter(code = orgsign).first())
+            orgList.append(PaperOrgs.objects.filter(code=orgsign).first())
 
 
         accountList = []
         for oneOrg in orgList:
-            acns = SmartAccount.objects.filter(orgcode = oneOrg,state = 1)
+            acns = PaperAccount.objects.filter(orgcode = oneOrg,state = 1)
             acns = acns.filter(~Q(type = 1))
             for oneAcnt in acns:
                 accountList.append(oneAcnt)
@@ -644,7 +651,7 @@ class AccountApi(object):
         # 数据刷选
         for index, oneAccount in enumerate(accountList):
             if fliterStr and len(fliterStr) > 0:
-                if fliterStr not in oneAccount.alias:
+                if fliterStr not in oneAccount.alias and fliterStr not in oneAccount.account and fliterStr not in oneAccount.workno:
                     continue
 
             dataSets.append(oneAccount)
@@ -659,15 +666,18 @@ class AccountApi(object):
             oneOrgDict['code'] = oneAccount.code
             oneOrgDict['account'] = oneAccount.workno
             oneOrgDict['name'] = oneAccount.alias
-            oneOrgDict['phone'] = oneAccount.phone
+            oneOrgDict['phone'] = oneAccount.account
             oneOrgDict['type'] = oneAccount.type
 
             if oneAccount.type == 0:
                 oneOrgDict['typename'] = "普通账号"
             elif oneAccount.type == 2:
                 oneOrgDict['typename'] = "PAD账号"
+            else:
+                oneOrgDict['typename'] = "未知"
             oneOrgDict['regdate'] = oneAccount.regdate
             oneOrgDict['orgcode'] = oneAccount.orgcode_id
+            oneOrgDict['orgname'] = oneAccount.orgcode.name
             rtnList.append(oneOrgDict)
 
         dictRtn = {}

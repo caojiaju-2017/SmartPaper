@@ -28,7 +28,7 @@
  * // Initialization...
  *
  * // Create computation renderer
- * var gpuCompute = new GPUComputationRenderer( 1024, 1024, renderer );
+ * var gpuCompute = V2.4.3 GPUComputationRenderer( 1024, 1024, renderer );
  *
  * // Create initial state float textures
  * var pos0 = gpuCompute.createTexture();

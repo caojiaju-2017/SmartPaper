@@ -442,17 +442,18 @@ class SystemApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        orgsign = allParams["orgsign"]
-        rootOrg = SmartOrganization.objects.filter(code = orgsign).first()
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        orgsign = acntHandle.orgcode.code
+        rootOrg = PaperOrgs.objects.filter(code = orgsign).first()
 
         orgLists = []
         orgLists = OrgTree.getOrgTreeObjects(rootOrg)
@@ -461,9 +462,9 @@ class SystemApi(object):
         logLists = None
         for oneOrg in orgLists:
             if not logLists:
-                logLists = SmartRunlog.objects.filter(orgcode = oneOrg)
+                logLists = PaperRunlog.objects.filter(orgcode = oneOrg)
             else:
-                logLists = logLists | SmartRunlog.objects.filter(orgcode = oneOrg)
+                logLists = logLists | PaperRunlog.objects.filter(orgcode = oneOrg)
 
         logLists = logLists.order_by("-logtime")
 
@@ -539,11 +540,13 @@ class SystemApi(object):
             oneData["code"] = oneSet.code
 
 
-            oneData["operator"] = oneSet.uaccount
-            oneData["opername"] = oneSet.uname
+            oneData["operator"] = oneSet.ucode
+            oneData["opername"] = oneSet.content
 
             oneData["opertype"] = oneSet.operttype
             oneData["content"] = oneSet.content
+
+            oneData["username"] = oneSet.terminalcode
 
             oneData["ipaddress"] = oneSet.ip
             oneData["opertortime"] = oneSet.logtime
@@ -661,21 +664,24 @@ class SystemApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        rootOrg = OrgTree.getRootOrgByCode(acntHandle.orgcode.code)
 
-        orgsign = allParams["orgsign"]
-        rootOrg = SmartOrganization.objects.filter(code = orgsign).first()
+        orgsign = rootOrg.code
+        # orgsign = allParams["orgsign"]
+        rootOrg = PaperOrgs.objects.filter(code = orgsign).first()
 
-        vers = SmartVersion.objects.filter(orgcode=rootOrg).order_by("-regtime")
+        vers = PaperVersion.objects.filter(orgcode=rootOrg).order_by("-regtime")
 
-        vers = vers.filter(~Q(state = 0))
+        # vers = vers.filter(~Q(state = 0))
 
         limit = int(allParams["limit"])
         pageIndex = int(allParams["page"])
@@ -761,44 +767,42 @@ class SystemApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        orgsign = allParams["orgsign"]
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        # orgRoot = OrgTree.getRootOrgByCode(acntHandle.orgcode)
+        orgsign = acntHandle.orgcode.code
         devObject = None
         typeCode = int(allParams["type"])
         if typeCode == 6:
-            devObject = SmartDevices.objects.filter(code=orgsign,state=1).first()
+            devObject = PaperDevices.objects.filter(code=orgsign,state=1).first()
             if not devObject:
-                # loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20002, "Result": {}})
-                # return HttpResponse(loginResut)
-                acnt = SmartAccount.objects.filter(workno=allParams['logincode']).first()
-
+                acnt = PaperAccount.objects.filter(account=allParams['logincode']).first()
                 if not acnt:
                     orgsign = "1e2c68303ebd11e880d3989096c1d848"
                 else:
                     orgsign = acnt.orgcode_id
-
             else:
                 orgsign = devObject.orgcode_id
         else:
             pass
 
         if typeCode == 5:
-            acnt = SmartAccount.objects.filter(workno=allParams['logincode']).first()
+            acnt = PaperAccount.objects.filter(account=allParams['logincode']).first()
             if not acnt:
                 loginResut = json.dumps({"ErrorInfo": "用户数据异常", "ErrorId": 20008, "Result": {}})
                 return HttpResponse(loginResut)
 
             orgsign = acnt.orgcode_id
 
-        rootOrg = SmartOrganization.objects.filter(code = orgsign,state=1).first()
+        rootOrg = PaperOrgs.objects.filter(code = orgsign,state=1).first()
         orgList = OrgTree.getOrgTreeObjects(rootOrg)
         orgList.append(rootOrg)
 
@@ -806,7 +810,7 @@ class SystemApi(object):
             # 查询登录账户归属单位
             for oneOrgT in orgList:
                 # 查账号
-                rootOrg = SmartAccount.objects.filter(workno = allParams["logincode"],orgcode= oneOrgT).first()
+                rootOrg = PaperAccount.objects.filter(account = allParams["logincode"],orgcode= oneOrgT).first()
 
                 # 如果查到了，则跳出
                 if rootOrg and rootOrg.orgcode != None:
@@ -827,27 +831,31 @@ class SystemApi(object):
             orgList.append(rootOrg)
             dataSets = orgList
             pass
-        if int(allParams["type"]) == 1:
-            dataSets = SmartRoles.objects.filter(orgcode=rootOrg,state = 1)
-            pass
-        elif int(allParams["type"]) == 2:
-            dataSets = SmartFunctions.objects.filter(freeflag = 1)
-            pass
-        elif int(allParams["type"]) == 5:
-            for oneOrg in orgList:
-                if not dataSets:
-                    dataSets = SmartDeviceGroup.objects.filter(orgcode=oneOrg,state = 1)
-                else:
-                    dataSets = dataSets | SmartDeviceGroup.objects.filter(orgcode=oneOrg,state=1)
-            # dataSets = SmartDeviceGroup.objects.filter(state = 1)
+        if int(allParams["type"]) == 1:  # 查询角色列表
+            dataSets = PaperRoles.objects.filter(orgcode=rootOrg,state = 1)
+            # orgList = []
+            # orgList = OrgTree.getOrgTreeObjects(rootOrg)
+            # orgList.append(rootOrg)
 
-        elif int(allParams["type"]) == 6:
-            # dataSets = SmartPowers.objects.filter(orgcode=orgsign)
-            for oneOrg in orgList:
-                if not dataSets:
-                    dataSets = SmartPowers.objects.filter(orgcode=oneOrg,state = 1)
-                else:
-                    dataSets = dataSets | SmartPowers.objects.filter(orgcode=oneOrg,state=1)
+            pass
+        elif int(allParams["type"]) == 2: #查询可用功能
+            dataSets = PaperFunctions.objects.filter(freeflag = 1)
+            pass
+        # elif int(allParams["type"]) == 5:
+        #     for oneOrg in orgList:
+        #         if not dataSets:
+        #             dataSets = SmartDeviceGroup.objects.filter(orgcode=oneOrg,state = 1)
+        #         else:
+        #             dataSets = dataSets | SmartDeviceGroup.objects.filter(orgcode=oneOrg,state=1)
+            # dataSets = SmartDeviceGroup.objects.filter(state = 1)
+        #
+        # elif int(allParams["type"]) == 6:
+        #     # dataSets = SmartPowers.objects.filter(orgcode=orgsign)
+        #     for oneOrg in orgList:
+        #         if not dataSets:
+        #             dataSets = SmartPowers.objects.filter(orgcode=oneOrg,state = 1)
+        #         else:
+        #             dataSets = dataSets | SmartPowers.objects.filter(orgcode=oneOrg,state=1)
 
         rtnData = []
 
@@ -955,19 +963,22 @@ class SystemApi(object):
         if not getParams.has_key("code") or \
                 not postParams.has_key("versionname") or \
                 not postParams.has_key("versioncode") or \
+                not postParams.has_key("logincode") or \
                 not postParams.has_key("versiontype"):
             loginResut = json.dumps({"ErrorInfo": "参数错误", "ErrorId": 2999, "Result": {}})
             return HttpResponse(loginResut)
 
+        acntHandle = PaperAccount.objects.filter(account=postParams["logincode"]).first()
+
         # 检查版本号是否存在
-        orgHandle = SmartOrganization.objects.filter(code = getParams['code']).first()
+        orgHandle = OrgTree.getRootOrgByCode(acntHandle.orgcode.code)
 
         typeTemp = int(postParams["versiontype"])
 
         if typeTemp == 0:
             typeTemp = 2
 
-        existVers = SmartVersion.objects.filter(orgcode=orgHandle , version=postParams["versioncode"] ,type = typeTemp)
+        existVers = PaperVersion.objects.filter(orgcode=orgHandle , version=postParams["versioncode"] ,type = typeTemp)
         if len(existVers) > 0:
             LoggerHandle.writeLogDevelope("版本号存储失败", request)
             loginResut = json.dumps({"ErrorInfo": "版本号存储失败", "ErrorId": 2999, "Result": {}})
@@ -995,7 +1006,7 @@ class SystemApi(object):
         destination.close()
 
         # 写入数据库
-        objectHandle = SmartVersion()
+        objectHandle = PaperVersion()
         objectHandle.code = fileUUID
         objectHandle.name = postParams["versionname"]
         objectHandle.orgcode = orgHandle

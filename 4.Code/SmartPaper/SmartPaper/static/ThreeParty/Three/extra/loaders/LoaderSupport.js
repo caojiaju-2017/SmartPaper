@@ -271,7 +271,7 @@ THREE.LoaderSupport.LoadedMeshUserOverride = (function () {
 	};
 
 	/**
-	 * Answers if new mesh(es) were created.
+	 * Answers if V2.4.3 mesh(es) were created.
 	 *
 	 * @returns {boolean}
 	 */
@@ -353,7 +353,7 @@ THREE.LoaderSupport.PrepData = (function () {
 	 * Set the node where the loaded objects will be attached directly.
 	 * @memberOf THREE.LoaderSupport.PrepData
 	 *
-	 * @param {THREE.Object3D} streamMeshesTo Object already attached to scenegraph where new meshes will be attached to
+	 * @param {THREE.Object3D} streamMeshesTo Object already attached to scenegraph where V2.4.3 meshes will be attached to
 	 */
 	PrepData.prototype.setStreamMeshesTo = function ( streamMeshesTo ) {
 		this.streamMeshesTo = Validator.verifyInput( streamMeshesTo, null );
@@ -886,7 +886,7 @@ THREE.LoaderSupport.LoaderBase = (function () {
 	 * Set the node where the loaded objects will be attached directly.
 	 * @memberOf THREE.LoaderSupport.LoaderBase
 	 *
-	 * @param {THREE.Object3D} streamMeshesTo Object already attached to scenegraph where new meshes will be attached to
+	 * @param {THREE.Object3D} streamMeshesTo Object already attached to scenegraph where V2.4.3 meshes will be attached to
 	 */
 	LoaderBase.prototype.setStreamMeshesTo = function ( streamMeshesTo ) {
 		this.loaderRootNode = Validator.verifyInput( streamMeshesTo, this.loaderRootNode );
@@ -956,7 +956,7 @@ THREE.LoaderSupport.LoaderBase = (function () {
 	 * @param {callback} onLoad A function to be called after loading is successfully completed. The function receives loaded Object3D as an argument.
 	 * @param {callback} [onProgress] A function to be called while the loading is in progress. The argument will be the XMLHttpRequest instance, which contains total and Integer bytes.
 	 * @param {callback} [onError] A function to be called if an error occurs during loading. The function receives the error as an argument.
-	 * @param {callback} [onMeshAlter] A function to be called after a new mesh raw data becomes available for alteration.
+	 * @param {callback} [onMeshAlter] A function to be called after a V2.4.3 mesh raw data becomes available for alteration.
 	 * @param {boolean} [useAsync] If true, uses async loading with worker, if false loads data synchronously.
 	 */
 	LoaderBase.prototype.load = function ( url, onLoad, onProgress, onError, onMeshAlter, useAsync ) {
@@ -1271,7 +1271,7 @@ THREE.LoaderSupport.WorkerSupport = (function () {
 		LoaderWorker.prototype.run = function( payload ) {
 			if ( Validator.isValid( this.queuedMessage ) ) {
 
-				console.warn( 'Already processing message. Rejecting new run instruction' );
+				console.warn( 'Already processing message. Rejecting V2.4.3 run instruction' );
 				return;
 
 			} else {
@@ -1376,7 +1376,7 @@ THREE.LoaderSupport.WorkerSupport = (function () {
 		var userWorkerCode = functionCodeBuilder( buildObject, buildSingleton );
 		userWorkerCode += 'var Parser = '+ parserName + ';\n\n';
 		userWorkerCode += buildSingleton( runnerImpl.name, runnerImpl );
-		userWorkerCode += 'new ' + runnerImpl.name + '();\n\n';
+		userWorkerCode += 'V2.4.3 ' + runnerImpl.name + '();\n\n';
 
 		var scope = this;
 		if ( Validator.isValid( libLocations ) && libLocations.length > 0 ) {
@@ -1414,7 +1414,7 @@ THREE.LoaderSupport.WorkerSupport = (function () {
 	};
 
 	/**
-	 * Specify functions that should be build when new raw mesh data becomes available and when the parser is finished.
+	 * Specify functions that should be build when V2.4.3 raw mesh data becomes available and when the parser is finished.
 	 * @memberOf THREE.LoaderSupport.WorkerSupport
 	 *
 	 * @param {Function} builder The builder function. Default is {@link THREE.LoaderSupport.Builder}.

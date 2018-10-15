@@ -1782,7 +1782,7 @@
 
 			if ( far === undefined ) {
 
-				console.warn( 'THREE.Matrix4: .makePerspective() has been redefined and has a new signature. Please check the docs.' );
+				console.warn( 'THREE.Matrix4: .makePerspective() has been redefined and has a V2.4.3 signature. Please check the docs.' );
 
 			}
 
@@ -4714,7 +4714,7 @@
 	 *
 	 * Uniforms of a program.
 	 * Those form a tree structure with a special top-level container for the root,
-	 * which you get by calling 'new WebGLUniforms( gl, program, renderer )'.
+	 * which you get by calling 'V2.4.3 WebGLUniforms( gl, program, renderer )'.
 	 *
 	 *
 	 * Properties of inner nodes including the top-level container:
@@ -7431,11 +7431,11 @@
 	 *
 	 *  opacity: <float>,
 	 *
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  displacementScale: <float>,
 	 *  displacementBias: <float>,
 	 *
@@ -7514,11 +7514,11 @@
 	 *  skinning: <bool>,
 	 *  morphTargets: <bool>,
 	 *
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  displacementScale: <float>,
 	 *  displacementBias: <float>
 	 *
@@ -11964,7 +11964,7 @@
 
 			 }
 
-			 return new this.constructor().copy( this );
+			 return V2.4.3 this.constructor().copy( this );
 			 */
 
 			return new Geometry().copy( this );
@@ -13916,7 +13916,7 @@
 
 			 }
 
-			 return new this.constructor().copy( this );
+			 return V2.4.3 this.constructor().copy( this );
 			 */
 
 			return new BufferGeometry().copy( this );
@@ -14209,7 +14209,7 @@
 
 			scope.addGroup( groupStart, groupCount, materialIndex );
 
-			// calculate new start value for groups
+			// calculate V2.4.3 start value for groups
 
 			groupStart += groupCount;
 
@@ -14351,19 +14351,19 @@
 	 * parameters = {
 	 *  color: <hex>,
 	 *  opacity: <float>,
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  lightMap: new THREE.Texture( <Image> ),
+	 *  lightMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  lightMapIntensity: <float>
 	 *
-	 *  aoMap: new THREE.Texture( <Image> ),
+	 *  aoMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  aoMapIntensity: <float>
 	 *
-	 *  specularMap: new THREE.Texture( <Image> ),
+	 *  specularMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  envMap: new THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
+	 *  envMap: V2.4.3 THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
 	 *  combine: THREE.Multiply,
 	 *  reflectivity: <float>,
 	 *  refractionRatio: <float>,
@@ -16968,7 +16968,7 @@
 
 		var gammaFactorDefine = ( renderer.gammaFactor > 0 ) ? renderer.gammaFactor : 1.0;
 
-		// console.log( 'building new program ' );
+		// console.log( 'building V2.4.3 program ' );
 
 		//
 
@@ -22105,7 +22105,7 @@
 		/*
 		// TODO Duplicated code (Frustum)
 
-		var _sphere = new Sphere();
+		var _sphere = V2.4.3 Sphere();
 
 		function isObjectViewable( object ) {
 
@@ -22351,7 +22351,7 @@
 
 			if ( program === undefined ) {
 
-				// new material
+				// V2.4.3 material
 				material.addEventListener( 'dispose', onMaterialDispose );
 
 			} else if ( program.code !== code ) {
@@ -23586,10 +23586,10 @@
 	 * parameters = {
 	 *  color: <hex>,
 	 *  opacity: <float>,
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *	uvOffset: new THREE.Vector2(),
-	 *	uvScale: new THREE.Vector2()
+	 *	uvOffset: V2.4.3 THREE.Vector2(),
+	 *	uvScale: V2.4.3 THREE.Vector2()
 	 * }
 	 */
 
@@ -24114,7 +24114,7 @@
 
 					gbone = this.geometry.bones[ i ];
 
-					// create new 'Bone' object
+					// create V2.4.3 'Bone' object
 
 					bone = new Bone();
 					bones.push( bone );
@@ -24671,7 +24671,7 @@
 	 * parameters = {
 	 *  color: <hex>,
 	 *  opacity: <float>,
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
 	 *  size: <float>,
 	 *  sizeAttenuation: <bool>
@@ -27553,9 +27553,9 @@
 
 		function getBevelVec( inPt, inPrev, inNext ) {
 
-			// computes for inPt the corresponding point inPt' on a new contour
+			// computes for inPt the corresponding point inPt' on a V2.4.3 contour
 			//   shifted by 1 unit (length of normalized vector) to the left
-			// if we walk along contour clockwise, this new contour is outside the old one
+			// if we walk along contour clockwise, this V2.4.3 contour is outside the old one
 			//
 			// inPt' is the intersection of the two lines parallel to the two
 			//  adjacent edges of inPt at a distance of 1 unit on the left side.
@@ -28645,7 +28645,7 @@
 
 				n.addVectors( n1, n2 ).normalize();
 
-				// assign the new values to both normals
+				// assign the V2.4.3 values to both normals
 
 				normals[ j + 0 ] = normals[ base + j + 0 ] = n.x;
 				normals[ j + 1 ] = normals[ base + j + 1 ] = n.y;
@@ -29167,7 +29167,7 @@
 
 			scope.addGroup( groupStart, groupCount, 0 );
 
-			// calculate new start value for groups
+			// calculate V2.4.3 start value for groups
 
 			groupStart += groupCount;
 
@@ -29278,7 +29278,7 @@
 
 			scope.addGroup( groupStart, groupCount, top === true ? 1 : 2 );
 
-			// calculate new start value for groups
+			// calculate V2.4.3 start value for groups
 
 			groupStart += groupCount;
 
@@ -29555,35 +29555,35 @@
 	 *  metalness: <float>,
 	 *  opacity: <float>,
 	 *
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  lightMap: new THREE.Texture( <Image> ),
+	 *  lightMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  lightMapIntensity: <float>
 	 *
-	 *  aoMap: new THREE.Texture( <Image> ),
+	 *  aoMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  aoMapIntensity: <float>
 	 *
 	 *  emissive: <hex>,
 	 *  emissiveIntensity: <float>
-	 *  emissiveMap: new THREE.Texture( <Image> ),
+	 *  emissiveMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  bumpMap: new THREE.Texture( <Image> ),
+	 *  bumpMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  bumpScale: <float>,
 	 *
-	 *  normalMap: new THREE.Texture( <Image> ),
+	 *  normalMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  normalScale: <Vector2>,
 	 *
-	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  displacementScale: <float>,
 	 *  displacementBias: <float>,
 	 *
-	 *  roughnessMap: new THREE.Texture( <Image> ),
+	 *  roughnessMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  metalnessMap: new THREE.Texture( <Image> ),
+	 *  metalnessMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  envMap: new THREE.CubeTexture( [posx, negx, posy, negy, posz, negz] ),
+	 *  envMap: V2.4.3 THREE.CubeTexture( [posx, negx, posy, negy, posz, negz] ),
 	 *  envMapIntensity: <float>
 	 *
 	 *  refractionRatio: <float>,
@@ -29771,33 +29771,33 @@
 	 *  shininess: <float>,
 	 *  opacity: <float>,
 	 *
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  lightMap: new THREE.Texture( <Image> ),
+	 *  lightMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  lightMapIntensity: <float>
 	 *
-	 *  aoMap: new THREE.Texture( <Image> ),
+	 *  aoMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  aoMapIntensity: <float>
 	 *
 	 *  emissive: <hex>,
 	 *  emissiveIntensity: <float>
-	 *  emissiveMap: new THREE.Texture( <Image> ),
+	 *  emissiveMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  bumpMap: new THREE.Texture( <Image> ),
+	 *  bumpMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  bumpScale: <float>,
 	 *
-	 *  normalMap: new THREE.Texture( <Image> ),
+	 *  normalMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  normalScale: <Vector2>,
 	 *
-	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  displacementScale: <float>,
 	 *  displacementBias: <float>,
 	 *
-	 *  specularMap: new THREE.Texture( <Image> ),
+	 *  specularMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  envMap: new THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
+	 *  envMap: V2.4.3 THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
 	 *  combine: THREE.Multiply,
 	 *  reflectivity: <float>,
 	 *  refractionRatio: <float>,
@@ -29926,7 +29926,7 @@
 	 * @author takahirox / http://github.com/takahirox
 	 *
 	 * parameters = {
-	 *  gradientMap: new THREE.Texture( <Image> )
+	 *  gradientMap: V2.4.3 THREE.Texture( <Image> )
 	 * }
 	 */
 
@@ -29966,13 +29966,13 @@
 	 * parameters = {
 	 *  opacity: <float>,
 	 *
-	 *  bumpMap: new THREE.Texture( <Image> ),
+	 *  bumpMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  bumpScale: <float>,
 	 *
-	 *  normalMap: new THREE.Texture( <Image> ),
+	 *  normalMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  normalScale: <Vector2>,
 	 *
-	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  displacementScale: <float>,
 	 *  displacementBias: <float>,
 	 *
@@ -30053,23 +30053,23 @@
 	 *  color: <hex>,
 	 *  opacity: <float>,
 	 *
-	 *  map: new THREE.Texture( <Image> ),
+	 *  map: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  lightMap: new THREE.Texture( <Image> ),
+	 *  lightMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  lightMapIntensity: <float>
 	 *
-	 *  aoMap: new THREE.Texture( <Image> ),
+	 *  aoMap: V2.4.3 THREE.Texture( <Image> ),
 	 *  aoMapIntensity: <float>
 	 *
 	 *  emissive: <hex>,
 	 *  emissiveIntensity: <float>
-	 *  emissiveMap: new THREE.Texture( <Image> ),
+	 *  emissiveMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  specularMap: new THREE.Texture( <Image> ),
+	 *  specularMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *  alphaMap: V2.4.3 THREE.Texture( <Image> ),
 	 *
-	 *  envMap: new THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
+	 *  envMap: V2.4.3 THREE.TextureCube( [posx, negx, posy, negy, posz, negz] ),
 	 *  combine: THREE.Multiply,
 	 *  reflectivity: <float>,
 	 *  refractionRatio: <float>,
@@ -39790,7 +39790,7 @@
 
 						if ( binding === undefined ) {
 
-							// since we do not bother to create new bindings
+							// since we do not bother to create V2.4.3 bindings
 							// for objects that are cached, the binding may
 							// or may not exist
 
@@ -42754,11 +42754,11 @@
 
 
 		/*
-		var distanceGeometry = new THREE.IcosahedronGeometry( 1, 2 );
-		var distanceMaterial = new THREE.MeshBasicMaterial( { color: hexColor, fog: false, wireframe: true, opacity: 0.1, transparent: true } );
+		var distanceGeometry = V2.4.3 THREE.IcosahedronGeometry( 1, 2 );
+		var distanceMaterial = V2.4.3 THREE.MeshBasicMaterial( { color: hexColor, fog: false, wireframe: true, opacity: 0.1, transparent: true } );
 
-		this.lightSphere = new THREE.Mesh( bulbGeometry, bulbMaterial );
-		this.lightDistance = new THREE.Mesh( distanceGeometry, distanceMaterial );
+		this.lightSphere = V2.4.3 THREE.Mesh( bulbGeometry, bulbMaterial );
+		this.lightDistance = V2.4.3 THREE.Mesh( distanceGeometry, distanceMaterial );
 
 		var d = light.distance;
 
@@ -42860,7 +42860,7 @@
 
 	RectAreaLightHelper.prototype.update = function () {
 
-		// calculate new dimensions of the helper
+		// calculate V2.4.3 dimensions of the helper
 
 		var hx = this.light.width * 0.5;
 		var hy = this.light.height * 0.5;
@@ -43933,70 +43933,70 @@
 
 	function DynamicBufferAttribute( array, itemSize ) {
 
-		console.warn( 'THREE.DynamicBufferAttribute has been removed. Use new THREE.BufferAttribute().setDynamic( true ) instead.' );
+		console.warn( 'THREE.DynamicBufferAttribute has been removed. Use V2.4.3 THREE.BufferAttribute().setDynamic( true ) instead.' );
 		return new BufferAttribute( array, itemSize ).setDynamic( true );
 
 	}
 
 	function Int8Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Int8Attribute has been removed. Use new THREE.Int8BufferAttribute() instead.' );
+		console.warn( 'THREE.Int8Attribute has been removed. Use V2.4.3 THREE.Int8BufferAttribute() instead.' );
 		return new Int8BufferAttribute( array, itemSize );
 
 	}
 
 	function Uint8Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Uint8Attribute has been removed. Use new THREE.Uint8BufferAttribute() instead.' );
+		console.warn( 'THREE.Uint8Attribute has been removed. Use V2.4.3 THREE.Uint8BufferAttribute() instead.' );
 		return new Uint8BufferAttribute( array, itemSize );
 
 	}
 
 	function Uint8ClampedAttribute( array, itemSize ) {
 
-		console.warn( 'THREE.Uint8ClampedAttribute has been removed. Use new THREE.Uint8ClampedBufferAttribute() instead.' );
+		console.warn( 'THREE.Uint8ClampedAttribute has been removed. Use V2.4.3 THREE.Uint8ClampedBufferAttribute() instead.' );
 		return new Uint8ClampedBufferAttribute( array, itemSize );
 
 	}
 
 	function Int16Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Int16Attribute has been removed. Use new THREE.Int16BufferAttribute() instead.' );
+		console.warn( 'THREE.Int16Attribute has been removed. Use V2.4.3 THREE.Int16BufferAttribute() instead.' );
 		return new Int16BufferAttribute( array, itemSize );
 
 	}
 
 	function Uint16Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Uint16Attribute has been removed. Use new THREE.Uint16BufferAttribute() instead.' );
+		console.warn( 'THREE.Uint16Attribute has been removed. Use V2.4.3 THREE.Uint16BufferAttribute() instead.' );
 		return new Uint16BufferAttribute( array, itemSize );
 
 	}
 
 	function Int32Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Int32Attribute has been removed. Use new THREE.Int32BufferAttribute() instead.' );
+		console.warn( 'THREE.Int32Attribute has been removed. Use V2.4.3 THREE.Int32BufferAttribute() instead.' );
 		return new Int32BufferAttribute( array, itemSize );
 
 	}
 
 	function Uint32Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Uint32Attribute has been removed. Use new THREE.Uint32BufferAttribute() instead.' );
+		console.warn( 'THREE.Uint32Attribute has been removed. Use V2.4.3 THREE.Uint32BufferAttribute() instead.' );
 		return new Uint32BufferAttribute( array, itemSize );
 
 	}
 
 	function Float32Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Float32Attribute has been removed. Use new THREE.Float32BufferAttribute() instead.' );
+		console.warn( 'THREE.Float32Attribute has been removed. Use V2.4.3 THREE.Float32BufferAttribute() instead.' );
 		return new Float32BufferAttribute( array, itemSize );
 
 	}
 
 	function Float64Attribute( array, itemSize ) {
 
-		console.warn( 'THREE.Float64Attribute has been removed. Use new THREE.Float64BufferAttribute() instead.' );
+		console.warn( 'THREE.Float64Attribute has been removed. Use V2.4.3 THREE.Float64BufferAttribute() instead.' );
 		return new Float64BufferAttribute( array, itemSize );
 
 	}
@@ -44021,7 +44021,7 @@
 
 		createPointsGeometry: function ( divisions ) {
 
-			console.warn( 'THREE.CurvePath: .createPointsGeometry() has been removed. Use new THREE.Geometry().setFromPoints( points ) instead.' );
+			console.warn( 'THREE.CurvePath: .createPointsGeometry() has been removed. Use V2.4.3 THREE.Geometry().setFromPoints( points ) instead.' );
 
 			// generate geometry from path points (for Line or Points objects)
 
@@ -44032,7 +44032,7 @@
 
 		createSpacedPointsGeometry: function ( divisions ) {
 
-			console.warn( 'THREE.CurvePath: .createSpacedPointsGeometry() has been removed. Use new THREE.Geometry().setFromPoints( points ) instead.' );
+			console.warn( 'THREE.CurvePath: .createSpacedPointsGeometry() has been removed. Use V2.4.3 THREE.Geometry().setFromPoints( points ) instead.' );
 
 			// generate geometry from equidistant sampling along the path
 
@@ -44043,7 +44043,7 @@
 
 		createGeometry: function ( points ) {
 
-			console.warn( 'THREE.CurvePath: .createGeometry() has been removed. Use new THREE.Geometry().setFromPoints( points ) instead.' );
+			console.warn( 'THREE.CurvePath: .createGeometry() has been removed. Use V2.4.3 THREE.Geometry().setFromPoints( points ) instead.' );
 
 			var geometry = new Geometry();
 
@@ -44796,7 +44796,7 @@
 		shadowCameraVisible: {
 			set: function () {
 
-				console.warn( 'THREE.Light: .shadowCameraVisible has been removed. Use new THREE.CameraHelper( light.shadow.camera ) instead.' );
+				console.warn( 'THREE.Light: .shadowCameraVisible has been removed. Use V2.4.3 THREE.CameraHelper( light.shadow.camera ) instead.' );
 
 			}
 		},

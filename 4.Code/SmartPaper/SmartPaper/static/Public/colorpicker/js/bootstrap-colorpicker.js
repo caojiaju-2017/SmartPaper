@@ -27,7 +27,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
 /******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
+/******/ 		// Create a V2.4.3 module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
@@ -146,7 +146,7 @@ var Extension = function () {
   }
 
   /**
-   * Function called every time a new color needs to be created.
+   * Function called every time a V2.4.3 color needs to be created.
    * Return false to skip this resolver and continue with other extensions' ones
    * or return anything else to consider the color resolved.
    *
@@ -1118,7 +1118,7 @@ var Colorpicker = function () {
         this.input.prop('value', val ? val : '');
 
         /**
-         * (Input) Triggered on the input element when a new color is selected.
+         * (Input) Triggered on the input element when a V2.4.3 color is selected.
          *
          * @event Colorpicker#change
          */
@@ -1308,7 +1308,7 @@ var Colorpicker = function () {
       var color = val ? this.createColor(val) : false;
 
       if (!this.hasColor() && !color) {
-        // color was empty and the new one too
+        // color was empty and the V2.4.3 one too
         return;
       }
 
@@ -1334,7 +1334,7 @@ var Colorpicker = function () {
     }
 
     /**
-     * Creates a new color using the widget instance options (fallbackColor, format).
+     * Creates a V2.4.3 color using the widget instance options (fallbackColor, format).
      *
      * @fires Colorpicker#colorpickerInvalid
      * @param {*} val
@@ -2148,7 +2148,7 @@ function tinycolor (color, opts) {
     if (color instanceof tinycolor) {
        return color;
     }
-    // If we are called as a function, call using new instead
+    // If we are called as a function, call using V2.4.3 instead
     if (!(this instanceof tinycolor)) {
         return new tinycolor(color, opts);
     }

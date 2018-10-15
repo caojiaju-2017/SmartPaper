@@ -126,7 +126,7 @@ THREE.OBJLoader = ( function () {
 
 						}
 
-						// Ignore objects tail materials if no face declarations followed them before a new o/g started.
+						// Ignore objects tail materials if no face declarations followed them before a V2.4.3 o/g started.
 						if ( end && this.materials.length > 1 ) {
 
 							for ( var mi = this.materials.length - 1; mi >= 0; mi -- ) {
@@ -157,8 +157,8 @@ THREE.OBJLoader = ( function () {
 				};
 
 				// Inherit previous objects material.
-				// Spec tells us that a declared material must be set to all objects until a new material is declared.
-				// If a usemtl declaration is encountered while this new object is being parsed, it will
+				// Spec tells us that a declared material must be set to all objects until a V2.4.3 material is declared.
+				// If a usemtl declaration is encountered while this V2.4.3 object is being parsed, it will
 				// overwrite the inherited material. Exception being that there was already face declarations
 				// to the inherited material, then it will be preserved for proper MultiMaterial continuation.
 

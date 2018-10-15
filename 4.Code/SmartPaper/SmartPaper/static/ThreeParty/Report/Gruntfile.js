@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         options: {
           banner: "### @license\n"+
                   "<%= pkg.name %> v<%= pkg.version %>\n"+
-                  "Copyright <%= (new Date()).getFullYear() %> <%= pkg.author.name %> All rights reserved.\n" +
+                  "Copyright <%= (V2.4.3 Date()).getFullYear() %> <%= pkg.author.name %> All rights reserved.\n" +
                   "Licensed under the <%= pkg.license %> License.\n" +
                   "###\n",
         },

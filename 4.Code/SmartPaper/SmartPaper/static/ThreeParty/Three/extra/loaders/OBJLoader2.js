@@ -264,7 +264,7 @@ THREE.OBJLoader2 = (function () {
 				activeMtlName: '',
 				mtllibName: '',
 
-				// reset with new mesh
+				// reset with V2.4.3 mesh
 				faceType: -1,
 				subGroups: [],
 				subGroupInUse: null,
@@ -591,7 +591,7 @@ THREE.OBJLoader2 = (function () {
 					break;
 
 				case 'o':
-					// 'o' is pure meta-information and does not result in creation of new meshes
+					// 'o' is pure meta-information and does not result in creation of V2.4.3 meshes
 					this.rawMesh.objectName = THREE.LoaderSupport.Validator.verifyInput( concatStringBuffer( buffer, bufferPointer, slashSpacePattern ), '' );
 					flushStringBuffer( buffer, bufferPointer );
 					break;

@@ -45,6 +45,10 @@ function getTabUrl(tabname) {
     {
         return "./log_query.html";
     }
+    else if (tabname == "版本管理")
+    {
+        return "./version_list.html";
+    }
     else
     {
         return "./org_list.html";

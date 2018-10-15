@@ -91,7 +91,8 @@ $.extend({
                 if (ErrorId == 200)
                 {
                     //alert("删除成功!");
-                    $.loadSrvOrgTree();
+                    // $.loadSrvOrgTree();
+                    location.reload()
                 }
                 else
                 {

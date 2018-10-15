@@ -77,7 +77,7 @@ class OrgTree(object):
 
     @staticmethod
     def getRootOrgByCode(orgCode):
-        myOrg = SmartOrganization.objects.filter(code = orgCode,state=1).first()
+        myOrg = PaperOrgs.objects.filter(code = orgCode,state=1).first()
         return OrgTree.getRootOrg(myOrg)
 
 

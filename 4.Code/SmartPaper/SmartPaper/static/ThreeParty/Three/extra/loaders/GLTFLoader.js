@@ -2040,7 +2040,7 @@ THREE.GLTFLoader = ( function () {
 
 				} else  {
 
-					// Otherwise create a new geometry
+					// Otherwise create a V2.4.3 geometry
 					geometry = new THREE.BufferGeometry();
 
 					addPrimitiveAttributes( geometry, primitive, accessors );

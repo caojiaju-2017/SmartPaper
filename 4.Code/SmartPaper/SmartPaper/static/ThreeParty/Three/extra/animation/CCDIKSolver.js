@@ -15,7 +15,7 @@
  * ik = {
  *	target: 1,
  *	effector: 2,
- *	links: [ { index: 5, limitation: new THREE.Vector3( 1, 0, 0 ) }, { index: 4, enabled: false }, { index : 3 } ],
+ *	links: [ { index: 5, limitation: V2.4.3 THREE.Vector3( 1, 0, 0 ) }, { index: 4, enabled: false }, { index : 3 } ],
  *	iteration: 10,
  *	minAngle: 0.0,
  *	maxAngle: 1.0,

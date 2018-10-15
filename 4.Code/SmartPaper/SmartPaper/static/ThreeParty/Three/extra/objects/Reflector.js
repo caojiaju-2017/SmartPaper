@@ -126,7 +126,7 @@ THREE.Reflector = function ( geometry, options ) {
 		textureMatrix.multiply( virtualCamera.matrixWorldInverse );
 		textureMatrix.multiply( scope.matrixWorld );
 
-		// Now update projection matrix with new clip plane, implementing code from: http://www.terathon.com/code/oblique.html
+		// Now update projection matrix with V2.4.3 clip plane, implementing code from: http://www.terathon.com/code/oblique.html
 		// Paper explaining this technique: http://www.terathon.com/lengyel/Lengyel-Oblique.pdf
 		reflectorPlane.setFromNormalAndCoplanarPoint( normal, reflectorWorldPosition );
 		reflectorPlane.applyMatrix4( virtualCamera.matrixWorldInverse );

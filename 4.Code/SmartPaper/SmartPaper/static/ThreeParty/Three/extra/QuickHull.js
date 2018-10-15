@@ -266,7 +266,7 @@
 
 		},
 
-		// Reassigns as many vertices as possible from the unassigned list to the new faces
+		// Reassigns as many vertices as possible from the unassigned list to the V2.4.3 faces
 
 		resolveUnassignedPoints: function ( newFaces ) {
 
@@ -772,7 +772,7 @@
 
 			}
 
-			// perform final join of new faces
+			// perform final join of V2.4.3 faces
 
 			firstSideEdge.next.setTwin( previousSideEdge );
 
@@ -796,7 +796,7 @@
 
 			this.addNewFaces( eyeVertex, horizon );
 
-			// reassign 'unassigned' vertices to the new faces
+			// reassign 'unassigned' vertices to the V2.4.3 faces
 
 			this.resolveUnassignedPoints( this.newFaces );
 

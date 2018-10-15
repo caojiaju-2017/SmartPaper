@@ -256,7 +256,7 @@ $.extend({
                     var Result = data.Result;
 
                     if (ErrorId == 200) {
-
+                        // parent.location.reload()
                         $.loSmartControlDatas();
                     }
                     else {

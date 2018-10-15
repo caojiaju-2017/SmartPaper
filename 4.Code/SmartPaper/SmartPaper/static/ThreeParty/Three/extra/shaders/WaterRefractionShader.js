@@ -86,7 +86,7 @@ THREE.WaterRefractionShader = {
 		'	distortedUv = vUv.xy + vec2( distortedUv.x, distortedUv.y + time * waveSpeed );',
 		'	vec2 distortion = ( texture2D( tDudv, distortedUv ).rg * 2.0 - 1.0 ) * waveStrength;',
 
-		// new uv coords
+		// V2.4.3 uv coords
 
 		' vec4 uv = vec4( vUvRefraction );',
 		' uv.xy += distortion;',
