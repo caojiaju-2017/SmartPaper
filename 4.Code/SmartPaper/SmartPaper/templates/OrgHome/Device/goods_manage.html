@@ -11,7 +11,7 @@
     <script src="/static/Public/public.js"></script>
 
     <script src="/static/ThreeParty/LayUi/layui.js"></script>
-    <script src="/static/OrgHome/group_list.js"></script>
+    <script src="/static/OrgHome/device_list.js"></script>
 
     <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>
     <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
@@ -28,25 +28,32 @@
 <div style="background: #fff;height: 600px;width: 90%;margin-left:5%;" id="vip_div">
     <div class="demoTable">
         <div class="layui-inline">
-            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="分区名称">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="设备名称">
         </div>
         <button class="layui-btn" data-type="reload" onclick="searchFliter()">搜索</button>
+        <button class="layui-btn" data-type="reload" onclick="showAll()">所有设备</button>
 
-        <button class="layui-btn layui-btn-danger layui-btn-radius" style="float: right"onclick="addGroup()">添加分区</button>
+
     </div>
     <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
 </div>
 
-<script type="text/html" id="barDemo">
+<script type="text/html" id="barDemo1">
     <a class="layui-btn layui-btn-xs" lay-event="view" id="view">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit" id="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" id="del">删除</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="binddev" id="binddev">设备绑定</a>
 </script>
 
-<script type="text/html" id="barControl">
-    <a class="layui-btn layui-btn-xs" lay-event="closeLight" id="closeLight">关灯</a>
-    <a class="layui-btn layui-btn-xs" lay-event="openLight" id="openLight">开灯</a>
+<script type="text/html" id="barDemo2">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="snap" id="snap">截图</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="restart" id="restart">重启</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="halt" id="halt">关机</a>
+</script>
+
+<script type="text/html" id="barDemo3">
+    <a class="layui-btn layui-btn-xs" lay-event="position" id="position">位置</a>
+    <a class="layui-btn layui-btn-xs" lay-event="power" id="power">电源</a>
+{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="grpmap" id="grpmap">分区</a>#}
 </script>
 
 <script>
@@ -55,14 +62,15 @@
         var table = layui.table;
 
         var listParams = new Array();
-        listParams[0] = "command=GROUPS_LIST";
+        listParams[0] = "command=DEVICES_LIST";
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
-        listParams[3] = "orgsign=" + orgsign;
+        listParams[3] = "orgsign=" + orgsign  ;
+        listParams[4] = "typecode=-1";
 
         listParams = listParams.sort();
-        var urlCmd = $.buildGetParam("/api/group/?", listParams);
+        var urlCmd = $.buildGetParam("/api/device/?", listParams);
         urlCmd = urlCmd + "&sign=" + $.signString(listParams);
 
         //第一个实例
@@ -75,12 +83,17 @@
             , id: 'testReload'
             , cols: [[ //表头
                 {type:'checkbox'}
-                ,{field: 'id', title: 'ID',sort: true,style:'hidden!important;' ,width:60}
-                , {field: 'name', title: '分区名称'}
-                , {field: 'orgname', title: '归属单位'}
-                , {field: 'devcount', title: '设备数量'}
-                , {fixed: 'right', title: '操作', align: 'center',toolbar: '#barDemo',width:300}
-                , {fixed: 'right', title: '控制', align: 'center',toolbar: '#barControl',width:160}
+                , {field: 'name', title: '设备名',}
+                , {field: 'ipaddress', title: 'IP地址',}
+                , {field: 'mac', title: 'Mac地址',}
+                , {field: 'typename', title: '设备类别', sort: true,}
+                , {field: 'orgname', title: '归属单位', sort: true,}
+                , {field: 'resource', title: '资源',}
+                , {field: 'statename', title: '开断状态', sort: true,width:100,align: 'center'}
+                {#, {field: 'lastupdatetime', title: '更新时间', sort: true,width:160}#}
+                , {fixed: 'right', title: '管理', align: 'center',toolbar: '#barDemo1',width:160}
+                , {fixed: 'right', title: '远程控制', align: 'center',toolbar: '#barDemo2',width:160}
+                , {fixed: 'right', title: '设置', align: 'center',toolbar: '#barDemo3',width:160}
             ]]
             , done: function (res, page, count) {
 
@@ -91,57 +104,48 @@
         table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
                 , layEvent = obj.event; //获得 lay-event 对应的值
-            if(layEvent == "view")
-            {
-                var newTmpLay = layer.open({
-                    title: ['分区与设备分布', 'font-size:13px;margin-top:10px;font-weight:bold;'],
-                    type: 2,
-                    maxmin: true,
-                    scrollbar: false,
-                    area: ['800px', '600px'],
-                    content: 'org_sceen.html?code=' + data.code + "&type=1"
-                });
+            if (layEvent === 'view') {
+                $.viewDevice(data);
             }
             else if (layEvent === 'edit') {
-                $.editGroup(data);
+                $.editDevice(data);
             } else if (layEvent === 'del') {
-                layer.confirm('你确定删除该分区？', function (index) {
+                layer.confirm('你确定删除该设备？', function (index) {
                     obj.del(); //删除对应行（tr）的DOM结构
                     layer.close(index);
                     //向服务端发送删除指令
-                    $.deleGroup(data);
+                    $.deleDevice(data);
                 });
             }
-            //else if (layEvent === 'location') {
-            //    $.mangeLocation(data);
-            //}
-            //else if (layEvent === 'bindlight') {
-            //    $.bindLight(data);
-            //}
-            else if (layEvent === 'binddev') {
-                layer.open({
-                    title: ['设置分区设备', 'font-size:13px;margin-top:10px;'],
-                    type: 2,
-                    area: ['800px', '640px'],
-                    content: 'group_bind.html?orgcode=' + data.orgcode + "&grpcode=" + data.code
-                });
+            else if (layEvent === 'snap') {
+                $.snapDevice(data);
             }
-            else if (layEvent === 'closeLight')
-            {
-                layer.confirm('你确定关闭该分区所有灯光？', function (index) {
+
+            else if (layEvent === 'restart') {
+                layer.confirm('你确定重启该设备？', function (index) {
                     layer.close(index);
                     //向服务端发送删除指令
-                    $.closeLight(data);
-                });
-            }
-            else if (layEvent === 'openLight')
-            {
-                layer.confirm('你确定开启该分区所有灯光？', function (index) {
-                    layer.close(index);
-                    //向服务端发送删除指令
-                    $.openLight(data);
+                    $.restartDevice(data);
                 });
 
+            }
+
+            else if (layEvent === 'halt') {
+                layer.confirm('该操作会关闭计算机，下次启动需要您在设备上启动，你确定关闭计算机吗？', function (index) {
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.shutdownDevice(data);
+                });
+            }
+            else if (layEvent === 'position') {
+                $.setDevPosition(data);
+            }
+            else if (layEvent === 'power') {
+                $.setDevPower(data);
+            }
+
+            else if (layEvent === 'grpmap') {
+                $.setDevGrp(data);
             }
 
         });
@@ -169,18 +173,31 @@
         });
     }
 
-    function addGroup()
-    {
-        var newTmpLay = layer.open({
-            title: ['添加分区', 'font-size:13px;margin-top:10px;font-weight:bold;'],
-            type: 2,
-            maxmin:true,
-            scrollbar: false,
-            area:['500px', '260px'],
-            content: 'group_add.html'
+    function openTerminal() {
+        layui.use('table', function () {
+            var table = layui.table;
+            var oldData = table.cache["testReload"];
+
+            for (var index = 0 ; index < oldData.length;index ++)
+            {
+                var oneRecore = oldData[index];
+
+                if (oneRecore.LAY_CHECKED)
+                {
+                    console.log(oneRecore.name);
+                }
+
+            }
         });
     }
-
+    
+    function shutdownTerminal() {
+        
+    }
+    
+    function restartTermianl() {
+        
+    }
 </script>
 </body>
 </html>

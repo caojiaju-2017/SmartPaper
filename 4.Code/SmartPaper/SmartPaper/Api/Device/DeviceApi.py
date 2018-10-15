@@ -2470,4 +2470,18 @@ class DeviceApi(object):
 
         return render(request, os.path.join(STATIC_TMP,'OrgHome/Device/device_view.html'), dict)
 
+    @staticmethod
+    def goGoodsView(request):
+        dict = {}
+        LoggerHandle.writeLogDevelope("商品管理", request)
+
+        return render(request, os.path.join(STATIC_TMP,'OrgHome/Device/goods_manage.html'), dict)
+
+    @staticmethod
+    def goOrderView(request):
+        dict = {}
+        LoggerHandle.writeLogDevelope("订单管理", request)
+
+        return render(request, os.path.join(STATIC_TMP,'OrgHome/Device/order_manage.html'), dict)
+
 

@@ -33,7 +33,6 @@ class SystemApi(object):
         elif command == "HOME_STAT":
             return SystemApi.HomeStat(req, command)
 
-
     @staticmethod
     def HomeStat(request,cmd):
         '''
@@ -1083,3 +1082,7 @@ class SystemApi(object):
         # LoggerHandle.writeLogDevelope("打开版本添加页面", request)
 
         return render(request, os.path.join(STATIC_TMP, 'OrgHome/Privilege/set_sceen.html'), dict)
+    @staticmethod
+    def openMessageConfig(request):
+        dict = {}
+        return render(request, os.path.join(STATIC_TMP, 'OrgHome/System/message_config.html'), dict)

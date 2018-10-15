@@ -10,18 +10,16 @@
     <script src="/static/Public/public.js"></script>
     <script src="/static/Public/cookie.js"></script>
     <script src="/static/ThreeParty/LayUi/layui.js"></script>
-    <script src="/static/OrgHome/Media_js/terminal_edit.js"></script>
-
-    {#    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>#}
+    <script src="/static/OrgHome/message_config.js"></script>
     <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
 </head>
 <body style="text-align: center">
 
 <form class="layui-form" action="">
     <div class="layui-form-item" style="margin-top: 10px;width: 550px">
-        <label class="layui-form-label" style="width: 130px">名称</label>
+        <label class="layui-form-label" style="width: 130px">LED终端名</label>
         <div class="layui-input-block">
-            <input type="text" name="city" id="name" lay-verify="title" autocomplete="off" placeholder="请输入电源名称"
+            <input type="text" name="city" id="name" lay-verify="title" autocomplete="off" placeholder="请输入LED终端名"
                    class="layui-input" style="width: 300px">
         </div>
     </div>
@@ -50,6 +48,31 @@
         </div>
     </div>
 
+    <div class="layui-form-item" style="margin-top: 10px;width: 550px">
+        <label class="layui-form-label" style="width: 130px">LED宽（像素）</label>
+        <div class="layui-input-block">
+            <input type="text" name="depsity" id="width" lay-verify="title" autocomplete="off" placeholder="请输入宽度"
+                   class="layui-input" style="width: 300px">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;width: 550px">
+        <label class="layui-form-label" style="width: 130px">LED高（像素）</label>
+        <div class="layui-input-block">
+            <input type="text" name="depsity" id="height" lay-verify="title" autocomplete="off" placeholder="请输入高度"
+                   class="layui-input" style="width: 300px">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 550px">
+        <label class="layui-form-label">板卡厂商</label>
+        <div class="layui-input-block" style="width: 300px">
+            <select name="factory" lay-filter="factory" id="factory">
+                <option value=""></option>
+                <option value="0">视展</option>
+            </select>
+        </div>
+    </div>
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 550px">
         <label class="layui-form-label">归属单位</label>
         <div class="layui-input-block" style="width: 300px">

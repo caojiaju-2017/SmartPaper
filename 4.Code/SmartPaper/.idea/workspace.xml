@@ -2,184 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14ec04a0-b5ca-48c8-b801-102c45203217" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../3.Designing/智能取纸机云平台接口说明书(软件).docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../3.Designing/智能取纸机云平台接口说明书(软件).docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SmartPaper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SmartPaper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Login/LoginApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Login/LoginApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Privilege/AccountApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Privilege/AccountApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgTree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Privilege/PrivilegeApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Privilege/PrivilegeApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Privilege/RoleApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Privilege/RoleApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/BaseMoudle/Logger/LoggerHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/BaseMoudle/Logger/LoggerHelper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/account_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/account_add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_view.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_view.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/org_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/org_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/role_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/role_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/Public/colorpicker/js/bootstrap-colorpicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/Public/colorpicker/js/bootstrap-colorpicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/ColorPicker/spectrum.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/ColorPicker/spectrum.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/layui.css" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/layui.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/layui.mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/layui.mobile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/code.css" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/code.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/laydate/default/laydate.css" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/laydate/default/laydate.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/icon-ext.png" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/icon-ext.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/layer.css" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/layer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/loading-0.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/loading-0.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/loading-1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/loading-1.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/css/modules/layer/default/loading-2.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/css/modules/layer/default/loading-2.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/font/iconfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/font/iconfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/font/iconfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/font/iconfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/font/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/font/iconfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/font/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/font/iconfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/0.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/0.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/1.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/10.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/10.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/11.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/11.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/12.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/12.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/13.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/13.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/14.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/14.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/15.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/15.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/16.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/16.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/17.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/17.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/18.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/18.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/19.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/19.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/2.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/2.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/20.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/20.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/21.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/21.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/22.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/22.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/23.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/23.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/24.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/24.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/25.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/25.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/26.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/26.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/27.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/27.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/28.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/28.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/29.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/29.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/3.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/3.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/30.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/30.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/31.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/31.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/32.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/32.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/33.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/33.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/34.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/34.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/35.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/35.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/36.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/36.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/37.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/37.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/38.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/38.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/39.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/39.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/4.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/4.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/40.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/40.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/41.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/41.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/42.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/42.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/43.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/43.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/44.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/44.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/45.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/45.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/46.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/46.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/47.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/47.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/48.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/48.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/49.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/49.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/5.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/5.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/50.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/50.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/51.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/51.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/52.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/52.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/53.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/53.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/54.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/54.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/55.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/55.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/56.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/56.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/57.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/57.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/58.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/58.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/59.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/59.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/6.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/6.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/60.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/60.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/61.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/61.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/62.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/62.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/63.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/63.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/64.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/64.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/65.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/65.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/66.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/66.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/67.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/67.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/68.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/68.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/69.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/69.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/7.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/7.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/70.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/70.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/71.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/71.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/8.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/8.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/images/face/9.gif" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/images/face/9.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/carousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/code.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/colorpicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/colorpicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/element.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/flow.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/flow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/laydate.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/laydate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/layedit.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/layedit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/layer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/laypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/laypage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/laytpl.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/laytpl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/mobile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/rate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/slider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/tree.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/lay/modules/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/lay/modules/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/layui.all.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/layui.all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/layui.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/layui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Report/Gruntfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Report/Gruntfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/GPUComputationRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/GPUComputationRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/Octree.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/Octree.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/QuickHull.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/QuickHull.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/TimelinerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/TimelinerController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/TypedArrayUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/TypedArrayUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/animation/CCDIKSolver.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/animation/CCDIKSolver.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/effects/AsciiEffect.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/effects/AsciiEffect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/effects/OutlineEffect.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/effects/OutlineEffect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/exporters/GLTFExporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/exporters/GLTFExporter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/geometries/TeapotBufferGeometry.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/geometries/TeapotBufferGeometry.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/dat.gui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/dat.gui.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/draco/draco_wasm_wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/draco/draco_wasm_wrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/draco/gltf/draco_wasm_wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/draco/gltf/draco_wasm_wrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/opentype.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/opentype.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/timeliner_gui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/libs/timeliner_gui.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/AMFLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/AMFLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/AWDLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/AWDLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/BinaryLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/BinaryLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/GCodeLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/GCodeLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/GLTFLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/GLTFLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/KMZLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/KMZLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/LoaderSupport.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/LoaderSupport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/MTLLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/MTLLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/NRRDLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/NRRDLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/OBJLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/OBJLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/OBJLoader2.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/OBJLoader2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/PLYLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/PLYLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/STLLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/STLLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/UTF8Loader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/UTF8Loader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/VRMLLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/VRMLLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/sea3d/SEA3DDeflate.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/loaders/sea3d/SEA3DDeflate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/modifiers/BufferSubdivisionModifier.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/modifiers/BufferSubdivisionModifier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/modifiers/SubdivisionModifier.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/modifiers/SubdivisionModifier.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/objects/Reflector.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/objects/Reflector.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/objects/Water.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/objects/Water.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/postprocessing/AdaptiveToneMappingPass.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/postprocessing/AdaptiveToneMappingPass.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/shaders/WaterRefractionShader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/shaders/WaterRefractionShader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/utils/ShadowMapViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/utils/ShadowMapViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/utils/UVsDebug.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/extra/utils/UVsDebug.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.module.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/ThreeParty/Three/three.module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/account_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/account_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/account_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/account_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/org_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/org_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/log_query.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/log_query.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaperServer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaperServer/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/group_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/group_bind.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/group_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/group_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/light_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/light_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/power_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/power_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/power_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaperServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaperServer/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -194,36 +30,37 @@
     <session id="1486263163">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="12" />
-          <entry key="js" value="12" />
-          <entry key="py" value="39" />
+          <entry key="html" value="15" />
+          <entry key="js" value="14" />
+          <entry key="py" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="12" />
-          <entry key="JavaScript" value="12" />
-          <entry key="Python" value="39" />
+          <entry key="HTML" value="15" />
+          <entry key="JavaScript" value="14" />
+          <entry key="Python" value="41" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="147" />
-          <entry key="js" value="72" />
-          <entry key="py" value="1187" />
+          <entry key="html" value="150" />
+          <entry key="js" value="95" />
+          <entry key="py" value="1277" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="147" />
-          <entry key="JavaScript" value="72" />
-          <entry key="Python" value="1187" />
+          <entry key="HTML" value="150" />
+          <entry key="JavaScript" value="95" />
+          <entry key="Python" value="1277" />
         </counts>
       </usages-collector>
     </session>
@@ -233,8 +70,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="1004" column="36" lean-forward="true" selection-start-line="1004" selection-start-column="36" selection-end-line="1004" selection-end-column="36" />
+            <state relative-caret-position="705">
+              <caret line="1087" column="89" selection-start-line="1087" selection-start-column="89" selection-end-line="1087" selection-end-column="89" />
+              <folding>
+                <marker date="1539594499375" expanded="true" signature="1145:1149" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -242,49 +82,70 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartPaperServer/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="863">
-              <caret line="292" column="53" lean-forward="true" selection-start-line="292" selection-start-column="53" selection-end-line="292" selection-end-column="53" />
+            <state relative-caret-position="409">
+              <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/message_config.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="95" column="104" lean-forward="true" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
+            <state relative-caret-position="689">
+              <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/version_list.html">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+            <state relative-caret-position="393">
+              <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/PrivilegeApi.py">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="668">
+              <caret line="2482" column="54" lean-forward="true" selection-start-line="2482" selection-start-column="54" selection-end-line="2482" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/AccountApi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="594" column="90" selection-start-line="594" selection-start-column="8" selection-end-line="594" selection-end-column="90" />
-              <folding>
-                <element signature="e#47#68#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/message_config.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -340,14 +201,17 @@
         <option value="$PROJECT_DIR$/SmartPaper/Api/Login/LoginApi.py" />
         <option value="$PROJECT_DIR$/SmartPaper/BaseMoudle/Logger/LoggerHelper.py" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/log_query.html" />
-        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/version_add.html" />
         <option value="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgTree.py" />
         <option value="$PROJECT_DIR$/SmartPaper/models.py" />
-        <option value="$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/version_list.html" />
         <option value="$PROJECT_DIR$/SmartPaperServer/settings.py" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/message_config.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js" />
+        <option value="$PROJECT_DIR$/SmartPaperServer/urls.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" />
       </list>
     </option>
   </component>
@@ -420,7 +284,7 @@
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="Service" type="462c0819:PsiDirectoryNode" />
+              <item name="OrgHome" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
@@ -441,7 +305,7 @@
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="OrgHome" type="462c0819:PsiDirectoryNode" />
-              <item name="Privilege" type="462c0819:PsiDirectoryNode" />
+              <item name="Device" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
@@ -471,6 +335,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\Device" />
       <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\OrgHome" />
       <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\System" />
       <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\ThreeParty\LayUi" />
@@ -535,12 +400,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19895834" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19895834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32944915" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32944915" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4523305" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -811,13 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/django/utils/autoreload.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -843,20 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="64" column="26" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -923,24 +767,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py">
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="1004" column="36" lean-forward="true" selection-start-line="1004" selection-start-column="36" selection-end-line="1004" selection-end-column="36" />
+        <state relative-caret-position="380">
+          <caret line="104" column="25" lean-forward="true" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/message_config.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/message_config.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaperServer/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="863">
-          <caret line="292" column="53" lean-forward="true" selection-start-line="292" selection-start-column="53" selection-end-line="292" selection-end-column="53" />
+        <state relative-caret-position="409">
+          <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html">
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="95" column="104" lean-forward="true" selection-start-line="95" selection-start-column="104" selection-end-line="95" selection-end-column="104" />
+        <state relative-caret-position="705">
+          <caret line="1087" column="89" selection-start-line="1087" selection-start-column="89" selection-end-line="1087" selection-end-column="89" />
+          <folding>
+            <marker date="1539594499375" expanded="true" signature="1145:1149" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="2482" column="54" lean-forward="true" selection-start-line="2482" selection-start-column="54" selection-end-line="2482" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="689">
+          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
         </state>
       </provider>
     </entry>

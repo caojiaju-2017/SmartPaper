@@ -94,6 +94,10 @@ urlpatterns = urlpatterns + [
     url(r'^device_edit.html', DeviceApi.goTerminalEdit),
 
     url(r'^device_view.html', DeviceApi.goDeviceView),
+    url(r'^goods_manage.html', DeviceApi.goGoodsView),
+    url(r'^order_manage.html', DeviceApi.goOrderView),
+
+    url(r'^message_config.html', SystemApi.openMessageConfig),
 
 
 

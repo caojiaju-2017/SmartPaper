@@ -17,17 +17,17 @@ function getTabUrl(tabname) {
     {
         return "./account_list.html?logincode=" + $.cookie("OrgUserCode") + "&orgsign=" + orgsign;
     }
-    else if (tabname == "基础设备")
+    else if (tabname == "设备管理")
     {
         return "./base_device.html";
     }
-    else if (tabname == "电源管理")
+    else if (tabname == "商品管理")
     {
-        return "./power_list.html";
+        return "./goods_manage.html";
     }
-    else if (tabname == "灯光管理")
+    else if (tabname == "订单管理")
     {
-        return "./light_list.html";
+        return "./order_manage.html";
     }
     else if (tabname == "LED管理")
     {
@@ -48,6 +48,10 @@ function getTabUrl(tabname) {
     else if (tabname == "版本管理")
     {
         return "./version_list.html";
+    }
+    else if (tabname == "短信配置")
+    {
+        return "./message_config.html";
     }
     else
     {
