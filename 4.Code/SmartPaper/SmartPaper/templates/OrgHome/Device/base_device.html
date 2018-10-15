@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
 
     <style>
-        .layui-table-cell{
-    height:30px;
-    line-height:30px;
-}
+        .layui-table-cell {
+            height: 30px;
+            line-height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -39,21 +39,21 @@
 </div>
 
 <script type="text/html" id="barDemo1">
-    <a class="layui-btn layui-btn-xs" lay-event="view" id="view">查看</a>
+    {#    <a class="layui-btn layui-btn-xs" lay-event="view" id="view">查看</a>#}
     <a class="layui-btn layui-btn-xs" lay-event="edit" id="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" id="del">删除</a>
 </script>
 
-<script type="text/html" id="barDemo2">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="snap" id="snap">截图</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="restart" id="restart">重启</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="halt" id="halt">关机</a>
-</script>
+{#<script type="text/html" id="barDemo2">#}
+{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="snap" id="snap">截图</a>#}
+{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="restart" id="restart">重启</a>#}
+{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="halt" id="halt">关机</a>#}
+{#</script>#}
 
 <script type="text/html" id="barDemo3">
-    <a class="layui-btn layui-btn-xs" lay-event="position" id="position">位置</a>
+    <a class="layui-btn layui-btn-xs" lay-event="position" id="position">设置商品</a>
     <a class="layui-btn layui-btn-xs" lay-event="power" id="power">电源</a>
-{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="grpmap" id="grpmap">分区</a>#}
+    {#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="grpmap" id="grpmap">分区</a>#}
 </script>
 
 <script>
@@ -66,7 +66,7 @@
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
-        listParams[3] = "orgsign=" + orgsign  ;
+        listParams[3] = "orgsign=" + orgsign;
         listParams[4] = "typecode=-1";
 
         listParams = listParams.sort();
@@ -77,23 +77,23 @@
         orgTab = table.render({
             elem: '#demo'
             , height: 600
-            ,cellMinWidth:80
+            , cellMinWidth: 80
             , url: urlCmd //数据接口
             , page: true //开启分页
             , id: 'testReload'
             , cols: [[ //表头
-                {type:'checkbox'}
+                {type: 'checkbox'}
                 , {field: 'name', title: '设备名',}
                 , {field: 'ipaddress', title: 'IP地址',}
                 , {field: 'mac', title: 'Mac地址',}
-                , {field: 'typename', title: '设备类别', sort: true,}
-                , {field: 'orgname', title: '归属单位', sort: true,}
-                , {field: 'resource', title: '资源',}
-                , {field: 'statename', title: '开断状态', sort: true,width:100,align: 'center'}
-                {#, {field: 'lastupdatetime', title: '更新时间', sort: true,width:160}#}
-                , {fixed: 'right', title: '管理', align: 'center',toolbar: '#barDemo1',width:160}
-                , {fixed: 'right', title: '远程控制', align: 'center',toolbar: '#barDemo2',width:160}
-                , {fixed: 'right', title: '设置', align: 'center',toolbar: '#barDemo3',width:160}
+                , {field: 'position', title: '设备位置'}
+                , {field: 'orgname', title: '归属单位',}
+                , {field: 'resource', title: '商品数量',}
+                , {field: 'mangeinfo', title: '管理员',}
+                , {field: 'statename', title: '设备状态', align: 'center'}
+                , {fixed: 'right', title: '管理', align: 'center', toolbar: '#barDemo1', width: 160}
+                {#, {fixed: 'right', title: '远程控制', align: 'center',toolbar: '#barDemo2',width:160}#}
+                , {fixed: 'right', title: '设置', align: 'center', toolbar: '#barDemo3', width: 160}
             ]]
             , done: function (res, page, count) {
 
@@ -150,6 +150,7 @@
 
         });
     });
+
     function showAll() {
         var pfliter = $("#demoReload").val();
         orgTab.reload({
@@ -161,11 +162,12 @@
             }
         });
     }
+
     function searchFliter() {
         var pfliter = $("#demoReload").val();
         orgTab.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                fliterstring:pfliter
+                fliterstring: pfliter
             }
             , page: {
                 curr: 1 //重新从第 1 页开始
@@ -178,25 +180,23 @@
             var table = layui.table;
             var oldData = table.cache["testReload"];
 
-            for (var index = 0 ; index < oldData.length;index ++)
-            {
+            for (var index = 0; index < oldData.length; index++) {
                 var oneRecore = oldData[index];
 
-                if (oneRecore.LAY_CHECKED)
-                {
+                if (oneRecore.LAY_CHECKED) {
                     console.log(oneRecore.name);
                 }
 
             }
         });
     }
-    
+
     function shutdownTerminal() {
-        
+
     }
-    
+
     function restartTermianl() {
-        
+
     }
 </script>
 </body>

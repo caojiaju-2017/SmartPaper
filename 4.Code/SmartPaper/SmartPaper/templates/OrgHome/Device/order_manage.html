@@ -28,10 +28,10 @@
 <div style="background: #fff;height: 600px;width: 90%;margin-left:5%;" id="vip_div">
     <div class="demoTable">
         <div class="layui-inline">
-            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="设备名称">
+            <input class="layui-input" name="keyword" id="demoReload" autocomplete="off" placeholder="商品名称">
         </div>
         <button class="layui-btn" data-type="reload" onclick="searchFliter()">搜索</button>
-        <button class="layui-btn" data-type="reload" onclick="showAll()">所有设备</button>
+        <button class="layui-btn" data-type="reload" onclick="showAll()">所有订单</button>
 
 
     </div>
@@ -44,17 +44,6 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" id="del">删除</a>
 </script>
 
-<script type="text/html" id="barDemo2">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="snap" id="snap">截图</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="restart" id="restart">重启</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="halt" id="halt">关机</a>
-</script>
-
-<script type="text/html" id="barDemo3">
-    <a class="layui-btn layui-btn-xs" lay-event="position" id="position">位置</a>
-    <a class="layui-btn layui-btn-xs" lay-event="power" id="power">电源</a>
-{#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="grpmap" id="grpmap">分区</a>#}
-</script>
 
 <script>
     var orgTab;
@@ -82,18 +71,14 @@
             , page: true //开启分页
             , id: 'testReload'
             , cols: [[ //表头
-                {type:'checkbox'}
-                , {field: 'name', title: '设备名',}
-                , {field: 'ipaddress', title: 'IP地址',}
-                , {field: 'mac', title: 'Mac地址',}
-                , {field: 'typename', title: '设备类别', sort: true,}
-                , {field: 'orgname', title: '归属单位', sort: true,}
-                , {field: 'resource', title: '资源',}
-                , {field: 'statename', title: '开断状态', sort: true,width:100,align: 'center'}
-                {#, {field: 'lastupdatetime', title: '更新时间', sort: true,width:160}#}
+                , {field: 'orderno', title: '订单号',}
+                , {field: 'name', title: '商品名',}
+                , {field: 'custominfo', title: '客户信息',}
+                , {field: 'createordertime', title: '下单时间'}
+                , {field: 'paytime', title: '付款时间'}
+                , {field: 'devname', title: '归属设备',}
+                , {field: 'statename', title: '状态', align: 'center'}
                 , {fixed: 'right', title: '管理', align: 'center',toolbar: '#barDemo1',width:160}
-                , {fixed: 'right', title: '远程控制', align: 'center',toolbar: '#barDemo2',width:160}
-                , {fixed: 'right', title: '设置', align: 'center',toolbar: '#barDemo3',width:160}
             ]]
             , done: function (res, page, count) {
 

@@ -11,6 +11,7 @@ from SmartPaper.Api.Privilege.OrgTree import *
 
 from SmartPaper.BaseMoudle.Device.DeviceHelper import DeviceHelper
 from SmartPaper.BaseMoudle.Device.PowerHelper import PowerHelper
+from SmartPaper.BaseMoudle.Privilege.PrivilegeHelper import PrivilegeHelper
 
 class DeviceApi(object):
     @staticmethod
@@ -1647,27 +1648,27 @@ class DeviceApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
+        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"])
         if not userOrg:
             LoggerHandle.writeLogDevelope("用户单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 检查当前账户是否具有权限
+        # resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        # if not resultPrivilegeSign:
+        #     LoggerHandle.writeLogDevelope("权限受限", request)
+        #     loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         limit = int(allParams["limit"])
         pageIndex = int(allParams["page"])
@@ -1691,22 +1692,22 @@ class DeviceApi(object):
         devicesList = None
         for oneOrg in currentAllOrgs:
             if not devicesList :
-                devicesList = SmartDevices.objects.filter(orgcode=oneOrg).order_by("-id")
+                devicesList = PaperDevices.objects.filter(orgcode=oneOrg).order_by("-id")
             else:
-                devicesList = devicesList | SmartDevices.objects.filter(orgcode=oneOrg).order_by("-id")
+                devicesList = devicesList | PaperDevices.objects.filter(orgcode=oneOrg).order_by("-id")
 
         devicesList = devicesList.filter(~Q(state = 0))
 
         # 根据终端类型过滤
 
-        if typeCode == None:
-            pass
-        elif typeCode == -1:
-            devicesList = devicesList.filter(typecode__lte=2000)
-        elif typeCode == 1:
-            devicesList = devicesList.filter(typecode__gte=2000)
-        else:
-            devicesList = devicesList.filter(typecode=typeCode)
+        # if typeCode == None:
+        #     pass
+        # elif typeCode == -1:
+        #     devicesList = devicesList.filter(typecode__lte=2000)
+        # elif typeCode == 1:
+        #     devicesList = devicesList.filter(typecode__gte=2000)
+        # else:
+        #     devicesList = devicesList.filter(typecode=typeCode)
 
         dataSets = []
         # 数据刷选
