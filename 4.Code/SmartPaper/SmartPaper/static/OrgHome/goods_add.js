@@ -1,5 +1,5 @@
 var code = "";
-var orgsign= "1e2c68303ebd11e880d3989096c1d848";
+var orgsign= "aaea68303ebd11e880d3989096c1d848";
 
 var itemTemplate = "<option value='{orgcode}'>{orgname}</option>";
 window.onload=function()
@@ -8,15 +8,16 @@ window.onload=function()
 
 $(document).ready(function(e) {
     code = $.GetQueryString("code");
-    $.loadBoxData(null);
+    $.loadBoxData(code);
+    $.initTestData();
 });
 
 $.extend({
 
-    loadDevInfo:function(code)
+    loadGoodsInfo:function(code)
     {
         var listParams = new Array();
-        listParams[0] = "command=GROUP_INFO";
+        listParams[0] = "command=GOODS_QUERY";
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
@@ -26,7 +27,7 @@ $.extend({
         var allParams = listParams;
         allParams = allParams.sort();
 
-        var urlCmd = $.buildGetParam("/api/group/?" ,listParams);
+        var urlCmd = $.buildGetParam("/api/goods/?" ,listParams);
         urlCmd = urlCmd + "&sign=" + $.signString(allParams);
 
         // 提取用户名
@@ -38,13 +39,20 @@ $.extend({
     },
 
     fillElement:function (data) {
-        $("#name").val(data.name);
-        $("#org_list").val(data.orgcode);
+        $("#goodsname").val(data.goodsname);
+        $("#goodsprice").val(data.goodsprice);
+        // $("#org_list").val(data.orgcode);
+        $('#previewimage').attr('src', data.previewimage);
 
-        layui.use('form', function () {
-            var form = layui.form; //
-            form.render('select');
+        layui.use('layer', function () {
+            $("#org_list").find("option[value = '" + data.orgcode + "']").attr("selected", "selected");
+            layui.use('form', function () {
+                var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+                form.render();
+            });
+
         });
+
     },
     GetQueryString:function (name)
     {
@@ -81,13 +89,14 @@ $.extend({
 
                     $("#org_list").html(readyText + tempalteResult);
 
-                    if (code != null && orgparam != null)
-                    {
-                        $("#org_list").find("option[value = '"+orgparam+"']").attr("selected","selected");
-                    }
+                    // if (code != null && orgparam != null)
+                    // {
+
+                    // }
                 }
 
                 layui.use('layer', function () {
+                    $("#org_list").find("option[value = '"+orgparam+"']").attr("selected","selected");
                     layui.use('form', function () {
                         var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
                         form.render();
@@ -97,7 +106,7 @@ $.extend({
 
                  if (code != "" && code != "null" && code != null)
                 {
-                    $.loadDevInfo(code);
+                    $.loadGoodsInfo(code);
                 }
                 else
                 {
@@ -106,44 +115,59 @@ $.extend({
             },
             "json");//这里返回的类型有：json,html,xml,text
     },
+    initTestData:function(){
+        $("#goodsname").val("新终端");
+        $("#goodsprice").val("10.30");
+        // $("#port").val("9393");
+        // $("#mac").val("98-90-96-C1-D8-48");
+    },
 
+    clearValue:function () {
+        $("#name").val("");
+        $("#ipaddress").val("");
+        $("#port").val("");
+        $("#mac").val("");
+    },
 
     saveInfo: function () {
         var name = $("#name").val();
-        var org_list = $("#org_list").val();
+        var ipaddress = $("#ipaddress").val();
+        var port = $("#port").val();
+        var mac = $("#mac").val();
+        var ownerOrg = $('#org_list').val();
 
-
-        if (name == ""
-        || org_list == "")
+        if (name == "" || ipaddress == "" || port == "" || mac == "" || ownerOrg == "")
         {
-            alert("信息不能为空");
+            alert("注册信息不能为空");
             return;
         }
 
-        // post参数
-        var postParm = new Array();
-        postParm[0] = "name=" + name;
-        postParm[1] = "orgcode=" + org_list;
-
-
         var listParams = new Array();
+
         if (code != "" && code != "null" && code != null) {
-            listParams[0] = "command=GROUP_EDIT";
-            postParm[2] = "code=" + code;
+            listParams[0] = "command=TERMINAL_EDIT";
         }
         else
         {
-            listParams[0] = "command=GROUP_ADD";
+            listParams[0] = "command=TERMINAL_ADD";  // 暂不使用
         }
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "orgsign=" + orgsign;
         listParams[3] = "logincode=" + $.cookie("OrgUserCode");
 
+        var postParm = new Array();
+        postParm[0] = "name=" + name;
+        postParm[1] = "ipaddress=" + ipaddress;
+        postParm[2] = "mac=" + mac;
+        postParm[3] = "port=" + port;
+        postParm[4] = "orgcode=" + ownerOrg;
+        postParm[5] = "code=" + code;
+
 
         var allParams = listParams.concat(postParm);
         allParams = allParams.sort();
-        var urlCmd = $.buildGetParam("/api/group/?" ,listParams);
+        var urlCmd = $.buildGetParam("/api/player/?" ,listParams);
         urlCmd = urlCmd + "&sign=" + $.signString(allParams);
 
         var params = null;
@@ -158,6 +182,7 @@ $.extend({
 
                 if (ErrorId == 200)
                 {
+                    $.clearValue();
                     alert("操作成功!");
 
                     var index = parent.layer.getFrameIndex(window.name);

@@ -28,12 +28,28 @@
 
 
     <div class="layui-form-item" style="margin-top: 10px;width: 450px">
-        <label class="layui-form-label" style="width: 130px">管理地址</label>
+        <label class="layui-form-label" style="width: 130px">管理员</label>
         <div class="layui-input-block">
-            <input type="text" name="profession" id="ipaddress" lay-verify="title" autocomplete="off"
-                   placeholder="请输入管理IP地址" class="layui-input" style="width: 200px">
+            <input type="text" name="profession" id="managename" lay-verify="title" autocomplete="off"
+                   placeholder="请输入管理员姓名" class="layui-input" style="width: 200px">
         </div>
     </div>
+    <div class="layui-form-item" style="margin-top: 10px;width: 450px">
+        <label class="layui-form-label" style="width: 130px">联系方式</label>
+        <div class="layui-input-block">
+            <input type="text" name="depsity" id="managephone" lay-verify="title" autocomplete="off" placeholder="请输入管理员联系电话"
+                   class="layui-input" style="width: 200px">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;width: 450px">
+        <label class="layui-form-label" style="width: 130px">IP地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="profession" id="ipaddress" lay-verify="title" autocomplete="off"
+                   placeholder="请输入设备IP地址" class="layui-input" style="width: 200px">
+        </div>
+    </div>
+
     <div class="layui-form-item" style="margin-top: 10px;width: 450px">
         <label class="layui-form-label" style="width: 130px">MAC地址</label>
         <div class="layui-input-block">
@@ -41,33 +57,50 @@
                    placeholder="请输入设备MAC地址" class="layui-input" style="width: 200px">
         </div>
     </div>
+
+
     <div class="layui-form-item" style="margin-top: 10px;width: 450px">
-        <label class="layui-form-label" style="width: 130px">管理端口</label>
+        <label class="layui-form-label" style="width: 130px">设备经度</label>
         <div class="layui-input-block">
-            <input type="text" name="depsity" id="port" lay-verify="title" autocomplete="off" placeholder="请输入管理端口"
-                   class="layui-input" style="width: 200px">
+            <input type="text" name="profession" id="longitude" lay-verify="title" autocomplete="off"
+                   placeholder="请输入设备经度" class="layui-input" style="width: 200px">
         </div>
     </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;width: 450px">
+        <label class="layui-form-label" style="width: 130px">设备纬度</label>
+        <div class="layui-input-block">
+            <input type="text" name="profession" id="latitude" lay-verify="title" autocomplete="off"
+                   placeholder="请输入设备纬度" class="layui-input" style="width: 200px">
+        </div>
+    </div>
+
+
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 450px">
-        <label class="layui-form-label">设备类型</label>
+        <label class="layui-form-label">产品型号</label>
         <div class="layui-input-block" style="width: 200px">
             <select name="dev" lay-filter="dev"  id="dev_type">
                 <option value=""></option>
-                <option value="1001">互动桌面</option>
-                <option value="1002">二维码屏option>
-                <option value="1003">3D导览</option>
-                <option value="1004">全息投影</option>
-                <option value="1005">分接屏</option>
+                <option value="BY-Paper-S002">智能取纸售卖一体机</option>
             </select>
         </div>
     </div>
+
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 450px">
         <label class="layui-form-label">设备状态</label>
         <div class="layui-input-block" style="width: 200px">
             <select name="devstate" lay-filter="devstate"  id="state_list">
                 <option value=""></option>
                 <option value="1">正常</option>
-                <option value="2">故障</option>
+                <option value="21">缺纸</option>
+                <option value="22">纸将尽</option>
+                <option value="23">堵纸</option>
+                <option value="24">卡纸</option>
+                <option value="5">换纸成功</option>
+                <option value="6">开机</option>
+                <option value="7">关机</option>
+                <option value="8">售卖机故障</option>
+                <option value="20">其他故障</option>
             </select>
         </div>
     </div>

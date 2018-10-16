@@ -31,20 +31,20 @@ $.extend({
         });
     },
 
-    editDevice:function (data) {
+    editGoods:function (data) {
         var newTmpLay = layer.open({
             title: ['编辑设备', 'font-size:13px;margin-top:10px;font-weight:bold;'],
             type: 2,
             maxmin:true,
             scrollbar: false,
-            area:['520px', '700px'],
-            content: 'device_edit.html?code=' + data.code
+            area:['520px', '560px'],
+            content: 'goods_add.html?code=' + data.code
         });
     },
 
-    deleDevice:function (data) {
+    deleGoods:function (data) {
         var listParams = new Array();
-        listParams[0] = "command=SET_DEVICE";
+        listParams[0] = "command=SET_GOODS";
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
@@ -57,7 +57,7 @@ $.extend({
         var allParams = listParams.concat(postParm);
         allParams = allParams.sort();
 
-        var urlCmd = $.buildGetParam("/api/device/?" ,listParams);
+        var urlCmd = $.buildGetParam("/api/goods/?" ,listParams);
         urlCmd = urlCmd + "&sign=" + $.signString(allParams);
 
         params = $.buildPostParam(postParm);
@@ -105,14 +105,14 @@ $.extend({
         });
     },
 
-    setGoods:function (data) {
+    setDevPosition:function (data) {
         var newTmpLay = layer.open({
-            title: ['管理设备商品', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+            title: ['管理设备位置', 'font-size:13px;margin-top:10px;font-weight:bold;'],
             type: 2,
             maxmin:true,
             scrollbar: false,
-            area:['700px', '300px'],
-            content: 'set_goods.html?' + "devcode=" + data.code
+            area:['800px', '600px'],
+            content: 'set_position.html?code=' + data.orgcode + "&devcode=" + data.code + "&xpos=" + data.leftx+ "&ypos=" + data.lefty + "&haveimage=" + data.haveimg
         });
     },
 

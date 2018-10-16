@@ -23,6 +23,8 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 from SmartPaper.Api.Device.DeviceApi import *
+from SmartPaper.Api.Device.GoodsApi import *
+
 from SmartPaper.Api.Login.LoginApi import *
 # from SmartPaper.Api.Policy.PolicyApi import *
 from SmartPaper.Api.Privilege.PrivilegeApi import *
@@ -95,6 +97,8 @@ urlpatterns = urlpatterns + [
 
     url(r'^device_view.html', DeviceApi.goDeviceView),
     url(r'^goods_manage.html', DeviceApi.goGoodsView),
+    url(r'^goods_add.html', DeviceApi.goAddGoods),
+
     url(r'^order_manage.html', DeviceApi.goOrderView),
 
     url(r'^message_config.html', SystemApi.openMessageConfig),
@@ -119,7 +123,14 @@ urlpatterns = urlpatterns + [
     url(r'^version_list.html', SystemApi.goVersionList),
     url(r'^version_add.html', SystemApi.goVersionAdd),
     url(r'^api/system/$', SystemApi.CommandDispatch),
+
     url(r'^uploadversion/$',SystemApi.uploadFile),
+    url(r'^uploadgoods/$',GoodsApi.uploadGoodsData),
+    url(r'^api/goods/$', GoodsApi.CommandDispatch),
+
+    url(r'^set_goods.html', GoodsApi.goGoodsSetting),
+
+
     url(r'^upload/$',SystemApi.uploadSceenFile),
 
     url(r'^set_sceen.html', SystemApi.goSetSceen),

@@ -33,6 +33,8 @@
         <button class="layui-btn" data-type="reload" onclick="searchFliter()">搜索</button>
         <button class="layui-btn" data-type="reload" onclick="showAll()">所有设备</button>
 
+        <button class="layui-btn" data-type="reload" onclick="addDevice()" style="float: right">添加设备</button>
+
 
     </div>
     <table id="demo" lay-filter="test" style="overflow-y: scroll"></table>
@@ -52,7 +54,7 @@
 
 <script type="text/html" id="barDemo3">
     <a class="layui-btn layui-btn-xs" lay-event="position" id="position">设置商品</a>
-    <a class="layui-btn layui-btn-xs" lay-event="power" id="power">电源</a>
+{#    <a class="layui-btn layui-btn-xs" lay-event="power" id="power">电源</a>#}
     {#    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="grpmap" id="grpmap">分区</a>#}
 </script>
 
@@ -82,8 +84,8 @@
             , page: true //开启分页
             , id: 'testReload'
             , cols: [[ //表头
-                {type: 'checkbox'}
-                , {field: 'name', title: '设备名',}
+                {#{type: 'checkbox'}#}
+                 {field: 'name', title: '设备名',}
                 , {field: 'ipaddress', title: 'IP地址',}
                 , {field: 'mac', title: 'Mac地址',}
                 , {field: 'position', title: '设备位置'}
@@ -138,7 +140,7 @@
                 });
             }
             else if (layEvent === 'position') {
-                $.setDevPosition(data);
+                $.setGoods(data);
             }
             else if (layEvent === 'power') {
                 $.setDevPower(data);
@@ -190,13 +192,15 @@
             }
         });
     }
-
-    function shutdownTerminal() {
-
-    }
-
-    function restartTermianl() {
-
+    function addDevice() {
+        var newTmpLay = layer.open({
+            title: ['添加设备', 'font-size:13px;margin-top:10px;font-weight:bold;'],
+            type: 2,
+            maxmin:true,
+            scrollbar: false,
+            area:['500px', '700px'],
+            content: 'device_edit.html'
+        });
     }
 </script>
 </body>

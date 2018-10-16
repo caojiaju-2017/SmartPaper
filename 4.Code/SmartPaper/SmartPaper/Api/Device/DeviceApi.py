@@ -28,6 +28,8 @@ class DeviceApi(object):
             return DeviceApi.LightRegister(req, command)
         elif command == "LIGHT_EDIT".upper():
             return DeviceApi.LightEdit(req, command)
+        elif command == "DEVICE_ADD":
+            return DeviceApi.DeviceAdd(req, command)
         elif command == "DEVICE_EDIT":
             return DeviceApi.DeviceEdit(req, command)
         elif command == "SET_DEVICE":
@@ -111,7 +113,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -273,9 +275,9 @@ class DeviceApi(object):
         DevLists = None
         for index ,one in enumerate(havePrivOrgs):
             if DevLists:
-                DevLists = DevLists | SmartDevices.objects.filter(orgcode=one)
+                DevLists = DevLists | PaperDevices.objects.filter(orgcode=one)
             else:
-                DevLists = SmartDevices.objects.filter(orgcode=one)
+                DevLists = PaperDevices.objects.filter(orgcode=one)
 
         DevLists = DevLists.filter(~Q(state=0))
 
@@ -398,7 +400,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -414,7 +416,7 @@ class DeviceApi(object):
             if not playerList :
                 powerList = SmartPowers.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
             else:
-                powerList = powerList | SmartDevices.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
+                powerList = powerList | PaperDevices.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
 
         # 当前单位下检查名字唯一性
         for onePlay in powerList:
@@ -428,7 +430,7 @@ class DeviceApi(object):
             #     return HttpResponse(loginResut)
 
         # 全网机构内检查ip和mac的合法性
-        orgRootTemp = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
+        orgRootTemp = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
         currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
         # 检查该MAC地址是否已经被注册
         currentAllOrgsTemps.append(orgRootTemp)
@@ -520,7 +522,8 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        
+        ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -545,7 +548,7 @@ class DeviceApi(object):
             if not playerList :
                 powerList = SmartPowers.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
             else:
-                powerList = powerList | SmartDevices.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
+                powerList = powerList | PaperDevices.objects.filter(orgcode=oneOrg,state=1).order_by("-id")
 
         # 当前单位下检查名字唯一性
         for onePlay in powerList:
@@ -559,7 +562,7 @@ class DeviceApi(object):
             #     return HttpResponse(loginResut)
 
         # 全网机构内检查ip和mac的合法性
-        orgRootTemp = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
+        orgRootTemp = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
         currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
         # 检查该MAC地址是否已经被注册
         currentAllOrgsTemps.append(orgRootTemp)
@@ -659,7 +662,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
         #
         # # 检查当前账户是否具有权限
-        # ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         # if not ownerOrgHandel:
         #     LoggerHandle.writeLogDevelope("归属单位数据异常", request)
         #     loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -938,7 +941,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -958,9 +961,9 @@ class DeviceApi(object):
         playerList = None
         for oneOrg in currentAllOrgs:
             if not playerList :
-                playerList = SmartDevices.objects.filter(orgcode=oneOrg,typecode = 2001,state=1).order_by("-id")
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg,typecode = 2001,state=1).order_by("-id")
             else:
-                playerList = playerList | SmartDevices.objects.filter(orgcode=oneOrg,typecode = 2001,state=1).order_by("-id")
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg,typecode = 2001,state=1).order_by("-id")
 
         # 当前单位下检查名字唯一性
         for onePlay in playerList:
@@ -971,16 +974,16 @@ class DeviceApi(object):
 
 
         # 全网机构内检查ip和mac的合法性
-        orgRootTemp = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
+        orgRootTemp = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
         currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
         # 检查该MAC地址是否已经被注册
         currentAllOrgsTemps.append(orgRootTemp)
         playerListTemps = None
         for oneOrg in currentAllOrgsTemps:
             if not playerListTemps :
-                playerListTemps = SmartDevices.objects.filter(orgcode=oneOrg,type = 2001,state=1).order_by("-id")
+                playerListTemps = PaperDevices.objects.filter(orgcode=oneOrg,type = 2001,state=1).order_by("-id")
             else:
-                playerListTemps = playerListTemps | SmartDevices.objects.filter(orgcode=oneOrg,type = 2001,state=1).order_by("-id")
+                playerListTemps = playerListTemps | PaperDevices.objects.filter(orgcode=oneOrg,type = 2001,state=1).order_by("-id")
 
         for onePlay in playerListTemps:
             if onePlay.mac == allParams["mac"]:
@@ -993,7 +996,7 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 如果已经注册--- 直接返回成功
-        regPlayer = SmartDevices()
+        regPlayer = PaperDevices()
         regPlayer.code = UtilHelper.UtilHelper.newUuid()
         regPlayer.orgcode = ownerOrgHandel
         # regPlayer.orgcode_id = allParams["orgsign"]
@@ -1071,7 +1074,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -1084,7 +1087,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查led设备是否存在
-        ledDevice = SmartDevices.objects.filter(typecode=2001,code=allParams["ledcode"],state=1).first()
+        ledDevice = PaperDevices.objects.filter(typecode=2001,code=allParams["ledcode"],state=1).first()
         if not ledDevice:
             LoggerHandle.writeLogDevelope("LED设备数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "LED设备数据异常", "ErrorId": 20006, "Result": {}})
@@ -1099,9 +1102,9 @@ class DeviceApi(object):
         playerList = None
         for oneOrg in currentAllOrgs:
             if not playerList:
-                playerList = SmartDevices.objects.filter(orgcode=oneOrg, typecode=2001, state=1).order_by("-id")
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg, typecode=2001, state=1).order_by("-id")
             else:
-                playerList = playerList | SmartDevices.objects.filter(orgcode=oneOrg, typecode=2001, state=1).order_by(
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg, typecode=2001, state=1).order_by(
                     "-id")
 
         # 当前单位下检查名字唯一性
@@ -1112,16 +1115,16 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 全网机构内检查ip和mac的合法性
-        orgRootTemp = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
+        orgRootTemp = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
         currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
         # 检查该MAC地址是否已经被注册
         currentAllOrgsTemps.append(orgRootTemp)
         playerListTemps = None
         for oneOrg in currentAllOrgsTemps:
             if not playerListTemps:
-                playerListTemps = SmartDevices.objects.filter(orgcode=oneOrg, type=0, state=1).order_by("-id")
+                playerListTemps = PaperDevices.objects.filter(orgcode=oneOrg, type=0, state=1).order_by("-id")
             else:
-                playerListTemps = playerListTemps | SmartDevices.objects.filter(orgcode=oneOrg, type=0,
+                playerListTemps = playerListTemps | PaperDevices.objects.filter(orgcode=oneOrg, type=0,
                                                                                 state=1).order_by("-id")
 
         for onePlay in playerListTemps:
@@ -1135,7 +1138,7 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 如果已经注册--- 直接返回成功
-        # regPlayer = SmartDevices()
+        # regPlayer = PaperDevices()
         # ledDevice.code = UtilHelper.UtilHelper.newUuid()
         ledDevice.orgcode = ownerOrgHandel
         # ledDevice.orgcode_id = allParams["orgsign"]
@@ -1215,7 +1218,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -1228,9 +1231,9 @@ class DeviceApi(object):
         playerList = None
         for oneOrg in currentAllOrgs:
             if not playerList :
-                playerList = SmartDevices.objects.filter(orgcode=oneOrg,typecode = 2002 ,state=1).order_by("-id")
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg,typecode = 2002 ,state=1).order_by("-id")
             else:
-                playerList = playerList | SmartDevices.objects.filter(orgcode=oneOrg,typecode = 2002 ,state=1).order_by("-id")
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg,typecode = 2002 ,state=1).order_by("-id")
 
         # 当前单位下检查名字唯一性
         for onePlay in playerList:
@@ -1240,7 +1243,7 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 如果已经注册--- 直接返回成功
-        regPlayer = SmartDevices()
+        regPlayer = PaperDevices()
         regPlayer.code = UtilHelper.UtilHelper.newUuid()
         regPlayer.orgcode = ownerOrgHandel
         # regPlayer.orgcode_id = allParams["orgsign"]
@@ -1320,14 +1323,14 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查灯光是否存在
-        lightObject = SmartDevices.objects.filter(code=allParams["lightcode"],state=1).first()
+        lightObject = PaperDevices.objects.filter(code=allParams["lightcode"],state=1).first()
         if not lightObject:
             loginResut = json.dumps({"ErrorInfo": "灯光数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
@@ -1359,9 +1362,9 @@ class DeviceApi(object):
         playerList = None
         for oneOrg in currentAllOrgs:
             if not playerList:
-                playerList = SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
             else:
-                playerList = playerList | SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by(
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by(
                     "-id")
 
         # 当前单位下检查名字唯一性
@@ -1372,7 +1375,7 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 如果已经注册--- 直接返回成功
-        # regPlayer = SmartDevices()
+        # regPlayer = PaperDevices()
         # lightObject.code = UtilHelper.UtilHelper.newUuid()
         lightObject.orgcode = ownerOrgHandel
         lightObject.name = allParams["name"]
@@ -1393,7 +1396,7 @@ class DeviceApi(object):
         return HttpResponse(loginResut)
 
     @staticmethod
-    def DeviceEdit(request,cmd):
+    def DeviceAdd(request,cmd):
         '''
 
          :param request:
@@ -1420,45 +1423,30 @@ class DeviceApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
-
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
-        if not userOrg:
-            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
-            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+        # 检查logioncode是否为权力机构
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle or not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户或单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户或单位数据异常", "ErrorId": 20008, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgcode"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgcode"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查灯光是否存在
-        deviceObject = SmartDevices.objects.filter(code=allParams["code"]).first()
-
-        if not deviceObject or deviceObject.state == 0:
-            loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
-
-        if deviceObject.typecode == 2001 or deviceObject.typecode == 2002:
-            loginResut = json.dumps({"ErrorInfo": "该接口不支持灯光、LED编辑", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 检查灯光是否存在
+        # deviceObject = PaperDevices.objects.filter(code=allParams["code"]).first()
+        #
+        # if not deviceObject or deviceObject.state == 0:
+        #     loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
+        #
+        # if deviceObject.typecode == 2001 or deviceObject.typecode == 2002:
+        #     loginResut = json.dumps({"ErrorInfo": "该接口不支持灯光、LED编辑", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         currentAllOrgs = OrgTree.getOrgTreeObjects(ownerOrgHandel)
         # 检查该MAC地址是否已经被注册
@@ -1467,14 +1455,198 @@ class DeviceApi(object):
         playerList = None
         for oneOrg in currentAllOrgs:
             if not playerList:
-                playerList = SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
             else:
-                playerList = playerList | SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by(
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by(
                     "-id")
 
         # playerList = playerList.filter(~Q(typecode=2001))
         # playerList = playerList.filter(~Q(typecode=2002))
-        playerList = playerList.filter(typecode__lte=2000)
+        # playerList = playerList.filter(typecode__lte=2000)
+
+
+        # 当前单位下检查名字唯一性
+        for onePlay in playerList:
+            if onePlay.name == allParams["name"] and onePlay.state != 0:
+                LoggerHandle.writeLogDevelope("设备名字重复", request)
+                loginResut = json.dumps({"ErrorInfo": "设备名字重复", "ErrorId": 20006, "Result": {}})
+                return HttpResponse(loginResut)
+
+        # 全网机构内检查ip和mac的合法性
+        orgRootTemp = PaperOrgs.objects.filter(code=acntHandle.orgcode.code).first()
+        currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
+
+        # 检查该MAC地址是否已经被注册
+        currentAllOrgsTemps.append(orgRootTemp)
+        playerListTemps = None
+        for oneOrg in currentAllOrgsTemps:
+            if not playerListTemps:
+                playerListTemps = PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+            else:
+                playerListTemps = playerListTemps | PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+        # playerListTemps = playerListTemps.filter(~Q(typecode=2001))
+        # playerListTemps = playerListTemps.filter(~Q(typecode=2002))
+
+        # playerListTemps = playerListTemps.filter(typecode__lte=2000)
+
+        for onePlay in playerListTemps:
+            if onePlay.mac == allParams["mac"]:
+                LoggerHandle.writeLogDevelope("MAC地址已被注册", request)
+                loginResut = json.dumps({"ErrorInfo": "MAC地址已被注册", "ErrorId": 20006, "Result": {}})
+                return HttpResponse(loginResut)
+            if onePlay.ipaddress == allParams["ipaddress"]:
+                LoggerHandle.writeLogDevelope("IP地址冲突", request)
+                loginResut = json.dumps({"ErrorInfo": "IP地址冲突", "ErrorId": 20006, "Result": {}})
+                return HttpResponse(loginResut)
+
+        # # 如果修改了单位，则需要判断是否存在绑定关系
+        # if ownerOrgHandel.code != deviceObject.orgcode_id:
+        #     mapHandle = SmartGroupDeviceMap.objects.filter(devicecode=deviceObject).first()
+        #     if mapHandle:
+        #         loginResut = json.dumps({"ErrorInfo": "当前设备绑定的分区所归属单位同新单位不一致，请先解除原有分区", "ErrorId": 20006, "Result": {}})
+        #         return HttpResponse(loginResut)
+        #
+        #     powerMap = SmartPowerPortMap.objects.filter(devcode=deviceObject).first()
+        #     if powerMap:
+        #         loginResut = json.dumps(
+        #             {"ErrorInfo": "当前设备绑定的电源所归属单位同新单位不一致，请先解除原有电源", "ErrorId": 20006, "Result": {}})
+        #         return HttpResponse(loginResut)
+        #
+        #     # 更换单位，清空设备坐标信息
+        #     deviceObject.leftx = 0
+        #     deviceObject.lefty=0
+        #     deviceObject.width = 0
+        #     deviceObject.height = 0
+        #     pass
+
+        # postParm[0] = "name=" + name;
+        # postParm[1] = "ipaddress=" + ipaddress;
+        # postParm[2] = "mac=" + macaddress;
+        # postParm[3] = "state=" + state_list;
+        # postParm[4] = "devtype=" + dev_type;
+        # postParm[5] = "orgcode=" + ownerOrg;
+        # postParm[6] = "managename=" + managename;
+        # postParm[7] = "managephone=" + managephone;
+        # postParm[8] = "longitude=" + longitude;
+        # postParm[9] = "latitude=" + latitude;
+        #
+        # 如果已经注册--- 直接返回成功
+        deviceObject = PaperDevices()
+        deviceObject.code = UtilHelper.UtilHelper.newUuid()
+        deviceObject.name = allParams["name"]
+        deviceObject.ipaddress = allParams["ipaddress"]
+        deviceObject.mac = allParams["mac"]
+        deviceObject.state = int(allParams["state"])
+        deviceObject.devtype = allParams["devtype"]
+        deviceObject.orgcode = ownerOrgHandel
+
+        deviceObject.managename = allParams["managename"]
+        deviceObject.managephone = allParams["managephone"]
+
+        deviceObject.longitude = allParams["longitude"]
+        deviceObject.latitude = allParams["latitude"]
+
+
+        deviceObject.lastlogintime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+        # deviceObject.port = allParams["port"]
+
+
+        try:
+            deviceObject.save()
+        except Exception, ex:
+            LoggerHandle.writeLogDevelope("修改设备失败", request)
+            loginResut = json.dumps({"ErrorInfo": "修改设备失败", "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 返回登录结果
+        loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
+        return HttpResponse(loginResut)
+
+    @staticmethod
+    def DeviceEdit(request,cmd):
+        '''
+
+         :param request:
+         :return:
+         '''
+        LoggerHandle.writeLogDevelope("收到设备修改指令%s" % cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items() + postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # # 验证参数完整性
+        # paramCompleteness, info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+        #
+        # if paramCompleteness:
+        #     LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+        #     return HttpResponse(loginResut)
+        #
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+        #
+        # # 检查当前账户是否具有权限
+        # resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        # if not resultPrivilegeSign:
+        #     LoggerHandle.writeLogDevelope("权限受限", request)
+        #     loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
+        #
+        # 检查当前账户是否具有权限
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgcode"]).first()
+        if not ownerOrgHandel:
+            LoggerHandle.writeLogDevelope("归属单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+
+        # 检查灯光是否存在
+        deviceObject = PaperDevices.objects.filter(code=allParams["code"]).first()
+
+        if not deviceObject or deviceObject.state == 0:
+            loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+        #
+        # if deviceObject.typecode == 2001 or deviceObject.typecode == 2002:
+        #     loginResut = json.dumps({"ErrorInfo": "该接口不支持灯光、LED编辑", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
+
+        currentAllOrgs = OrgTree.getOrgTreeObjects(acntHandle.orgcode)
+        # 检查该MAC地址是否已经被注册
+        currentAllOrgs.append(acntHandle.orgcode)
+
+        playerList = None
+        for oneOrg in currentAllOrgs:
+            if not playerList:
+                playerList = PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+            else:
+                playerList = playerList | PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by(
+                    "-id")
+
+        # playerList = playerList.filter(~Q(typecode=2001))
+        # playerList = playerList.filter(~Q(typecode=2002))
+        # playerList = playerList.filter(typecode__lte=2000)
 
 
         # 当前单位下检查名字唯一性
@@ -1485,20 +1657,21 @@ class DeviceApi(object):
                 return HttpResponse(loginResut)
 
         # 全网机构内检查ip和mac的合法性
-        orgRootTemp = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
+        # orgRootTemp = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
+        orgRootTemp = OrgTree.getRootOrg(acntHandle.orgcode)
         currentAllOrgsTemps = OrgTree.getOrgTreeObjects(orgRootTemp)
         # 检查该MAC地址是否已经被注册
         currentAllOrgsTemps.append(orgRootTemp)
         playerListTemps = None
         for oneOrg in currentAllOrgsTemps:
             if not playerListTemps:
-                playerListTemps = SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+                playerListTemps = PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
             else:
-                playerListTemps = playerListTemps | SmartDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
+                playerListTemps = playerListTemps | PaperDevices.objects.filter(orgcode=oneOrg, state=1).order_by("-id")
         # playerListTemps = playerListTemps.filter(~Q(typecode=2001))
         # playerListTemps = playerListTemps.filter(~Q(typecode=2002))
 
-        playerListTemps = playerListTemps.filter(typecode__lte=2000)
+        # playerListTemps = playerListTemps.filter(typecode__lte=2000)
 
         for onePlay in playerListTemps:
             if onePlay.mac == allParams["mac"] and onePlay.code != deviceObject.code:
@@ -1510,34 +1683,50 @@ class DeviceApi(object):
                 loginResut = json.dumps({"ErrorInfo": "IP地址冲突", "ErrorId": 20006, "Result": {}})
                 return HttpResponse(loginResut)
 
-        # 如果修改了单位，则需要判断是否存在绑定关系
-        if ownerOrgHandel.code != deviceObject.orgcode_id:
-            mapHandle = SmartGroupDeviceMap.objects.filter(devicecode=deviceObject).first()
-            if mapHandle:
-                loginResut = json.dumps({"ErrorInfo": "当前设备绑定的分区所归属单位同新单位不一致，请先解除原有分区", "ErrorId": 20006, "Result": {}})
-                return HttpResponse(loginResut)
+        # # 如果修改了单位，则需要判断是否存在绑定关系
+        # if ownerOrgHandel.code != deviceObject.orgcode_id:
+        #     mapHandle = SmartGroupDeviceMap.objects.filter(devicecode=deviceObject).first()
+        #     if mapHandle:
+        #         loginResut = json.dumps({"ErrorInfo": "当前设备绑定的分区所归属单位同新单位不一致，请先解除原有分区", "ErrorId": 20006, "Result": {}})
+        #         return HttpResponse(loginResut)
+        #
+        #     powerMap = SmartPowerPortMap.objects.filter(devcode=deviceObject).first()
+        #     if powerMap:
+        #         loginResut = json.dumps(
+        #             {"ErrorInfo": "当前设备绑定的电源所归属单位同新单位不一致，请先解除原有电源", "ErrorId": 20006, "Result": {}})
+        #         return HttpResponse(loginResut)
+        #
+        #     # 更换单位，清空设备坐标信息
+        #     deviceObject.leftx = 0
+        #     deviceObject.lefty=0
+        #     deviceObject.width = 0
+        #     deviceObject.height = 0
+        #     pass
 
-            powerMap = SmartPowerPortMap.objects.filter(devcode=deviceObject).first()
-            if powerMap:
-                loginResut = json.dumps(
-                    {"ErrorInfo": "当前设备绑定的电源所归属单位同新单位不一致，请先解除原有电源", "ErrorId": 20006, "Result": {}})
-                return HttpResponse(loginResut)
-
-            # 更换单位，清空设备坐标信息
-            deviceObject.leftx = 0
-            deviceObject.lefty=0
-            deviceObject.width = 0
-            deviceObject.height = 0
-            pass
         # 如果已经注册--- 直接返回成功
+        # deviceObject.name = allParams["name"]
+        # deviceObject.lastlogintime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        # deviceObject.ipaddress = allParams["ipaddress"]
+        # deviceObject.mac = allParams["mac"]
+        # deviceObject.port = allParams["port"]
+        # deviceObject.orgcode = ownerOrgHandel
+        # deviceObject.state = int(allParams["state"])
+        # deviceObject.typecode = int(allParams["devtype"])
         deviceObject.name = allParams["name"]
-        deviceObject.lastlogintime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         deviceObject.ipaddress = allParams["ipaddress"]
         deviceObject.mac = allParams["mac"]
-        deviceObject.port = allParams["port"]
-        deviceObject.orgcode = ownerOrgHandel
         deviceObject.state = int(allParams["state"])
-        deviceObject.typecode = int(allParams["devtype"])
+        deviceObject.devtype = allParams["devtype"]
+        deviceObject.orgcode = ownerOrgHandel
+
+        deviceObject.managename = allParams["managename"]
+        deviceObject.managephone = allParams["managephone"]
+
+        deviceObject.longitude = allParams["longitude"]
+        deviceObject.latitude = allParams["latitude"]
+
+
+        deviceObject.lastlogintime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         try:
             deviceObject.save()
@@ -1577,30 +1766,31 @@ class DeviceApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
-        if not userOrg:
+        # userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("用户单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 检查当前账户是否具有权限
+        # resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        # if not resultPrivilegeSign:
+        #     LoggerHandle.writeLogDevelope("权限受限", request)
+        #     loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
+        #     return HttpResponse(loginResut)
 
         # 检查灯光是否存在
-        deviceObject = SmartDevices.objects.filter(code=allParams["code"], state=1).first()
+        deviceObject = PaperDevices.objects.filter(code=allParams["code"], state=1).first()
         if not deviceObject:
             loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
@@ -1620,6 +1810,31 @@ class DeviceApi(object):
         loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
         return HttpResponse(loginResut)
 
+    @staticmethod
+    def getDevStateInfo(devHandle):
+        if not devHandle or not isinstance(devHandle,PaperDevices):
+            return None,None
+
+        if devHandle.state == 1:
+            return "正常"
+        elif devHandle.state == 21:
+            return "缺纸"
+        elif devHandle.state == 22:
+            return "纸将尽"
+        elif devHandle.state == 23:
+            return "堵纸"
+        elif devHandle.state == 24:
+            return "卡纸"
+        elif devHandle.state == 5:
+            return "换纸成功"
+        elif devHandle.state == 6:
+            return "开机"
+        elif devHandle.state == 7:
+            return "关机"
+        elif devHandle.state == 8:
+            return "售卖机故障"
+        elif devHandle.state == 20:
+            return "其他故障"
     @staticmethod
     def DeviceList(request,cmd):
         '''
@@ -1737,98 +1952,90 @@ class DeviceApi(object):
             oneOrgDict['name'] = oneData.name
             oneOrgDict['ipaddress'] = oneData.ipaddress
             oneOrgDict['mac'] = oneData.mac
-            # oneOrgDict['online'] = oneData.online
-            # oneOrgDict['terminalsign'] = oneData.terminalsign
             oneOrgDict['orgcode'] = oneData.orgcode_id
             oneOrgDict['orgname'] = oneData.orgcode.name
-            oneOrgDict['typecode'] = oneData.typecode
+
+            oneOrgDict['devtype'] = oneData.devtype
+            oneOrgDict['devtypename'] = "智能取纸售卖一体机"
+
             oneOrgDict['devstate'] = oneData.state
-            oneOrgDict['port'] = oneData.port
-            oneOrgDict["leftx"] = oneData.leftx
-            oneOrgDict["lefty"] = oneData.lefty
+            oneOrgDict['managename'] = oneData.managename
+            oneOrgDict["managephone"] = oneData.managephone
+            oneOrgDict["longitude"] = oneData.longitude
+            oneOrgDict["latitude"] = oneData.latitude
 
-            pathDiv = os.path.join(STATIC_ROOT,"Service")
-            backgroundImageFile = os.path.join(pathDiv, oneData.orgcode_id + ".png")
+            oneOrgDict["resource"] = 0
 
-            if os.path.isfile(backgroundImageFile):
-                oneOrgDict["haveimg"] = 1
-            else:
-                oneOrgDict["haveimg"] = 0
+            customTemplate = "<div id='%s_1' onmouseover='$.viewResource(\"%s\",\"%s\",\"%s_1\")' onmouseout='$.closeResourceTips()' style='width: 30px;height: 30px;text-align:center'>" \
+                                      '<img src="/static/images/custom.png" width="30px" height="30px" /> ' + "</div>"
 
-            if oneData.state == 1:
-                oneOrgDict['statename'] = "正常"
-            elif oneData.state == 2:
-                oneOrgDict['statename'] = "故障"
-
-            if oneData.typecode == 1001:
-                oneOrgDict['typename'] = "互动桌面"
-            elif oneData.typecode == 1002:
-                oneOrgDict['typename'] = "二维码屏"
-            elif oneData.typecode == 1003:
-                oneOrgDict['typename'] = "3D导览"
-            elif oneData.typecode == 1004:
-                oneOrgDict['typename'] = "全息投影"
-            elif oneData.typecode == 1005:
-                oneOrgDict['typename'] = "分接屏"
-            elif oneData.typecode == 2001:
-                oneOrgDict['typename'] = "LED"
-            elif oneData.typecode == 2002:
-                oneOrgDict['typename'] = "白炽灯"
-            elif oneData.typecode == 2003:
-                oneOrgDict['typename'] = "荧光灯"
-
-            # 智能终端才有
-            if typeCode < 2000:
-                # 终端状态
-                playerState = SmartDevicestat.objects.filter(terminalcode = oneData).order_by("-recordtime").first()
-                if not playerState:
-                    oneOrgDict['cpu'] = "0"
-                    oneOrgDict['disk'] = "0"
-                    oneOrgDict['memory'] = "0"
-                    oneOrgDict["resource"] = "<div style='width: 5px;height: 10px;background: #cf3a02'></div>" + "<div style='width: 5px;height: 10px;background: green'></div>" + "<div style='width: 5px;height: 10px;background: #1E9FFF'></div>"
-                    oneOrgDict['lastupdatetime'] = oneData.lastlogintime
-                else:
-                    oneOrgDict['cpu'] = playerState.cpu
-                    oneOrgDict['disk'] = playerState.disk
-                    oneOrgDict['memory'] = playerState.memory
-                    oneOrgDict["resource"] = "<div id='%s_0' onmouseover='$.viewResource(0,%d,\"%s_0\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: #cf3a02 ;'></div>"%(oneData.code,playerState.cpu,oneData.code,playerState.cpu) \
-                                             + "<div id='%s_1' onmouseover='$.viewResource(1,%d,\"%s_1\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: green'></div>"%(oneData.code,playerState.disk,oneData.code,playerState.disk ) \
-                                             + "<div id='%s_2' onmouseover='$.viewResource(2,%d,\"%s_2\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: #1E9FFF'></div>"%(oneData.code,playerState.memory,oneData.code,playerState.memory)
-                    oneOrgDict['lastupdatetime'] = playerState.recordtime
+            customTemplate = customTemplate % (oneData.code,oneData.managename, oneData.managephone,oneData.code)
 
 
-            grpMap = SmartGroupDeviceMap.objects.filter(devicecode=oneData).first()
+            locationTemplate = "<div id='%s_2' onclick='$.openMap()' onmouseover='$.viewLocation(\"%s\",\"%s\",\"%s_2\")' onmouseout='$.closeResourceTips()' style='width: 20px;height: 30px;text-align:center;cursor:pointer'>" \
+                                      '<img src="/static/images/location.png" width="20px" height="30px" /> ' + "</div>"
 
-            if not grpMap:
-                oneOrgDict["groupname"] = "未绑定"
-                oneOrgDict["groupcode"] = None
-            else:
-                oneOrgDict["groupname"] = grpMap.groupcode.name
-                oneOrgDict["groupcode"] = grpMap.groupcode.code
+            locationTemplate = locationTemplate.decode("utf-8")
+            locationTemplate = locationTemplate % (oneData.code,oneData.longitude, oneData.latitude,oneData.code)
+            oneOrgDict["position"] = locationTemplate
 
-            powerMap = SmartPowerPortMap.objects.filter(devcode=oneData).first()
-            if not powerMap:
-                oneOrgDict["powername"] = "未绑定"
-                oneOrgDict["powercode"] = None
-                oneOrgDict["powerport"] = "未设置"
-                oneOrgDict["state"] = "未设置"
-                oneOrgDict["state"] = "未设置"
 
-                oneOrgDict["statename"] =  '<i class="layui-icon" style="font-size: 24px">&#xe64d;</i>   '
-            else:
-                oneOrgDict["powername"] = u"%s(%d号端子)"% (powerMap.powercode.name , powerMap.port)
-                oneOrgDict["powercode"] = powerMap.powercode.code
-                oneOrgDict["powerport"] = powerMap.port
-                oneOrgDict["state"] = "未设置"
+            oneOrgDict["mangeinfo"] =customTemplate
+            oneOrgDict['statename'] = DeviceApi.getDevStateInfo(oneData)
 
-                portStat = powerMap.powercode.portstates[powerMap.port - 1]
-                if int(portStat) == 0:
-                    oneOrgDict["statename"] = "<div style='width: 20px;height: 20px;background: #6c6c6c;border-radius: 10px'></div>"
-                else:
-                    oneOrgDict[
-                        "statename"] = "<div style='width: 20px;height: 20px;background: #009100;border-radius: 10px'></div>"
-                # 检查端子是否接通
-                # oneOrgDict["statename"] = "<div style='width: 20px;height: 20px;background: #009100;border-radius: 10px'></div>"
+            #
+            # # 智能终端才有
+            # if typeCode < 2000:
+            #     # 终端状态
+            #     playerState = PaperDevicestat.objects.filter(terminalcode = oneData).order_by("-recordtime").first()
+            #     if not playerState:
+            #         oneOrgDict['cpu'] = "0"
+            #         oneOrgDict['disk'] = "0"
+            #         oneOrgDict['memory'] = "0"
+            #         oneOrgDict["resource"] = "<div style='width: 5px;height: 10px;background: #cf3a02'></div>" + "<div style='width: 5px;height: 10px;background: green'></div>" + "<div style='width: 5px;height: 10px;background: #1E9FFF'></div>"
+            #         oneOrgDict['lastupdatetime'] = oneData.lastlogintime
+            #     else:
+            #         oneOrgDict['cpu'] = playerState.cpu
+            #         oneOrgDict['disk'] = playerState.disk
+            #         oneOrgDict['memory'] = playerState.memory
+            #         oneOrgDict["resource"] = "<div id='%s_0' onmouseover='$.viewResource(0,%d,\"%s_0\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: #cf3a02 ;'></div>"%(oneData.code,playerState.cpu,oneData.code,playerState.cpu) \
+            #                                  + "<div id='%s_1' onmouseover='$.viewResource(1,%d,\"%s_1\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: green'></div>"%(oneData.code,playerState.disk,oneData.code,playerState.disk ) \
+            #                                  + "<div id='%s_2' onmouseover='$.viewResource(2,%d,\"%s_2\")' onmouseout='$.closeResourceTips()' style='width: %dpx;height: 10px;background: #1E9FFF'></div>"%(oneData.code,playerState.memory,oneData.code,playerState.memory)
+            #         oneOrgDict['lastupdatetime'] = playerState.recordtime
+            #
+            #
+            # grpMap = SmartGroupDeviceMap.objects.filter(devicecode=oneData).first()
+            #
+            # if not grpMap:
+            #     oneOrgDict["groupname"] = "未绑定"
+            #     oneOrgDict["groupcode"] = None
+            # else:
+            #     oneOrgDict["groupname"] = grpMap.groupcode.name
+            #     oneOrgDict["groupcode"] = grpMap.groupcode.code
+            #
+            # powerMap = SmartPowerPortMap.objects.filter(devcode=oneData).first()
+            # if not powerMap:
+            #     oneOrgDict["powername"] = "未绑定"
+            #     oneOrgDict["powercode"] = None
+            #     oneOrgDict["powerport"] = "未设置"
+            #     oneOrgDict["state"] = "未设置"
+            #     oneOrgDict["state"] = "未设置"
+            #
+            #     oneOrgDict["statename"] =  '<i class="layui-icon" style="font-size: 24px">&#xe64d;</i>   '
+            # else:
+            #     oneOrgDict["powername"] = u"%s(%d号端子)"% (powerMap.powercode.name , powerMap.port)
+            #     oneOrgDict["powercode"] = powerMap.powercode.code
+            #     oneOrgDict["powerport"] = powerMap.port
+            #     oneOrgDict["state"] = "未设置"
+            #
+            #     portStat = powerMap.powercode.portstates[powerMap.port - 1]
+            #     if int(portStat) == 0:
+            #         oneOrgDict["statename"] = "<div style='width: 20px;height: 20px;background: #6c6c6c;border-radius: 10px'></div>"
+            #     else:
+            #         oneOrgDict[
+            #             "statename"] = "<div style='width: 20px;height: 20px;background: #009100;border-radius: 10px'></div>"
+            #     # 检查端子是否接通
+            #     # oneOrgDict["statename"] = "<div style='width: 20px;height: 20px;background: #009100;border-radius: 10px'></div>"
 
             rtnList.append(oneOrgDict)
 
@@ -1870,39 +2077,39 @@ class DeviceApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
+        # # 参数验签
+        # verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
+        # if verifyResult:
+        #     LoggerHandle.writeLogDevelope("参数验签成功", request)
+        # else:
+        #     LoggerHandle.writeLogDevelope("参数验签失败", request)
+        #     loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
+        #     return HttpResponse(loginResut)
 
-
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
-        if not userOrg:
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        # userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
+        if not acntHandle or not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("用户单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
             return HttpResponse(loginResut)
 
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
+        resultPrivilegeSign = PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
         if not resultPrivilegeSign:
             LoggerHandle.writeLogDevelope("权限受限", request)
             loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
-        if not ownerOrgHandel:
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        if not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        devHandles = SmartDevices.objects.filter(code=allParams["devcode"])
+        devHandles = PaperDevices.objects.filter(code=allParams["devcode"])
         devHandle = devHandles.filter(~Q(state = 0)).first()
 
         # 检查当前账号是否具有当前权限
@@ -1916,129 +2123,52 @@ class DeviceApi(object):
         oneOrgDict['code'] = devHandle.code
         oneOrgDict['name'] = devHandle.name
 
-        if devHandle.typecode > 2000:
-            oneOrgDict['ipaddress'] = "不支持"
-            oneOrgDict['mac'] = "不支持"
-            oneOrgDict['port'] = "不支持"
-        else:
-            if not devHandle.ipaddress or devHandle.ipaddress.lower() == "null":
-                oneOrgDict['ipaddress'] = "未设置"
-            else:
-                oneOrgDict['ipaddress'] = devHandle.ipaddress
 
-            if not devHandle.port or devHandle.port == 0:
-                oneOrgDict['port'] = "未设置"
-            else:
-                oneOrgDict['port'] = devHandle.port
+        oneOrgDict['ipaddress'] = devHandle.ipaddress
+        oneOrgDict['mac'] = devHandle.mac
+        # oneOrgDict['port'] = devHandle.port
 
-            if not devHandle.mac or devHandle.mac.lower() == "null":
-                oneOrgDict['mac'] = "未设置"
-            else:
-                oneOrgDict['mac'] = devHandle.mac
 
-            oneOrgDict['mac'] = devHandle.mac
-            oneOrgDict['port'] = devHandle.port
-
-        oneOrgDict['terminalcode'] = devHandle.terminalcode
+        oneOrgDict['managename'] = devHandle.managename
+        oneOrgDict['managephone'] = devHandle.managephone
         oneOrgDict['orgcode'] = devHandle.orgcode.code
 
         if len(devHandle.orgcode.name) > 7:
             oneOrgDict['orgname'] = devHandle.orgcode.name[:7] + "..."
         else:
             oneOrgDict['orgname'] = devHandle.orgcode.name
+
         oneOrgDict['lastlogintime'] = devHandle.lastlogintime
         oneOrgDict['state'] = devHandle.state
-        oneOrgDict['leftx'] = devHandle.leftx
-        oneOrgDict['lefty'] = devHandle.lefty
+        oneOrgDict['longitude'] = devHandle.longitude
+        oneOrgDict['latitude'] = devHandle.latitude
 
-        oneOrgDict['typecode'] = devHandle.typecode
-
-        if devHandle.typecode == 1001:
-            oneOrgDict['typename'] = "互动桌面"
-        elif devHandle.typecode == 1002:
-            oneOrgDict['typename'] = "二维码屏"
-        elif devHandle.typecode == 1003:
-            oneOrgDict['typename'] = "3D导览"
-        elif devHandle.typecode == 1004:
-            oneOrgDict['typename'] = "全息投影"
-        elif devHandle.typecode == 1005:
-            oneOrgDict['typename'] = "分接屏"
-        elif devHandle.typecode == 2001:
-            oneOrgDict['typename'] = "LED"
-        elif devHandle.typecode == 2002:
-            oneOrgDict['typename'] = "白炽灯"
-        elif devHandle.typecode == 2003:
-            oneOrgDict['typename'] = "荧光灯"
-
-        oneOrgDict['externinfo1'] = devHandle.externinfo1
-        oneOrgDict['externinfo2'] = devHandle.externinfo2
-        oneOrgDict['externinfo3'] = devHandle.externinfo3
-        oneOrgDict['externinfo4'] = devHandle.externinfo4
-        oneOrgDict['externinfo5'] = devHandle.externinfo5
-        oneOrgDict['externinfo6'] = devHandle.externinfo6
-        oneOrgDict['externinfo7'] = devHandle.externinfo7
-        oneOrgDict['externinfo8'] = devHandle.externinfo8
-        oneOrgDict['externinfo9'] = devHandle.externinfo9
-        oneOrgDict['externinfo10'] = devHandle.externinfo10
-
-        # 设备归属分区
-        bindGrp = SmartGroupDeviceMap.objects.filter(devicecode=devHandle).first()
-        if not bindGrp:
-            oneOrgDict['grpcode'] = ""
-            oneOrgDict['grpname'] = "未绑定分区"
-        else:
-            oneOrgDict['grpcode'] = bindGrp.groupcode.code
-
-            if len(bindGrp.groupcode.name) > 7:
-                oneOrgDict['grpname'] =  bindGrp.groupcode.name[:7] + "..."
-            else:
-                oneOrgDict['grpname'] = bindGrp.groupcode.name
-
-        # 设备绑定电源
-        powerObj = SmartPowerPortMap.objects.filter(devcode=devHandle).first()
-        if not powerObj:
-            oneOrgDict['powercode'] = ""
-            oneOrgDict['powername'] = "未绑定"
-
-            # 端子编号
-            oneOrgDict['pport'] = ""
-            oneOrgDict['pportname'] = "未绑定"
-        else:
-            oneOrgDict['powercode'] = powerObj.powercode.code
-            if len(powerObj.powercode.name) > 7:
-                oneOrgDict['powername'] = powerObj.powercode.name[:7] + "..."
-            else:
-                oneOrgDict['powername'] = powerObj.powercode.name
-
-            oneOrgDict['ctrlportnumber'] = powerObj.powercode.ctrlportnumber
-
-            # 端子编号
-            oneOrgDict['pport'] = powerObj.port
-            oneOrgDict['pportname'] = "%d#端子"%powerObj.port
-
-        # 查询设备资源时间流图
-        devStatsQuerySet = SmartDevicestat.objects.filter(terminalcode=devHandle).order_by("-recordtime")[:10]
-
-        devStats = []
-        for oneSet in devStatsQuerySet:
-            devStats.append(oneSet)
-
-        # devStats = devStats.sort()
-        devStats = sorted(devStats, cmp=lambda x, y: -cmp(y.recordtime,x.recordtime))
-
-        statList = []
-        for one in devStats:
-            oneStat = {}
-            oneStat["cpu"] = one.cpu
-            oneStat["memory"] = one.memory
-            oneStat["disk"] = one.disk
-            oneStat["recordtime"] = one.recordtime
-            statList.append(oneStat)
-
-            if len(statList) > 10:
-                break
-
-        oneOrgDict['stats'] = statList
+        oneOrgDict['devtype'] = devHandle.devtype
+        oneOrgDict['typename'] = "智能取纸售卖一体机"
+        #
+        # # 查询设备资源时间流图
+        # devStatsQuerySet = PaperDevicestat.objects.filter(terminalcode=devHandle).order_by("-recordtime")[:10]
+        #
+        # devStats = []
+        # for oneSet in devStatsQuerySet:
+        #     devStats.append(oneSet)
+        #
+        # # devStats = devStats.sort()
+        # devStats = sorted(devStats, cmp=lambda x, y: -cmp(y.recordtime,x.recordtime))
+        #
+        # statList = []
+        # for one in devStats:
+        #     oneStat = {}
+        #     oneStat["cpu"] = one.cpu
+        #     oneStat["memory"] = one.memory
+        #     oneStat["disk"] = one.disk
+        #     oneStat["recordtime"] = one.recordtime
+        #     statList.append(oneStat)
+        #
+        #     if len(statList) > 10:
+        #         break
+        #
+        # oneOrgDict['stats'] = statList
 
         # 返回登录结果
         lResut = json.dumps(oneOrgDict)
@@ -2100,7 +2230,7 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code = allParams["orgsign"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
@@ -2108,7 +2238,7 @@ class DeviceApi(object):
 
         # 暂不做单位联合查询---理论上不会出问题
         playCode = allParams["code"]
-        playerHandle = SmartDevices.objects.filter(code = playCode).first()
+        playerHandle = PaperDevices.objects.filter(code = playCode).first()
         # 检查播放器是否存在
         if not playerHandle:
             LoggerHandle.writeLogDevelope("播放器数据不存在或已被删除", request)
@@ -2130,7 +2260,7 @@ class DeviceApi(object):
         #     commitDataList.append(CommitData(boxMapData, 1))
 
         # 删除播放器状态数据
-        stateData = SmartDevicestat.objects.filter(terminalcode = playerHandle).first()
+        stateData = PaperDevicestat.objects.filter(terminalcode = playerHandle).first()
         if stateData:
             commitDataList.append(CommitData(stateData, 1))
 
@@ -2208,14 +2338,14 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        devHandle = SmartDevices.objects.filter(code=allParams["devcode"], state=1).first()
+        devHandle = PaperDevices.objects.filter(code=allParams["devcode"], state=1).first()
 
         # 检查当前账号是否具有当前权限
         if not devHandle:
@@ -2299,14 +2429,14 @@ class DeviceApi(object):
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        ownerOrgHandel = SmartOrganization.objects.filter(code=allParams["orgsign"]).first()
+        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
         if not ownerOrgHandel:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查logioncode是否为权力机构
-        devHandle = SmartDevices.objects.filter(code=allParams["devcode"], state=1).first()
+        devHandle = PaperDevices.objects.filter(code=allParams["devcode"], state=1).first()
 
         # 检查当前账号是否具有当前权限
         if not devHandle:
@@ -2477,6 +2607,13 @@ class DeviceApi(object):
         LoggerHandle.writeLogDevelope("商品管理", request)
 
         return render(request, os.path.join(STATIC_TMP,'OrgHome/Device/goods_manage.html'), dict)
+
+    @staticmethod
+    def goAddGoods(request):
+        dict = {}
+        LoggerHandle.writeLogDevelope("添加商品", request)
+
+        return render(request, os.path.join(STATIC_TMP,'OrgHome/Device/goods_add.html'), dict)
 
     @staticmethod
     def goOrderView(request):

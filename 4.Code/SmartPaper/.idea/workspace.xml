@@ -4,12 +4,18 @@
     <list default="true" id="14ec04a0-b5ca-48c8-b801-102c45203217" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/group_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/group_bind.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/static/OrgHome/group_list.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/device_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/device_edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartPaperServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartPaperServer/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,95 +29,161 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="15" />
-          <entry key="js" value="14" />
-          <entry key="py" value="41" />
+          <entry key="html" value="26" />
+          <entry key="jpg" value="7" />
+          <entry key="js" value="23" />
+          <entry key="png" value="1" />
+          <entry key="py" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="15" />
-          <entry key="JavaScript" value="14" />
-          <entry key="Python" value="41" />
+          <entry key="HTML" value="26" />
+          <entry key="Image" value="8" />
+          <entry key="JavaScript" value="23" />
+          <entry key="Python" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="150" />
-          <entry key="js" value="95" />
-          <entry key="py" value="1277" />
+          <entry key="html" value="747" />
+          <entry key="js" value="435" />
+          <entry key="py" value="2735" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="150" />
-          <entry key="JavaScript" value="95" />
-          <entry key="Python" value="1277" />
+          <entry key="HTML" value="747" />
+          <entry key="JavaScript" value="435" />
+          <entry key="Python" value="2735" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="base_device.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="20" column="21" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeviceApi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="1716" column="28" lean-forward="true" selection-start-line="1716" selection-start-column="28" selection-end-line="1716" selection-end-column="28" />
-              <folding>
-                <element signature="e#46#67#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="goods_manage.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="44" column="73" lean-forward="true" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="order_manage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.7568069">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="574">
+                  <caret line="142" column="21" selection-start-line="142" selection-start-column="18" selection-end-line="142" selection-end-column="26" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="436">
+                  <caret line="2617" selection-start-line="2617" selection-end-line="2622" selection-end-column="97" />
+                  <folding>
+                    <element signature="e#46#67#0" expanded="true" />
+                    <element signature="e#73037#76123#0" />
+                    <element signature="e#76937#86581#0" />
+                    <element signature="e#86642#91522#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/device_list.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="348">
+                  <caret line="113" column="29" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="403">
+                  <caret line="130" column="32" selection-start-line="130" selection-start-column="32" selection-end-line="130" selection-end-column="32" />
+                  <folding>
+                    <element signature="e#692#724#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/GoodsApi.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="460">
+                  <caret line="430" column="17" selection-start-line="430" selection-start-column="17" selection-end-line="430" selection-end-column="17" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/set_goods.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="364">
+                  <caret line="84" column="89" selection-start-line="84" selection-start-column="89" selection-end-line="84" selection-end-column="89" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <splitter split-orientation="vertical" split-proportion="0.43042073">
+          <split-first>
+            <leaf>
+              <file pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/device_edit.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="95">
+                      <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-first>
+          <split-second>
+            <leaf>
+              <file pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/SmartPaper/models.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="315">
+                      <caret line="111" column="11" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="11" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-second>
+        </splitter>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PaperOrg</find>
-      <find>1e2c</find>
-      <find>workno</find>
-      <find>QUERY_ORG</find>
-      <find>detail</find>
-      <find>CommitData</find>
-      <find>account_list.html</find>
-      <find>PaperUserRole</find>
-      <find>VerifyHelper</find>
-      <find>saveInfo</find>
       <find>ACCOUNT_ADD</find>
       <find>conphone</find>
       <find>account_type_list</find>
@@ -126,7 +198,29 @@
       <find>OpertType</find>
       <find>VERSION_LIST</find>
       <find>PrivilegeHelper</find>
+      <find>device_edit</find>
+      <find>DEVICE_EDIT</find>
+      <find>SmartDevices</find>
+      <find>fillElement</find>
+      <find>DEVICE_INFO</find>
+      <find>DeviceApi</find>
+      <find>itemTemplate</find>
+      <find>initTestData</find>
+      <find>uploadversion</find>
+      <find>viewResource</find>
+      <find>loadBoxData</find>
+      <find>设备</find>
+      <find>editDevice</find>
+      <find>SET_D</find>
+      <find>商品分布</find>
+      <find>width: 550px&quot;&gt;</find>
     </findStrings>
+    <replaceStrings>
+      <replace>PaperDevices</replace>
+      <replace>GoodsApi</replace>
+      <replace>商品</replace>
+      <replace>width: 600px&quot;&gt;</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -153,18 +247,26 @@
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/log_query.html" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/version_add.html" />
         <option value="$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgTree.py" />
-        <option value="$PROJECT_DIR$/SmartPaper/models.py" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/version_list.html" />
         <option value="$PROJECT_DIR$/SmartPaperServer/settings.py" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/index.html" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/System/message_config.html" />
         <option value="$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py" />
         <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js" />
-        <option value="$PROJECT_DIR$/SmartPaperServer/urls.py" />
-        <option value="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" />
-        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/device_edit.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_edit.js" />
+        <option value="$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_add.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/models.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/goods_add.js" />
+        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/goods_list.js" />
+        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html" />
         <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html" />
+        <option value="$PROJECT_DIR$/SmartPaperServer/urls.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/Api/Device/GoodsApi.py" />
+        <option value="$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/set_goods.html" />
+        <option value="$PROJECT_DIR$/SmartPaper/static/OrgHome/device_list.js" />
       </list>
     </option>
   </component>
@@ -174,16 +276,15 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="739" />
-    <option name="y" value="6" />
+    <option name="x" value="831" />
+    <option name="y" value="239" />
     <option name="width" value="1695" />
-    <option name="height" value="1038" />
+    <option name="height" value="535" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -218,20 +319,6 @@
               <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="Privilege" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -265,14 +352,6 @@
             <path>
               <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
               <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="OrgHome" type="462c0819:PsiDirectoryNode" />
-              <item name="System" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartPaper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartPaper" type="462c0819:PsiDirectoryNode" />
               <item name="SmartPaperServer" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -284,21 +363,22 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../BYSmartPlatform/4.Code/SmartControl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../BYAdPlatform/4.Code/Server/AdProject" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\Device" />
-      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\OrgHome" />
-      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\System" />
-      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\ThreeParty\LayUi" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\ThreeParty\LayUi\V2.2.6" />
       <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\ThreeParty\LayUi\new" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\OrgHome" />
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\Device" />
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\Api\Device" />
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\static\images" />
+      <recent name="D:\Work\SVNRep\SmartPaper\4.Code\SmartPaper\SmartPaper\templates\OrgHome\System" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -336,6 +416,7 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
+      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -353,28 +434,29 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32875264" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19895834" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14895834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4513742" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3411017" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.20021187" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32944915" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,6 +503,16 @@
           <line>117</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py</url>
+          <line>1532</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py</url>
+          <line>1798</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -436,152 +528,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46987">
-          <caret line="2473" lean-forward="true" selection-start-line="2473" selection-end-line="2473" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="47" column="8" lean-forward="true" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/views/decorators/csrf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/apps/registry.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/BaseMoudle/Privilege/PrivilegeHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="14" column="39" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/pkg_resources/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/db/models/query.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="277" selection-start-line="277" selection-end-line="277" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/OrgApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="315" column="88" selection-start-line="315" selection-start-column="8" selection-end-line="315" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/org_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.2.6/layui.js" />
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/ThreeParty/LayUi/V2.4.3/layui.js" />
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/org_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="120" column="28" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/org_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="49" selection-start-line="49" selection-end-line="49" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/RoleApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="320" column="43" lean-forward="true" selection-start-line="320" selection-start-column="43" selection-end-line="320" selection-end-column="43" />
-          <folding>
-            <element signature="e#47#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/role_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="260" column="21" lean-forward="true" selection-start-line="260" selection-start-column="21" selection-end-line="260" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="36" column="68" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Privilege/role_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="33" column="4" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/role_add.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026" />
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/db/models/fields/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="1042" selection-start-line="1042" selection-end-line="1042" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_breakpoints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/account_list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="121" column="33" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/account_add.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -603,13 +549,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/management/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="430" selection-start-line="430" selection-end-line="430" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Login/LoginApi.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -617,13 +556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
           <caret line="289" selection-start-line="289" selection-end-line="289" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/BaseMoudle/Util/UtilHelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="76" column="19" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -681,20 +613,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1577">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="175" column="16" lean-forward="true" selection-start-line="175" selection-start-column="16" selection-end-line="175" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -702,48 +620,225 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py">
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="75" column="20" lean-forward="true" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        <state relative-caret-position="1273">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/BaseMoudle/Util/UtilHelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="202" column="34" selection-start-line="202" selection-start-column="34" selection-end-line="202" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/strategys_add.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/strategys_bind.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/strategys_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="145" selection-start-line="145" selection-end-line="152" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/django/core/management/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="430" selection-start-line="430" selection-end-line="430" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/images/location.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Privilege/AccountApi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="1716" column="28" lean-forward="true" selection-start-line="1716" selection-start-column="28" selection-end-line="1716" selection-end-column="28" />
+        <state relative-caret-position="413">
+          <caret line="477" column="8" selection-start-line="477" selection-start-column="8" selection-end-line="477" selection-end-column="90" />
           <folding>
-            <element signature="e#46#67#0" expanded="true" />
+            <element signature="e#47#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/order_manage.html">
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/device_edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="78" column="47" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
+        <state relative-caret-position="190">
+          <caret line="106" selection-start-line="106" selection-end-line="113" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html">
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/System/SystemApi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="21" />
+        <state relative-caret-position="241">
+          <caret line="1027" column="35" lean-forward="true" selection-start-line="952" selection-end-line="1027" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/django/views/decorators/csrf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/c921e0cfd11111e8a915989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/1243f45ed11211e88ace989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/device_edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="96" column="59" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="59" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#4;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="111" column="11" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/goods_add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/goods_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/24c4e7d1d11611e88ee3989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/f786bbeed11911e8870d989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/b68546b0d11b11e8906e989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/73cc5e70d11211e8a9e4989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/GoodsImage/42c9625ed11611e882dd989096c1d848.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/set_goods.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/goods_manage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="44" column="73" lean-forward="true" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
+        <state relative-caret-position="225">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaperServer/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="130" column="32" selection-start-line="130" selection-start-column="32" selection-end-line="130" selection-end-column="32" />
+          <folding>
+            <element signature="e#692#724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/DeviceApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="2617" selection-start-line="2617" selection-end-line="2622" selection-end-column="97" />
+          <folding>
+            <element signature="e#46#67#0" expanded="true" />
+            <element signature="e#73037#76123#0" />
+            <element signature="e#76937#86581#0" />
+            <element signature="e#86642#91522#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/Api/Device/GoodsApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="430" column="17" selection-start-line="430" selection-start-column="17" selection-end-line="430" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/set_goods.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="84" column="89" selection-start-line="84" selection-start-column="89" selection-end-line="84" selection-end-column="89" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/templates/OrgHome/Device/base_device.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="142" column="21" selection-start-line="142" selection-start-column="18" selection-end-line="142" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartPaper/static/OrgHome/device_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="113" column="29" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
         </state>
       </provider>
     </entry>

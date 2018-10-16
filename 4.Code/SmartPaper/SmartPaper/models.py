@@ -70,9 +70,15 @@ class PaperDevices(models.Model):
     ipaddress = models.CharField(db_column='IpAddress', max_length=20, blank=True, null=True)  # Field name made lowercase.
     mac = models.CharField(db_column='Mac', max_length=20, blank=True, null=True)  # Field name made lowercase.
     lastlogintime = models.CharField(db_column='LastLoginTime', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    orgcode = models.ForeignKey('PaperOrgs', models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
+    orgcode = models.ForeignKey('PaperOrgs', models.DO_NOTHING, db_column='OrgCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
     state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=64, blank=True, null=True)  # Field name made lowercase.
+
+    managename = models.CharField(db_column='MName', max_length=64, blank=True, null=True)  # Field name made lowercase.
+    managephone = models.CharField(db_column='MPhone', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    longitude = models.FloatField(db_column='Logitude', blank=True, null=True)  # Field name made lowercase.
+    latitude = models.FloatField(db_column='Latitude', blank=True, null=True)  # Field name made lowercase.
+    devtype = models.CharField(db_column='DevType', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -103,7 +109,7 @@ class PaperGoods(models.Model):
     simage = models.CharField(db_column='Simage', max_length=64, blank=True, null=True)  # Field name made lowercase.
     limage = models.CharField(max_length=64, blank=True, null=True)
     state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
-    orgcode = models.ForeignKey('PaperOrgs', models.DO_NOTHING, db_column='OrgCode', blank=True, null=True)  # Field name made lowercase.
+    orgcode = models.ForeignKey('PaperOrgs', models.DO_NOTHING, db_column='OrgCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
 
     class Meta:
         managed = False

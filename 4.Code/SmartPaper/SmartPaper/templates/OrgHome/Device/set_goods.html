@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no">
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/public.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/ThreeParty/LayUi/layui.js"></script>
+    <script src="/static/OrgHome/device_edit.js"></script>
+
+    {#    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>#}
+    <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
+</head>
+<body style="text-align: center">
+
+<form class="layui-form" action="">
+    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
+        <label class="layui-form-label">一号轨道</label>
+        <div class="layui-input-inline" style="width: 200px">
+            <select name="dev" lay-filter="dev" id="goods_list">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+                   class="layui-input" style="width: 120px">
+        </div>
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+    </div>
+
+    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
+        <label class="layui-form-label">二号轨道</label>
+        <div class="layui-input-inline" style="width: 200px">
+            <select name="dev" lay-filter="dev" id="goods_list">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+                   class="layui-input" style="width: 120px">
+        </div>
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+    </div>
+
+
+    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
+        <label class="layui-form-label">三号轨道</label>
+        <div class="layui-input-inline" style="width: 200px">
+            <select name="dev" lay-filter="dev" id="goods_list">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+                   class="layui-input" style="width: 120px">
+        </div>
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+    </div>
+
+
+    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
+        <label class="layui-form-label">四号轨道</label>
+        <div class="layui-input-inline" style="width: 200px">
+            <select name="dev" lay-filter="dev" id="goods_list">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+                   class="layui-input" style="width: 120px">
+        </div>
+        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+    </div>
+
+</form>
+
+<div class="layui-form-item" style="margin-top: 10px">
+    {#    <label class="layui-form-label" style="width: 130px">联系电话</label>#}
+    <div class="layui-input-block">
+        <div style="width: 120px;margin-top: 20px;cursor: pointer;background-color: #d58512;font-size: 18px;
+        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px;float: right;" onclick="$.saveInfo()">保存
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+    });
+</script>
+</body>
+</html>
