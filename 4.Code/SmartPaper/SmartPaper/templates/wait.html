@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    {% if hidden == 0 %}
+        <title>登陆验证中</title>
+    {% else %}
+        <title>主页重新载入</title>
+    {% endif %}
+    <link rel="stylesheet" href="/static/normalize.css">
+    <link rel="stylesheet" href="/static/style.css" media="screen" type="text/css"/>
+
+    <script src="/static/Public/jquery.js"></script>
+    <script src="/static/Public/md5.js"></script>
+    <script src="/static/Public/cookie.js"></script>
+    <script src="/static/Public/public.js"></script>
+
+    <script src="/static/wait.js"></script>
+</head>
+
+<body>
+
+{% if hidden == 0 %}
+    <div class="bg">
+        <img src="/static/Images/background.png" width="100%" height="100%;">
+    </div>
+    <div class="loader">Loading...</div>
+{% endif %}
+
+</body>
+
+</html>

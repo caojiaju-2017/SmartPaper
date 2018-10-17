@@ -1,0 +1,107 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>微信安全支付</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+
+    <script src="/static/js/public/jquery.min.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.js"></script>
+    <script src="/static/js/public/cookie.js"></script>
+    <script src="/static/js/wxpay.js"></script>
+
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall() {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                    "appId": "{{appid}}", // 公众号名称，由商户传入
+                    "timeStamp": "{{timestamp}}", // 时间戳
+                    "nonceStr": "{{nonceStr}}", // 随机串
+                    "package": "{{package}}", // 扩展包
+                    "signType": "MD5", // 微信签名方式:1.sha1
+                    "paySign": "{{paysign}}"// 微信签名
+                },
+                function (res) {
+                     var msg = res.err_msg;
+                    if (msg == "get_brand_wcpay_request:ok") {
+                        alert("支付成功，跳转到资源下载信息页");
+                        $.notifyServer('{{ OrderNo }}');
+                    } else {
+                        if (msg == "get_brand_wcpay_request:cancel") {
+                            var err_msg = "您取消了微信支付";
+                        } else if (res.err_code == 3) {
+                            var err_msg = "您正在进行跨号支付正在为您转入扫码支付......";
+                        } else if (msg == "get_brand_wcpay_request:fail") {
+                            var err_msg = "微信支付失败错误信息：" + res.err_desc;
+                        } else {
+                            var err_msg = msg + "" + res.err_desc;
+                        }
+                        show_notice(err_msg);
+                    }
+                }
+            );
+        }
+
+        function callpay() {
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            } else {
+                jsApiCall();
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="list-group" style="font-size: 2em">
+        <a class="list-group-item row" style="">
+            <div class="col-xs-12 col-sm-12 col-md12" style="text-align: center;font-size: 50px;height: 90px">
+                <div class="col-xs-4 col-sm-4 col-md4" style="text-align: center;font-size: 40px;line-height: 90px;color: black">
+                    资源名称：
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md8" style="text-align: left;font-size: 40px;line-height: 100px">
+                    {{ ResTitle }}
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md12" style="height: 1px;background-color: #ECECEC;margin-top: 20px">
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md12" style="text-align: center;font-size: 50px;height: 90px">
+                <div class="col-xs-4 col-sm-4 col-md4" style="text-align: center;font-size: 40px;line-height: 90px;color: black">
+                    订单编号：
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md8" style="text-align: left;font-size: 40px;line-height: 100px">
+                    {{ OrderNo }}
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md12" style="height: 1px;background-color: #ECECEC;margin-top: 20px">
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md12" style="text-align: center;font-size: 50px;height: 90px">
+                <div class="col-xs-4 col-sm-4 col-md4" style="text-align: center;font-size: 40px;line-height: 90px;color: black">
+                    订单金额：
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md8" style="text-align: left;font-size: 40px;line-height: 100px;color: #c7254e">
+                    {{ OrderPrice }} 元
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div align="center">
+    <button style="width:210px; height:100px;width: 80%; background-color:#FE6714;
+        border:0px #FE6714 solid; cursor: pointer;  color:white;
+        font-size:50px;border-radius: 10px" type="button" onclick="callpay()">立  即  支  付
+    </button>
+</div>
+</body>
+</html>

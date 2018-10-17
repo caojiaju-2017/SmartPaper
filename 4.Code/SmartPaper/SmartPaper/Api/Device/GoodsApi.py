@@ -28,7 +28,208 @@ class GoodsApi(object):
             return GoodsApi.GoodsQuery(req, command)
         elif command == "SET_GOODS".upper():
             return GoodsApi.SetGoods(req, command)
+        elif command == "BIND_DEVICE_GOODS".upper():
+            return GoodsApi.BindGoods(req, command)
+        elif command == "CLEAR_DEVICE_GOODS".upper():
+            return GoodsApi.ClearGoods(req, command)
+        elif command == "QUERY_DEVICE_GOODS".upper():
+            return GoodsApi.QueryDeviceGoods(req, command)
 
+    @staticmethod
+    def QueryDeviceGoods(request,cmd):
+
+
+
+        # return render(request, 'vote_notice.html', {"erweima_img": "/static/Images/erweima_img.png"})
+
+        '''
+        LED查询
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到设备查询指令%s"%cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items()+postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # 验证参数完整性
+        paramCompleteness,info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+
+        if paramCompleteness:
+            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        else:
+            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle or not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查当前账户是否具有权限
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("归属单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查logioncode是否为权力机构
+        devHandles = PaperDevices.objects.filter(code=allParams["devcode"])
+        devHandle = devHandles.filter(~Q(state = 0)).first()
+
+        # 检查当前账号是否具有当前权限
+        if not devHandle:
+            LoggerHandle.writeLogDevelope("当前设备数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "当前设备数据异常", "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        maps = PaperDevGoodsMap.objects.filter(dcode=devHandle)
+
+
+        oneOrgDict = {}
+        for oneMap in maps:
+            oneOrgDict[oneMap.trackindex] = [oneMap.gcode.code, oneMap.count]
+
+        # 返回登录结果
+        lResut = json.dumps(oneOrgDict)
+        return HttpResponse(lResut)
+
+    @staticmethod
+    def ClearGoods(request,cmd):
+        '''
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到商品删除指令%s" % cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items() + postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # 验证参数完整性
+        paramCompleteness, info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+
+        if paramCompleteness:
+            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        else:
+            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查设备是否存在
+        deviceHandle = PaperDevices.objects.filter(code=allParams["devcode"], state=1).first()
+        if not deviceHandle:
+            loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查轨道商品是否重复
+        bindsList = PaperDevGoodsMap.objects.filter(dcode=deviceHandle, trackindex=int(allParams["trackid"]))
+        try:
+            bindsList.delete()
+        except Exception, ex:
+            LoggerHandle.writeLogDevelope("设置商品失败", request)
+            loginResut = json.dumps({"ErrorInfo": "修改商品失败", "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 返回登录结果
+        loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
+        return HttpResponse(loginResut)
+
+    @staticmethod
+    def BindGoods(request,cmd):
+        '''
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到商品删除指令%s" % cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items() + postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # 验证参数完整性
+        paramCompleteness, info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+
+        if paramCompleteness:
+            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        else:
+            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查设备是否存在
+        deviceHandle = PaperDevices.objects.filter(code=allParams["devcode"], state=1).first()
+        if not deviceHandle:
+            loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查商品是否存在
+        goodHandle = PaperGoods.objects.filter(code = allParams["goodscode"]).first()
+        if not goodHandle:
+            loginResut = json.dumps({"ErrorInfo": "商品不存在", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查轨道商品是否重复
+        bindsList = PaperDevGoodsMap.objects.filter(dcode=deviceHandle, gcode=goodHandle)
+        existRecord = None
+        for oneBind in bindsList:
+            if oneBind.trackindex == int(allParams["trackid"]):
+                existRecord = oneBind
+                continue
+            else:
+                loginResut = json.dumps({"ErrorInfo": "当前设备的其它轨道存在同类商品", "ErrorId": 20006, "Result": {}})
+                return HttpResponse(loginResut)
+
+        if not existRecord:
+            existRecord = PaperDevGoodsMap()
+            existRecord.code = UtilHelper.UtilHelper.newUuid()
+            existRecord.dcode = deviceHandle
+            existRecord.gcode = goodHandle
+            existRecord.lockcount = 0
+            existRecord.trackindex = int(allParams["trackid"])
+
+        existRecord.count = int(allParams["count"])
+
+        try:
+            existRecord.save()
+        except Exception, ex:
+            LoggerHandle.writeLogDevelope("设置商品失败", request)
+            loginResut = json.dumps({"ErrorInfo": "修改商品失败", "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 返回登录结果
+        loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
+        return HttpResponse(loginResut)
 
     @staticmethod
     def SetGoods(request,cmd):

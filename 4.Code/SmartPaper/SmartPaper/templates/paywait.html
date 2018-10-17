@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付中</title>
+</head>
+<body>
+<script src="/static/js/public/jquery.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js">
+
+function onBridgeReady(){
+    alert("a");
+   WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                            "appId": "{{appid}}", // 公众号名称，由商户传入
+                            "timeStamp": "{{sign.timestamp}}", // 时间戳
+                            "nonceStr":"{{sign.nonceStr}}", // 随机串
+                            "package": "{{package}}", // 扩展包
+                            "signType": "MD5", // 微信签名方式:1.sha1
+                            "paySign":"{{paysign}}"// 微信签名
+                        }, function(res) {
+
+                                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                document.getElementById("myForm").submit();
+                            } else {
+                                alert('错误：' + res.err_msg);
+                            }
+                            alert(res.err_msg);
+
+                        });
+
+}
+function pay(){
+alert("b");
+
+  if(typeof WeixinJSBridge=="undefined"){
+    if(document.addEventListener){
+      document.addEventListener('WeixinJSBridgeReady',onBridgeReady,false);
+    }else if(document.attachEvent){
+      document.attachEvent('WeixinJSBridgeReady',onBridgeReady);
+      document.attachEvent('onWeixinJSBridgeReady',onBridgeReady);
+    }
+  } else {
+    onBridgeReady();
+  }
+}
+</script>
+111
+</body>
+</html>

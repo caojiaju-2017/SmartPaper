@@ -10,7 +10,7 @@
     <script src="/static/Public/public.js"></script>
     <script src="/static/Public/cookie.js"></script>
     <script src="/static/ThreeParty/LayUi/layui.js"></script>
-    <script src="/static/OrgHome/device_edit.js"></script>
+    <script src="/static/OrgHome/set_goods.js"></script>
 
     {#    <link rel="stylesheet" href="/static/ThreeParty/Boost/bootstrap.css"/>#}
     <link rel="stylesheet" href="/static/ThreeParty/LayUi/css/layui.css" media="all">
@@ -18,75 +18,79 @@
 <body style="text-align: center">
 
 <form class="layui-form" action="">
-    <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
+    <div class="layui-form-item" style="margin-top: 30px;margin-left:50px;width: 600px">
         <label class="layui-form-label">一号轨道</label>
         <div class="layui-input-inline" style="width: 200px">
-            <select name="dev" lay-filter="dev" id="goods_list">
+            <select name="dev" lay-filter="dev" id="goods_list1">
                 <option value=""></option>
+                <option value="null">无商品</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+            <input type="number" name="number" lay-verify="pass" placeholder="请输入数量" autocomplete="off" id="number1"
                    class="layui-input" style="width: 120px">
         </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+        <div onclick="$.setTrackGoods(1)" style="width: 60px;height: 35px;line-height: 35px;background-color: #1b6d85;border-radius: 4px;color:white;margin-right:20px;float: right;cursor: pointer">应用</div>
     </div>
 
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
         <label class="layui-form-label">二号轨道</label>
         <div class="layui-input-inline" style="width: 200px">
-            <select name="dev" lay-filter="dev" id="goods_list">
+            <select name="dev" lay-filter="dev" id="goods_list2">
                 <option value=""></option>
+                <option value="null">无商品</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+            <input type="number" name="number" lay-verify="pass" placeholder="请输入数量" autocomplete="off" id="number2"
                    class="layui-input" style="width: 120px">
         </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+        <div onclick="$.setTrackGoods(2)" style="width: 60px;height: 35px;line-height: 35px;background-color: #1b6d85;border-radius: 4px;color:white;margin-right:20px;float: right;cursor: pointer">应用</div>
     </div>
 
 
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
         <label class="layui-form-label">三号轨道</label>
         <div class="layui-input-inline" style="width: 200px">
-            <select name="dev" lay-filter="dev" id="goods_list">
+            <select name="dev" lay-filter="dev" id="goods_list3">
                 <option value=""></option>
+                <option value="null">无商品</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+            <input type="number" name="number" lay-verify="pass" placeholder="请输入数量" autocomplete="off"  id="number3"
                    class="layui-input" style="width: 120px">
         </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+        <div onclick="$.setTrackGoods(3)" style="width: 60px;height: 35px;line-height: 35px;background-color: #1b6d85;border-radius: 4px;color:white;margin-right:20px;float: right;cursor: pointer">应用</div>
     </div>
 
 
     <div class="layui-form-item" style="margin-top: 10px;margin-left:50px;width: 600px">
         <label class="layui-form-label">四号轨道</label>
         <div class="layui-input-inline" style="width: 200px">
-            <select name="dev" lay-filter="dev" id="goods_list">
+            <select name="dev" lay-filter="dev" id="goods_list4">
                 <option value=""></option>
+                <option value="null">无商品</option>
             </select>
         </div>
         <div class="layui-input-inline">
-            <input type="password" name="password" lay-verify="pass" placeholder="请输入数量" autocomplete="off"
+            <input type="number" name="number" lay-verify="pass" placeholder="请输入数量" autocomplete="off"  id="number4"
                    class="layui-input" style="width: 120px">
         </div>
-        <button class="layui-btn" lay-submit="" lay-filter="demo2">应用</button>
+        <div onclick="$.setTrackGoods(4)" style="width: 60px;height: 35px;line-height: 35px;background-color: #1b6d85;border-radius: 4px;color:white;margin-right:20px;float: right;cursor: pointer">应用</div>
     </div>
 
 </form>
 
-<div class="layui-form-item" style="margin-top: 10px">
+{#<div class="layui-form-item" style="margin-top: 10px">#}
     {#    <label class="layui-form-label" style="width: 130px">联系电话</label>#}
-    <div class="layui-input-block">
-        <div style="width: 120px;margin-top: 20px;cursor: pointer;background-color: #d58512;font-size: 18px;
-        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px;float: right;" onclick="$.saveInfo()">保存
-        </div>
-
-    </div>
-</div>
+{#    <div class="layui-input-block">#}
+{#        <div style="width: 120px;margin-top: 20px;margin-right:40px;cursor: pointer;background-color: #d58512;font-size: 18px;#}
+{#        color: whitesmoke;height: 40px;border-radius: 20px;line-height: 40px;float: right;" onclick="$.saveInfo()">保存#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#</div>#}
 
 
 <script>

@@ -111,8 +111,8 @@ $.extend({
             type: 2,
             maxmin:true,
             scrollbar: false,
-            area:['700px', '300px'],
-            content: 'set_goods.html?' + "devcode=" + data.code
+            area:['700px', '350px'],
+            content: 'set_goods.html?' + "code=" + data.code
         });
     },
 

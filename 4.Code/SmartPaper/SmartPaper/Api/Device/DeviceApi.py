@@ -12,6 +12,7 @@ from SmartPaper.Api.Privilege.OrgTree import *
 from SmartPaper.BaseMoudle.Device.DeviceHelper import DeviceHelper
 from SmartPaper.BaseMoudle.Device.PowerHelper import PowerHelper
 from SmartPaper.BaseMoudle.Privilege.PrivilegeHelper import PrivilegeHelper
+from SmartPaper.BaseMoudle.DBModule.CommitData import *
 
 class DeviceApi(object):
     @staticmethod
@@ -62,26 +63,34 @@ class DeviceApi(object):
         elif command == "POWER_CONTROL".upper():
             return DeviceApi.PowerControl(req, command)
 
-    @staticmethod
-    def PowerControl(request,cmd):
-        '''
+        # 本次新增
+        elif command == "TERMINAL_STATUS".upper():
+            return DeviceApi.TerminalStatus(req, command)
+        elif command == "TERMINAL_ QRCODE".upper():
+            return DeviceApi.TerminalQRCode(req, command)
+        elif command == "HEAT_BEAT".upper():
+            return DeviceApi.HeartBeat(req, command)
 
-         :param request:
-         :return:
-         '''
-        LoggerHandle.writeLogDevelope("收到设备查询指令%s" % cmd.encode('utf-8'), request)
+    @staticmethod
+    def TerminalStatus(request,cmd):
+        '''
+        LED查询
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到设备查询指令%s"%cmd.encode('utf-8'), request)
         LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
 
         # 提取参数
         getParams = UtilHelper.UtilHelper.getGetParams(request)
         postParams = UtilHelper.UtilHelper.getPostParams(request)
 
-        allParams = dict(getParams.items() + postParams.items())
+        allParams = dict(getParams.items()+postParams.items())
         LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
         LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
 
         # 验证参数完整性
-        paramCompleteness, info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+        paramCompleteness,info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
 
         if paramCompleteness:
             LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
@@ -90,62 +99,240 @@ class DeviceApi(object):
             loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
-
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
-        if not userOrg:
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle or not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("用户单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
             return HttpResponse(loginResut)
 
         # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查当前账户是否具有权限
-        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
-        if not ownerOrgHandel:
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        if not acntHandle.orgcode:
             LoggerHandle.writeLogDevelope("归属单位数据异常", request)
             loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
             return HttpResponse(loginResut)
 
-        # 检查当前电源端子是否已经绑定到了其他设备
-        bindPowerHandle = SmartPowers.objects.filter(code=allParams["powercode"],state=1).first()
-        if not bindPowerHandle:
-            loginResut = json.dumps({"ErrorInfo": "当前电源数据异常", "ErrorId": 20001, "Result": {}})
+        status = int(allParams["status"])
+        mac = allParams["mac"]
+        eventid = allParams["eventid"]
+
+
+        # 检查logioncode是否为权力机构
+        devHandles = PaperDevices.objects.filter(mac=mac)
+        devHandle = devHandles.filter(~Q(state = 0)).first()
+
+        # 检查当前账号是否具有当前权限
+        if not devHandle:
+            LoggerHandle.writeLogDevelope("当前设备数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "当前设备数据异常", "ErrorId": 20001, "Result": {}})
             return HttpResponse(loginResut)
 
-        port = int(allParams["port"])
-        state = int(allParams["state"])
+        # 设备状态
+        devHandles.state = status
+        eventHandle = None
+        # 如果状态不正常，则需要更新
+        if status in [21,22,23,24,8,20]:
+            eventHandle = PaperDevicesEvent.objects.filter(mac = mac,eventid = eventid).first()
+            if not eventHandle:
+                eventHandle = PaperDevicesEvent()
+                eventHandle.mac = mac
+                eventHandle.count = 0
+                eventHandle.eventid = eventid
+                eventHandle.eventtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-        portBindMap = None
-        if port > 0:
-            portBindMap = SmartPowerPortMap.objects.filter(powercode=bindPowerHandle,port=port).first()
 
 
-        # ---
-        if portBindMap and portBindMap.devcode and portBindMap.devcode.typecode < 2000:
-            workThread = threading.Thread(target=DeviceApi.syncControl, args=(portBindMap.devcode,bindPowerHandle,port,state,))
-            workThread.start()
-        else:
-            if state == 1:
-                PowerHelper.openPort(bindPowerHandle,port)
-            elif state == 0:
-                PowerHelper.closePort(bindPowerHandle, port)
+        commitDataList = []
+        commitDataList.append(CommitData(devHandles, 0))
+        if eventHandle:
+            commitDataList.append(CommitData(eventHandle, 0))
+
+        # 事务提交
+        try:
+            result = DBHelper.commitCustomDataByTranslate(commitDataList)
+
+            if not result:
+                loginResut = json.dumps({"ErrorInfo": "数据库操作失败", "ErrorId": 99999, "Result": None})
+                return HttpResponse(loginResut)
+        except Exception, ex:
+            loginResut = json.dumps({"ErrorInfo": "数据库操作失败", "ErrorId": 99999, "Result": None})
+            return HttpResponse(loginResut)
 
         # 返回登录结果
-        loginResut = json.dumps({"ErrorInfo": "指令下发成功", "ErrorId": 200, "Result": None})
+        loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
         return HttpResponse(loginResut)
+
+
+    @staticmethod
+    def TerminalQRCode(request,cmd):
+        '''
+        LED查询
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到设备查询指令%s"%cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items()+postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # 验证参数完整性
+        paramCompleteness,info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+
+        if paramCompleteness:
+            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        else:
+            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle or not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查当前账户是否具有权限
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("归属单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        mac = allParams["mac"]
+
+        # 查询设备信息
+        devHandle = PaperDevices.objects.filter(mac = mac).first()
+        if not devHandle or devHandle.state in [21,22,23,24,8,20]:
+            LoggerHandle.writeLogDevelope("设备异常或故障", request)
+            loginResut = json.dumps({"ErrorInfo": "设备异常或故障", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        type = int(allParams["type"])
+
+        ermaUrl = "http://" + request.META['HTTP_HOST']
+        if type == 0: # 免费取纸
+            url = "http://" + request.META['HTTP_HOST'] + "/wait.html?code=" + devHandle.code + "&type=0"
+            img = qrcode.make(url)
+            img.save(os.path.join(os.path.join(STATIC_ROOT, "images" + os.sep + "qrcode"), "%s_0.jpg" % devHandle.code))
+            ermaUrl = ermaUrl + "/static/images/qrcode/%s_0.jpg" % devHandle.code
+        elif type == 1:
+            url = "http://" + request.META['HTTP_HOST'] + "/wait.html?code=" + devHandle.code + "&type=1"
+            img = qrcode.make(url)
+            img.save(os.path.join(os.path.join(STATIC_ROOT, "images" + os.sep + "qrcode"), "%s_1.jpg"%devHandle.code))
+            ermaUrl = ermaUrl + "/static/images/qrcode/%s_1.jpg" % devHandle.code
+
+        # 返回登录结果
+        lResut = json.dumps(ermaUrl)
+        return HttpResponse(lResut)
+
+    @staticmethod
+    def HeartBeat(request,cmd):
+        '''
+        LED查询
+        :param request:
+        :return:
+        '''
+        LoggerHandle.writeLogDevelope("收到设备查询指令%s"%cmd.encode('utf-8'), request)
+        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
+
+        # 提取参数
+        getParams = UtilHelper.UtilHelper.getGetParams(request)
+        postParams = UtilHelper.UtilHelper.getPostParams(request)
+
+        allParams = dict(getParams.items()+postParams.items())
+        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
+        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
+
+        # 验证参数完整性
+        paramCompleteness,info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
+
+        if paramCompleteness:
+            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
+        else:
+            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
+            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+        acntHandle = PaperAccount.objects.filter(account=allParams["logincode"]).first()
+        if not acntHandle or not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
+            return HttpResponse(loginResut)
+
+        # 检查当前账户是否具有权限
+        # ownerOrgHandel = PaperOrgs.objects.filter(code = allParams["orgsign"]).first()
+        if not acntHandle.orgcode:
+            LoggerHandle.writeLogDevelope("归属单位数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        mac = allParams["mac"]
+        devHandle = PaperDevices.objects.filter(mac = mac).first()
+        if not devHandle:
+            LoggerHandle.writeLogDevelope("设备数据异常", request)
+            loginResut = json.dumps({"ErrorInfo": "设备数据异常", "ErrorId": 20006, "Result": {}})
+            return HttpResponse(loginResut)
+
+        haveApply = PaperApplyFreePaper.objects.filter(devcode = devHandle,state = 0).first()
+        outpaper = 0
+        if haveApply:
+            outpaper = 1
+
+        # 查询付款成功项
+        orderHandle = PaperOrders.objects.filter(dcode=devHandle,state=1).first()
+        deliver = -1
+        if orderHandle:
+            updateMapData = PaperDevGoodsMap.objects.filter(dcode=devHandle,gcode=orderHandle).first()
+            if not updateMapData:
+                deliver = -1
+            else:
+                deliver = updateMapData.trackindex
+
+        # 先更新状态
+        commitDataList = []
+        if haveApply:
+            haveApply.state = 1
+            commitDataList.append(CommitData(haveApply, 0))
+
+        if orderHandle:
+            haveApply.state = 2
+            commitDataList.append(CommitData(orderHandle, 0))
+
+        if updateMapData:
+            # 增量修改值---数据库保证锁定数据----这是一段错误的代码
+            # count 减  lockcount 加
+            updateMapData.count = updateMapData.count - 1
+            updateMapData.lockcount = updateMapData.lockcount + 1
+            # 成功吐出物件后， 更新PaperDevGoodsMap 对应的lockcount 和 count
+            commitDataList.append(CommitData(updateMapData, 0))
+
+        try:
+            result = DBHelper.commitCustomDataByTranslate(commitDataList)
+            if not result:
+                loginResut = json.dumps({"ErrorInfo": "刷新数据失败", "ErrorId": 99999, "Result": None})
+                return HttpResponse(loginResut)
+        except Exception, ex:
+            LoggerHandle.writeLogDevelope("内部错误或网络错误", request)
+            loginResut = json.dumps({"ErrorInfo": "内部错误或网络错误", "ErrorId": 20001, "Result": {}})
+            return HttpResponse(loginResut)
+
+
+        # Result = {“deliver”:trackid;“outpaper”:0 / 1; “reboot”:0;}
+        rtnDict = {}
+        rtnDict["deliver"] = deliver
+        rtnDict["ordercode"] = orderHandle.code
+        rtnDict["outpaper"] = outpaper
+        rtnDict["reboot"] = 0
+
+        # 返回登录结果
+        lResut = json.dumps(rtnDict)
+        return HttpResponse(lResut)
 
     @staticmethod
     def syncControl(dev,power,port,state):
@@ -169,9 +356,6 @@ class DeviceApi(object):
             PowerHelper.openPort(power, port)
         elif state == 0:
             PowerHelper.closePort(power, port)
-
-
-
 
     @staticmethod
     def QueryDevices(request,cmd):
@@ -2377,116 +2561,6 @@ class DeviceApi(object):
         # 返回登录结果
         loginResut = json.dumps({"ErrorInfo": "操作成功", "ErrorId": 200, "Result": None})
         return HttpResponse(loginResut)
-
-    @staticmethod
-    def SetDevPower(request,cmd):
-        '''
-         LED查询
-         :param request:
-         :return:
-         '''
-        LoggerHandle.writeLogDevelope("收到设备查询指令%s" % cmd.encode('utf-8'), request)
-        LoggerHandle.writeLog("%s" % cmd.encode('utf-8'), request)
-
-        # 提取参数
-        getParams = UtilHelper.UtilHelper.getGetParams(request)
-        postParams = UtilHelper.UtilHelper.getPostParams(request)
-
-        allParams = dict(getParams.items() + postParams.items())
-        LoggerHandle.writeLogDevelope("指令GET参数" + str(getParams), request)
-        LoggerHandle.writeLogDevelope("指令POST参数" + str(postParams), request)
-
-        # 验证参数完整性
-        paramCompleteness, info = ParamCheckHelper.ParamCheckHelper.getParamModule(cmd).checkParamComplete(allParams)
-
-        if paramCompleteness:
-            LoggerHandle.writeLogDevelope("参数完整,符合要求", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数不完整，缺少：" + info, request)
-            loginResut = json.dumps({"ErrorInfo": "参数不足，缺少：" + info, "ErrorId": 20001, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 参数验签
-        verifyResult = VerifyHelper.VerifyHelper.verifyParam(allParams)
-        if verifyResult:
-            LoggerHandle.writeLogDevelope("参数验签成功", request)
-        else:
-            LoggerHandle.writeLogDevelope("参数验签失败", request)
-            loginResut = json.dumps({"ErrorInfo": "参数验签失败", "ErrorId": 20002, "Result": {}})
-            return HttpResponse(loginResut)
-
-        userOrg, acntHandle = OrgTree.getUserOrg(allParams["logincode"], allParams["orgsign"])
-        if not userOrg:
-            LoggerHandle.writeLogDevelope("用户单位数据异常", request)
-            loginResut = json.dumps({"ErrorInfo": "用户单位数据异常", "ErrorId": 20008, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查当前账户是否具有权限
-        resultPrivilegeSign = PrivilegeHelper.PrivilegeHelper.funcPrivCheck(cmd, acntHandle)
-        if not resultPrivilegeSign:
-            LoggerHandle.writeLogDevelope("权限受限", request)
-            loginResut = json.dumps({"ErrorInfo": "权限受限", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查当前账户是否具有权限
-        ownerOrgHandel = PaperOrgs.objects.filter(code=allParams["orgsign"]).first()
-        if not ownerOrgHandel:
-            LoggerHandle.writeLogDevelope("归属单位数据异常", request)
-            loginResut = json.dumps({"ErrorInfo": "归属单位数据异常", "ErrorId": 20006, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查logioncode是否为权力机构
-        devHandle = PaperDevices.objects.filter(code=allParams["devcode"], state=1).first()
-
-        # 检查当前账号是否具有当前权限
-        if not devHandle:
-            LoggerHandle.writeLogDevelope("当前设备数据异常", request)
-            loginResut = json.dumps({"ErrorInfo": "当前设备数据异常", "ErrorId": 20001, "Result": {}})
-            return HttpResponse(loginResut)
-
-        # 检查当前电源端子是否已经绑定到了其他设备
-        bindPowerHandle = SmartPowers.objects.filter(code=allParams["powercode"]).first()
-        port = int(allParams["port"])
-        existMap = SmartPowerPortMap.objects.filter(powercode=bindPowerHandle,port=port).first()
-        if existMap and existMap.devcode.code != devHandle.code:
-            loginResut = json.dumps({"ErrorInfo": "当前端子有设备绑定，请更换端子", "ErrorId": 20001, "Result": {}})
-            return HttpResponse(loginResut)
-
-
-        bindPower = SmartPowerPortMap.objects.filter(devcode=devHandle).first()
-
-        if not bindPower:
-            bindPower = SmartPowerPortMap()
-            bindPower.code = UtilHelper.UtilHelper.newUuid()
-
-
-        commitDataList = []
-
-        if port < 0:
-            commitDataList.append(CommitData(bindPower, 1))
-        else:
-            # 设置播放器未删除状态
-            bindPower.devcode = devHandle
-            bindPower.powercode =bindPowerHandle
-            bindPower.port = int(allParams["port"])  # 段子编号
-            commitDataList.append(CommitData(bindPower, 0))
-
-        # 事务提交
-        try:
-            result = DBHelper.commitCustomDataByTranslate(commitDataList)
-
-            if not result:
-                loginResut = json.dumps({"ErrorInfo": "数据库操作失败", "ErrorId": 99999, "Result": None})
-                return HttpResponse(loginResut)
-        except Exception, ex:
-            loginResut = json.dumps({"ErrorInfo": "数据库操作失败", "ErrorId": 99999, "Result": None})
-            return HttpResponse(loginResut)
-
-        # 返回登录结果
-        loginResut = json.dumps({"ErrorInfo": "终端登记成功，请联系管理员授权", "ErrorId": 200, "Result": None})
-        return HttpResponse(loginResut)
-
-
 
     ########################################################################################
     @staticmethod

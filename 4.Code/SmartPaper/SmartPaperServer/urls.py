@@ -33,6 +33,9 @@ from SmartPaper.Api.System.SystemApi import *
 from SmartPaper.Api.Privilege.OrgPageRoute.OrgPageRoute import *
 from SmartPaper.BaseMoudle.Task.TaskHelper import *
 
+from SmartPaper.Api.OtherApi import *
+
+
 # 启动定时任务
 TaskHelper.startTask()
 
@@ -134,6 +137,16 @@ urlpatterns = urlpatterns + [
     url(r'^upload/$',SystemApi.uploadSceenFile),
 
     url(r'^set_sceen.html', SystemApi.goSetSceen),
+
+
+    # 启动时微信登录---等待页面
+    url(r'^wait.html',OtherApi.openWaitPage),
+    url(r'^get_free_paper.html',OtherApi.applyFreePaper),
+
+    # url(r'^$',WebCenterApi.wxA),
+    url(r'^shop.html',OtherApi.openShop),
+
+    # url(r'^index.html',OtherApi.goHome),
 
 ]
 

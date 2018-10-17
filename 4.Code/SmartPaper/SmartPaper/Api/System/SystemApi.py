@@ -840,6 +840,9 @@ class SystemApi(object):
         elif int(allParams["type"]) == 2: #查询可用功能
             dataSets = PaperFunctions.objects.filter(freeflag = 1)
             pass
+
+        elif int(allParams["type"]) == 7 : # 查询可用物品
+            dataSets = PaperGoods.objects.filter(state = 1)
         # elif int(allParams["type"]) == 5:
         #     for oneOrg in orgList:
         #         if not dataSets:

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="background-color: #9eb9c2;overflow: hidden">
+
+<div id="msgpanel" style="position: absolute;text-align: center">
+    <img src="{{ imagelab }}" style="width: 160px;height: 160px">
+    <div style="font-size: 48px">{{ info }}</div>
+</div>
+
+<script>
+    var msgPan = document.getElementById("msgpanel");
+    var panWd = msgPan.offsetWidth;
+    var panHd = msgPan.offsetHeight;
+
+    var bodyHd = window.innerHeight;
+    var bodyWd = window.innerWidth;
+
+    msgPan.style.left = (bodyWd - panWd)/2 +"px";
+    msgPan.style.top = (bodyHd - panHd)/3 +"px";
+
+</script>
+</body>
+</html>

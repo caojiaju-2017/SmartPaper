@@ -54,10 +54,11 @@ class PaperDevControls(models.Model):
 class PaperDevGoodsMap(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
     code = models.CharField(db_column='Code', max_length=32)  # Field name made lowercase.
-    dcode = models.ForeignKey('PaperDevices', models.DO_NOTHING, db_column='DCode', blank=True, null=True)  # Field name made lowercase.
-    gcode = models.ForeignKey('PaperGoods', models.DO_NOTHING, db_column='GCode', blank=True, null=True)  # Field name made lowercase.
+    dcode = models.ForeignKey('PaperDevices', models.DO_NOTHING, db_column='DCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
+    gcode = models.ForeignKey('PaperGoods', models.DO_NOTHING, db_column='GCode', blank=True, null=True,to_field="code")  # Field name made lowercase.
     count = models.IntegerField(db_column='Count', blank=True, null=True)  # Field name made lowercase.
     lockcount = models.IntegerField(db_column='LockCount', blank=True, null=True)  # Field name made lowercase.
+    trackindex = models.IntegerField(db_column='TrackIndex', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -66,7 +67,7 @@ class PaperDevGoodsMap(models.Model):
 
 class PaperDevices(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
-    code = models.CharField(db_column='Code', max_length=32)  # Field name made lowercase.
+    code = models.CharField(db_column='Code', max_length=32,unique=True)  # Field name made lowercase.
     ipaddress = models.CharField(db_column='IpAddress', max_length=20, blank=True, null=True)  # Field name made lowercase.
     mac = models.CharField(db_column='Mac', max_length=20, blank=True, null=True)  # Field name made lowercase.
     lastlogintime = models.CharField(db_column='LastLoginTime', max_length=20, blank=True, null=True)  # Field name made lowercase.
@@ -101,7 +102,7 @@ class PaperFunctions(models.Model):
 
 class PaperGoods(models.Model):
     id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
-    code = models.CharField(db_column='Code', max_length=32)  # Field name made lowercase.
+    code = models.CharField(db_column='Code', max_length=32,unique=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=64, blank=True, null=True)  # Field name made lowercase.
     price = models.FloatField(db_column='Price', blank=True, null=True)  # Field name made lowercase.
     model = models.CharField(db_column='Model', max_length=64, blank=True, null=True)  # Field name made lowercase.
@@ -218,3 +219,51 @@ class PaperVersion(models.Model):
     class Meta:
         managed = False
         db_table = 'paper_version'
+
+class PaperDevicesEvent(models.Model):
+    id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    count = models.IntegerField(db_column='Count', blank=True, null=True)  # Field name made lowercase.
+    mac = models.CharField(db_column='Mac', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    eventtime = models.CharField(db_column='EventTime', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    eventid = models.CharField(db_column='EventId', max_length=20, blank=True,
+                                 null=True)  # Field name made lowercase.
+    class Meta:
+        managed = False
+        db_table = 'paper_devices_event'
+
+class PaperApplyFreePaper(models.Model):
+    id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    state = models.IntegerField(db_column='State', blank=True, null=True)  # Field name made lowercase.
+    # DevCode = models.CharField(db_column='Mac', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    devcode = models.ForeignKey('PaperDevices', models.DO_NOTHING, db_column='DevCode', blank=True,
+                              null=True,to_field="code")  # Field name made lowercase.
+    devmac = models.CharField(db_column='DevMac', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    applytime = models.CharField(db_column='ApplyTime', max_length=20, blank=True,
+                                 null=True)  # Field name made lowercase.
+    class Meta:
+        managed = False
+        db_table = 'paper_apply_freepaper'
+
+class PaperWxCustom(models.Model):
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    wxaccount = models.CharField(db_column='WxAccount', max_length=64, blank=True, null=True)  # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=64, blank=True, null=True)  # Field name made lowercase.
+    headimage = models.CharField(db_column='HeadImage', max_length=2000, blank=True,null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'paper_wx_custom'
+
+class PaperWxTicket(models.Model):
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    ticket = models.CharField(db_column='Ticket', unique=True, max_length=64, blank=True,null=True)  # Field name made lowercase.
+    signtime = models.CharField(db_column='SignTime', max_length=32, blank=True, null=True)  # Field name made lowercase.
+    timestamp = models.CharField(db_column='TimeStamp', max_length=32, blank=True,null=True)  # Field name made lowercase.
+    noncestr = models.CharField(db_column='NonceStr', max_length=20, blank=True,null=True)  # Field name made lowercase.
+    signature = models.CharField(db_column='Signature', max_length=64, blank=True, null=True)  # Field name made lowercase.
+    appid = models.CharField(db_column='AppId', max_length=64, blank=True, null=True)  # Field name made lowercase.
+    timeoutsecond = models.IntegerField(db_column='TimeOutSecond', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'paper_wx_ticket'

@@ -1,5 +1,4 @@
 var code = "";
-var orgsign= "1e2c68303ebd11e880d3989096c1d848";
 
 var itemTemplate = "<option value='{orgcode}'>{orgname}</option>";
 window.onload=function()
@@ -10,41 +9,24 @@ $(document).ready(function(e) {
     code = $.GetQueryString("code");
     $.loadBoxData(null);
 
-    $.initTestData();
 });
 
 $.extend({
-    initTestData:function()
-    {
-        $("#name").val("测试设备");
 
-        $("#managename").val("曹家驹");
-        $("#managephone").val("15836225941");
-
-        $("#ipaddress").val("192.168.0.208");
-        $("#macaddress").val("98-90-96-C1-D8-48");
-
-        $("#longitude").val("104.096693");
-        $("#latitude").val("30.672411");
-
-        $("#dev_type").val("BY-Paper-S002");
-        $("#state_list").val("1");
-        $('#org_list').val("cadd0280bb1111e8bfc1989096c1d848");
-    },
-    loadDevInfo:function(code)
+    loadDevGoodsInfo:function(code)
     {
         var listParams = new Array();
-        listParams[0] = "command=DEVICE_INFO";
+        listParams[0] = "command=QUERY_DEVICE_GOODS";
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
-        listParams[3] = "orgsign=" + orgsign;
+        listParams[3] = "orgsign=" + $.cookie("OrgUserCode");
         listParams[4] = "devcode=" + code;
 
         var allParams = listParams;
         allParams = allParams.sort();
 
-        var urlCmd = $.buildGetParam("/api/device/?" ,listParams);
+        var urlCmd = $.buildGetParam("/api/goods/?" ,listParams);
         urlCmd = urlCmd + "&sign=" + $.signString(allParams);
 
         // 提取用户名
@@ -55,21 +37,14 @@ $.extend({
             "json");//这里返回的类型有：json,html,xml,text
     },
 
-    fillElement:function (data) {
-        $("#name").val(data.name);
-        $("#ipaddress").val(data.ipaddress);
-        $("#macaddress").val(data.mac);
+    fillElement:function (datas) {
 
-        $("#managename").val(data.managename);
-        $("#managephone").val(data.managephone);
-        $("#longitude").val(data.longitude);
-        $("#latitude").val(data.latitude);
+        for (oneKey in datas) {
+            values = datas[oneKey];
 
-        $("#dev_type").val(data.devtype);
-        $('#state_list').val(data.state);
-        $('#org_list').val(data.orgcode);
-
-
+            $("#goods_list" + oneKey).val(values[0]);
+            $("#number" + oneKey).val(values[1]);
+        }
         layui.use('form', function () {
             var form = layui.form; //
             form.render('select');
@@ -87,8 +62,8 @@ $.extend({
         var timestamp = (new Date()).valueOf();
         listParams[1] = "timestamp=" + timestamp;
         listParams[2] = "logincode=" + $.cookie("OrgUserCode");
-        listParams[3] = "orgsign=" + orgsign;
-        listParams[4] = "type=0";
+        listParams[3] = "orgsign="  + $.cookie("OrgUserCode");
+        listParams[4] = "type=7";
 
         var allParams = listParams;
         allParams = allParams.sort();
@@ -100,7 +75,8 @@ $.extend({
         $.get(urlCmd,
             function (data) {
                 for (var index = 0; index < data.length; index++) {
-                    var readyText = $("#org_list").html();
+                    var readyText = $("#goods_list1").html();
+
                     var oneOrg = data[index];
                     var abcTemp = {};
                     abcTemp["orgcode"] = oneOrg.id;
@@ -108,12 +84,15 @@ $.extend({
 
                     var tempalteResult = $.format(itemTemplate, abcTemp);
 
-                    $("#org_list").html(readyText + tempalteResult);
+                    $("#goods_list1").html(readyText + tempalteResult);
+                    $("#goods_list2").html(readyText + tempalteResult);
+                    $("#goods_list3").html(readyText + tempalteResult);
+                    $("#goods_list4").html(readyText + tempalteResult);
 
-                    if (code != null && orgparam != null)
-                    {
-                        $("#org_list").find("option[value = '"+orgparam+"']").attr("selected","selected");
-                    }
+                    // if (code != null && orgparam != null)
+                    // {
+                    //     $("#goods_list").find("option[value = '"+orgparam+"']").attr("selected","selected");
+                    // }
                 }
 
                 layui.use('layer', function () {
@@ -124,90 +103,83 @@ $.extend({
 
                 });
 
-                 if (code != "" && code != "null" && code != null)
-                {
-                    $.loadDevInfo(code);
-                }
-                else
-                {
-                }
-
+                $.loadDevGoodsInfo(code);
             },
             "json");//这里返回的类型有：json,html,xml,text
     },
 
+    clearGoodes :function(inx)
+    {
+        // post参数
+        var postParm = new Array();
+        postParm[0] = "devcode=" + code;
+        postParm[1] = "trackid=" + inx;
 
-    saveInfo: function () {
-        var name = $("#name").val();
+        var listParams = new Array();
+        listParams[0] = "command=CLEAR_DEVICE_GOODS";
+        listParams[1] = "logincode=" + $.cookie("OrgUserCode");
 
-        var managename = $("#managename").val();
-        var managephone = $("#managephone").val();
+        var urlCmd = $.buildGetParam("/api/goods/?" ,listParams);
 
-        var ipaddress = $("#ipaddress").val();
-        var macaddress = $("#macaddress").val();
+        var params = null;
+        params = $.buildPostParam(postParm);
 
-        var longitude = $("#longitude").val();
-        var latitude = $("#latitude").val();
+        $.post(urlCmd, params,
+            function (data)
+            {
 
-        var dev_type = $("#dev_type").val();
-        var state_list = $("#state_list").val();
-        var ownerOrg = $('#org_list').val();
+                var  ErrorId = data.ErrorId;
+                var  Result = data.Result;
 
+                if (ErrorId == 200)
+                {
+                    alert("操作成功!");
+                }
+                else
+                {
+                    alert(data.ErrorInfo);
+                }
 
-        if (name == ""
-            || ipaddress == ""
-            || ownerOrg == ""
-            || macaddress == ""
-            || state_list == ""
-            || managename == ""
-            || managephone == ""
-            || longitude == ""
-            || latitude == ""
-            || dev_type == "")
+            },
+            "json");
+    },
+
+    setTrackGoods: function (inx) {
+        var goodsCode = $("#goods_list" + inx).val();
+        var goodsCount = $("#number" + inx).val();
+        if (goodsCode == "")
         {
             alert("信息不能为空");
             return;
         }
 
+        if (goodsCode == "null")
+        {
+            $.clearGoodes(inx)
+            return
+        }
+        if (goodsCount == "")
+        {
+            alert("信息不能为空");
+            return;
+        }
 
         // post参数
         var postParm = new Array();
-        postParm[0] = "name=" + name;
-        postParm[1] = "ipaddress=" + ipaddress;
-        postParm[2] = "mac=" + macaddress;
-        postParm[3] = "state=" + state_list;
-        postParm[4] = "devtype=" + dev_type;
-        postParm[5] = "orgcode=" + ownerOrg;
-        postParm[6] = "managename=" + managename;
-        postParm[7] = "managephone=" + managephone;
-        postParm[8] = "longitude=" + longitude;
-        postParm[9] = "latitude=" + latitude;
-
+        postParm[0] = "devcode=" + code;
+        postParm[1] = "goodscode=" + goodsCode;
+        postParm[2] = "count=" + goodsCount;
+        postParm[3] = "trackid=" + inx;
 
         var listParams = new Array();
 
-        if (code != "" && code != "null" && code != null)
-        {
-            listParams[0] = "command=DEVICE_EDIT";
-            postParm[10] = "code=" + code;
-        }
-        else
-        {
-            listParams[0] = "command=DEVICE_ADD";
-        }
-
-        // postParm[7] = "code=" + code;
-
-        //
-        // var timestamp = (new Date()).valueOf();
-        // listParams[1] = "timestamp=" + timestamp;
-        // listParams[2] = "orgsign=" + orgsign;
+        listParams[0] = "command=BIND_DEVICE_GOODS";
         listParams[1] = "logincode=" + $.cookie("OrgUserCode");
 
 
         // var allParams = listParams.concat(postParm);
         // allParams = allParams.sort();
-        var urlCmd = $.buildGetParam("/api/device/?" ,listParams);
+        var urlCmd = $.buildGetParam("/api/goods/?" ,listParams);
         // urlCmd = urlCmd + "&sign=" + $.signString(allParams);
 
         var params = null;
@@ -224,9 +196,9 @@ $.extend({
                 {
                     alert("操作成功!");
 
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
-                    parent.location.reload();
+                    // var index = parent.layer.getFrameIndex(window.name);
+                    // parent.layer.close(index);
+                    // parent.location.reload();
                 }
                 else
                 {

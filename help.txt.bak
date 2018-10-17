@@ -1,0 +1,10 @@
+http://localhost:8000/api/device/?command=TERMINAL_ QRCODE&mac=98-90-96-C1-D8-48&type=1&logincode=15680585185
+http://localhost:8000/api/device/?command=TERMINAL_ QRCODE&mac=98-90-96-C1-D8-48&type=1&logincode=15680585185
+
+http://localhost:8000/static/images/qrcode/d4e3868fd10611e8ab16989096c1d848_0.jpg
+http://localhost:8000/wait.html?code=d4e3868fd10611e8ab16989096c1d848&type=0
+///√‚∑—»°÷Ω
+
+
+http://localhost:8000/static/images/qrcode/d4e3868fd10611e8ab16989096c1d848_1.jpg
+http://localhost:8000/wait.html?code=d4e3868fd10611e8ab16989096c1d848&type=1
